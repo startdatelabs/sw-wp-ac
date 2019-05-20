@@ -1,0 +1,6 @@
+.dockerignore
+docker-compose
+Dockerfile
+README.md
+rebuild.sh
+buildspec.yml

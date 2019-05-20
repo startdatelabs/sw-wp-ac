@@ -1,0 +1,19 @@
+<div class="doc_title">Transfer to other (WordPress) databases</div>
+
+<p>Export to SQL offers support for seemless export and import between WordPress databases that use different table prefixes.
+The WordPress table prefix of the WordPress source database is replaced during export by environment variable <strong>{wp_prefix}</strong>.
+This environment variable is replaced by the WordPress table prefix of the WordPress destination database on import.
+</p>
+
+<div class="export_image"></div>
+
+<p>Follow these steps if you want to use another tool (like MySQL command line or phpMyAdmin) to import Data Explorer export files:
+</p>
+
+<ul class="doc_list">
+  <li>Navigate to the Manage Plugin page (tab Back-End Settings)</li>
+  <li>Disable checkbox <strong>"Export with variable WP prefix"</strong></li>
+</ul>
+
+<p>With <strong>"Export with variable WP prefix"</strong> disabled full table names are written to the export file.
+</p>

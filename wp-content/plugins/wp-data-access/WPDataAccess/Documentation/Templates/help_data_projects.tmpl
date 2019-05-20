@@ -1,0 +1,122 @@
+<div class="doc_title">Data Projects</div>
+<p>Data Projects is a tool that allows WordPress users to build simple data apps that run in the WordPress dashboard.</p>
+<ul class="doc_list">
+  <li>Create your own WordPress data app</li>
+  <li>Add static pages to your WordPress data app</li>
+  <li>Add pages to your WordPress data app that allow standard CRUD opperations on a table</li>
+  <li>Add pages to your WordPress data app that support parent-child relationships</li>
+</ul>
+
+<p>Follow these steps to build your own WordPress data app:</p>
+<p><strong>1. Create a new WordPress data app</strong></p>
+<ul class="doc_list">
+  <li>Select the Data Projects tool from the WP Data Access menu</li>
+  <li>Navigate to tab Manage Projects</li>
+  <li>Click Add New</li>
+  <li>Enter the items as described below</li>
+</ul>
+
+<p><strong>Project ID</strong><br/>
+A unique project ID is generated automatically when you save your data (you cannot change this value)</p>
+
+<p><strong>Project Name</strong><br/>
+Enter a project name that makes sense to you</p>
+
+<p><strong>Project Description</strong><br/>
+You can enter a project description here for your own administration or leave it empty</p>
+
+<p><strong>Add To Menu</strong><br/>
+Select Yes if you want your project to appear in the WordPress dashboard menu<br/>
+</p>
+
+<p><strong>Menu Name</strong><br/>
+Name of your WordPress menu (only needed if Add To Menu = Yes)<br/>
+</p>
+
+<p><strong>Seq#</strong><br/>
+Sequence number: order in which your menus will be shown in the WordPress dashboard<br/>
+</p>
+
+<p><strong>Notes</strong></p>
+<ul class="doc_list">
+  <li>As long as your project contains no pages, the project will not be added to the WordPress dashboard menu</li>
+  <li>When saving changes you'll need to refresh the WordPress dashboard menu</li>
+  <li>You can take specific pages or the whole project offline by setting Add To Menu to No</li>
+</ul>
+
+<p><strong>2. Add pages to your WordPress data app</strong></p>
+<p>There are three types of pages you can add to your WordPress data app:</p>
+<ul class="doc_list">
+  <li>Static pages</li>
+  <li>CRUD pages</li>
+  <li>Parent-child pages</li>
+</ul>
+
+<p><strong>2a. Add a static page to your WordPress data app</strong></p>
+<p>
+Use static pages to inform your data app users. Technically spoken a static page is just a WordPress post shown in the WordPress dashboard.
+If the post should be visible to your WordPress data app users only, make sure you take the necessary actions to prevent it being shown on your blog.
+</p>
+<p>Follow these steps to add a static page to your WordPress data app:</p>
+<ul class="doc_list">
+  <li>Select the Data Projects tool from the WP Data Access menu</li>
+  <li>Navigate to tab Manage Projects</li>
+  <li>Click Add New below the Pages tab</li>
+  <li>Select "static" from the Type list</li>
+  <li>Select the post you want to be displayed on the page</li>
+  <li>If you want the page to be in the menu make sure Add To Menu is set to Yes and Menu Name has an appropriate value</li>
+  <li>Use Seq# to put your pages in your preferred order</li>
+</ul>
+
+<p><strong>2b. Add a CRUD page to your WordPress data app</strong></p>
+<p>
+A CRUD page is a page that allows you to perform Create, Read, Update and Delete operations on a database table.
+Use the Data Designer (or another tool) to create tables. Use Data Projects to add a CRUD page to your WordPress data app.
+</p>
+<p>Follow these steps to add a CRUD page to your WordPress data app:</p>
+<ul class="doc_list">
+  <li>Select the Data Projects tool from the WP Data Access menu</li>
+  <li>Navigate to tab Manage Projects</li>
+  <li>Click Add New below the Pages tab</li>
+  <li>Select "table" from the Type list</li>
+  <li>Enter the Table Name for which you like to create a CRUD page</li>
+  <li>Enter the Mode (edit to allow users to perform all CRUD operations; view for read only access)</li>
+  <li>Decide whether users should be able to insert and/or delete</li>
+  <li>If you want the page to be in the menu make sure Add To Menu is set to Yes and Menu Name has an appropriate value</li>
+  <li>Use Seq# to put your pages in your preferred order</li>
+</ul>
+
+<p><strong>2c. Add a parent-child page to your WordPress data app</strong></p>
+<p>
+A parent-child page allows you to build simple parent-child pages. These are more complex and arbitrary than static pages and table pages.
+</p>
+<p>Follow these steps to add a parent-child page to your WordPress data app:</p>
+<ul class="doc_list">
+  <li>Select the Data Projects tools from the WP Data Access menu</li>
+  <li>Navigate to tab Manage Projects</li>
+  <li>Click Add New below the Pages tab</li>
+  <li>Select "parent/child" from the Type list</li>
+  <li>Enter the (parent) Table Name for which you like to create a parent-child page</li>
+  <li>Enter the Mode (edit to allow users to perform all CRUD operations; view for read only access)</li>
+  <li>Decide whether users should be able to insert and/or delete</li>
+  <li>If you want the page to be in the menu make sure Add To Menu is set to Yes and Menu Name has an appropriate value</li>
+  <li>Use Seq# to put your pages in your preferred order</li>
+</ul>
+<p>
+Although your parent-child page is now available, you need to do some more work to establish the relationship(s) between parent and child(ren).
+Follow these steps to add a child relationships to the parent:</p>
+<ul class="doc_list">
+  <li>Select the Data Projects tool from the WP Data Access menu</li>
+  <li>Navigate to tab Manage Table Options</li>
+  <li>Click Add Table To Repository</li>
+  <li>Select the parent table and click Add Selected Table To Repository</li>
+  <li>Add the child relationships to your parent table (a tab is generated for every child)</li>
+  <li>Additionally you can modify item labels, item ordering and hide specific items for list table and data entry forms</li>
+  <li>Add child tables to the repository to modify child tabs, child item labels, child item ordering and hide specific child items for list table and data entry forms</li>
+</ul>
+
+<p><strong>Notes</strong></p>
+<ul class="doc_list">
+  <li>Your parent and child tables <strong>MUST HAVE A PRIMARY KEY</strong> to support all functionality available (at this time a unique is index is not sufficient)</li>
+  <li>You can add multiple child relationships to one parent, a tab will be generated for each child</li>
+</ul>

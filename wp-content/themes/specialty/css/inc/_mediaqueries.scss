@@ -1,0 +1,440 @@
+// sass-lint:disable no-empty-rulesets
+
+/* -----------------------------------------
+	11. Global Mediaqueries
+----------------------------------------- */
+// xs: mobiles
+// sm: small tablets / phablets
+// md: tablets
+// lg: tablets / small laptops
+// xl: desktop
+
+@include media-breakpoint-up(xs) {
+	.sidebar-wrap {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		margin: 0;
+		width: 80%;
+		max-width: 330px;
+		padding: 65px 0 0;
+		background-color: $body-bg;
+		border-left: 1px solid $border-color;
+		z-index: 100;
+		transform: translateX(100%);
+		transition: transform .25s ease;
+
+		.sidebar {
+			max-height: 100%;
+			overflow-y: scroll;
+			padding: 0 25px 25px;
+			margin: 0;
+		}
+	}
+
+	.sidebar-wrap-visible {
+		transform: translateX(0);
+	}
+
+	.sidebar-wrap-header,
+	.form-filter-header {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		text-align: right;
+		background-color: $white;
+		height: 40px;
+	}
+
+	.sidebar-wrap-dismiss,
+	.form-filter-dismiss {
+		display: inline-block;
+		font-size: 30px;
+		color: $text-color-dark;
+		line-height: normal;
+		position: relative;
+		right: 15px;
+
+		&:hover {
+			color: $text-color-dark;
+		}
+	}
+}
+@include media-breakpoint-up(sm) { }
+@include media-breakpoint-up(md) { }
+@include media-breakpoint-up(lg) {
+	.sidebar-wrap {
+		&:not(.sidebar-fixed-default) {
+			position: static;
+			padding: 0;
+			border: 0;
+			width: auto;
+			max-width: none;
+			background-color: transparent;
+			transform: translateX(0);
+
+			.sidebar-wrap-header {
+				display: none;
+			}
+
+			.sidebar {
+				padding: 0;
+				max-height: none;
+				overflow-y: visible;
+			}
+		}
+	}
+
+	.form-filter-header {
+		display: none;
+	}
+}
+@include media-breakpoint-up(xl) { }
+
+@include media-breakpoint-down(xl) { }
+@include media-breakpoint-down(lg) {
+	.content-wrap {
+		padding: 50px;
+	}
+
+	.entry {
+		margin-bottom: 130px;
+	}
+
+	.entry-thumb {
+		margin-top: -50px;
+		margin-right: -50px;
+		margin-left: -50px;
+	}
+
+	.entry-item {
+		@include clearfix;
+		background-color: transparent;
+		border: 0;
+		margin-bottom: 40px;
+	}
+
+	.entry-item-thumb {
+		float: left;
+		width: 200px;
+		margin-right: 20px;
+
+		img {
+			border-radius: 3px;
+		}
+
+		.job_listing & {
+			padding: 0;
+		}
+	}
+
+	.entry-item-content-wrap {
+		padding: 0;
+		overflow: hidden;
+		font-size: 13px;
+	}
+
+
+	// WP Job Manager Alerts
+	#job-manager-alerts {
+		overflow-x: scroll;
+
+		.job-manager-alerts {
+			font-size: 14px;
+
+			.job-alert-actions {
+				margin-top: 10px;
+				padding: 2px 10px;
+				background-color: rgba($grey, .35);
+				visibility: visible;
+				font-size: 12px;
+			}
+		}
+	}
+}
+@include media-breakpoint-down(md) {
+	.navigation-main {
+		display: none;
+	}
+
+	.mobile-nav-trigger {
+		display: inline-block;
+	}
+
+	.mobile-triggers {
+		display: block;
+	}
+
+	.form-filter {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 80%;
+		padding-top: 60px;
+		max-width: 300px;
+		background-color: $body-bg;
+		color: $text-color;
+		z-index: 200;
+		border-right: 1px solid $border-color;
+		transform: translateX(-100%);
+		transition: transform .25s ease;
+
+		input,
+		.ci-select {
+			margin-bottom: 25px;
+		}
+
+		select {
+			background-color: $white;
+		}
+	}
+
+	.form-filter-visible {
+		transform: translateX(0);
+	}
+
+	.page-hero {
+		height: 300px;
+	}
+
+	.page-hero-lg {
+		height: 380px;
+	}
+
+	.page-hero-content {
+		margin: 0;
+
+		.page-hero-lg & {
+			margin-top: 35px;
+		}
+	}
+
+	.page-title {
+		font-size: 34px;
+	}
+
+	.section-title-compliment {
+		.sidebar-wrap-trigger {
+			display: none;
+		}
+	}
+
+	.sidebar {
+		margin-top: 50px;
+
+		.widget_ci-apply-button-widget { // sass-lint:disable-line class-name-format
+			display: none;
+		}
+
+		.main-elevated & {
+			margin-top: 50px;
+		}
+	}
+}
+@include media-breakpoint-down(sm) {
+	.site-logo {
+		max-width: 180px;
+	}
+
+	.content-wrap-footer {
+		.text-right {
+			text-align: left;
+			margin-top: 10px;
+		}
+	}
+
+	.entry-title {
+		font-size: 26px;
+		margin-bottom: 20px;
+	}
+
+	.entry-related {
+		margin: 30px 0 10px;
+	}
+
+	.comment-author {
+		.avatar {
+			display: none;
+		}
+	}
+
+	.footer {
+		padding-bottom: 30px;
+	}
+
+	// WP Job Manager
+	#job-manager-job-dashboard {
+		overflow-x: scroll;
+
+		.job-manager-jobs {
+			font-size: 14px;
+
+			.job_title {
+				min-width: 250px;
+			}
+
+			.filled {
+				width: 40px;
+			}
+
+			.date,
+			.expires {
+				min-width: 120px;
+			}
+
+			.job-dashboard-actions {
+				margin-top: 10px;
+				padding: 2px 10px;
+				background-color: rgba($grey, .35);
+				visibility: visible;
+				font-size: 12px;
+			}
+		}
+	}
+
+	.job-manager-form {
+		fieldset {
+			margin-bottom: 5px;
+
+			label {
+				float: none;
+				width: 100%;
+				display: block;
+			}
+
+			div.field {
+				float: none;
+				width: 100%;
+				display: block;
+			}
+		}
+	}
+}
+@include media-breakpoint-down(xs) {
+	.header {
+		padding: 15px 0;
+	}
+
+	.page-hero {
+		height: 230px;
+
+		.page-hero-content {
+			margin-top: 25px;
+		}
+
+		.page-title {
+			font-size: 26px;
+		}
+	}
+
+	.page-hero-lg {
+		height: 300px;
+
+		.page-hero-content {
+			margin-top: 40px;
+		}
+
+		.page-title {
+			font-size: 28px;
+
+			br {
+				display: none;
+			}
+		}
+	}
+
+	.main {
+		padding: 40px 0;
+	}
+
+	.content-wrap {
+		padding: 15px;
+	}
+
+	.entry {
+		margin-bottom: 60px;
+	}
+
+	.entry-title {
+		font-size: 24px;
+	}
+
+	.entry-thumb {
+		margin-top: -15px;
+		margin-left: -15px;
+		margin-right: -15px;
+	}
+
+	.entry-related {
+		margin: 25px 0;
+	}
+
+	.entry-item-thumb {
+		float: none;
+		margin-bottom: 20px;
+		
+		.job_listing & {
+			text-align: left;
+		}
+	}
+
+	.post-comments {
+		margin-bottom: 40px;
+	}
+
+	.navigation {
+		a,
+		span {
+			padding: 5px 9px;
+		}
+	}
+
+	/* List Items */
+	.list-item {
+		padding: 23px 15px 27px;
+	}
+
+	.list-item-main-info {
+		margin-right: 10px;
+	}
+
+	.list-item-title {
+		font-size: 18px;
+	}
+
+	.list-item-secondary-info {
+		max-width: 30%;
+	}
+
+	.list-item-location {
+		font-size: 13px;
+	}
+
+	.list-item-callout {
+		display: block;
+		text-align: center;
+
+		.list-item-secondary-info {
+			max-width: none;
+			text-align: center;
+			margin-top: 15px;
+		}
+	}
+
+	/* Footer */
+	.footer {
+		padding: 40px 0 50px;
+	}
+
+	.footer-copy {
+		text-align: center;
+
+		.text-right {
+			text-align: center;
+			margin-top: 5px;
+		}
+	}
+}

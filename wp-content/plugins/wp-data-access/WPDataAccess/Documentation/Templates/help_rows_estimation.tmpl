@@ -1,0 +1,6 @@
+<div class="doc_title">Column #Rows for InnoDB tables shows an estimation</div>
+<p>If you start the Data Explorer from the WP Data Access menu, you'll see the list of tables in your WordPress database. The column #Rows shows the number of rows in the corresponding table. This number is a rough estimate of the number of rows (records) for InnoDB tables with an estimate row count over the "Max InnoDB row count" plugin parameter.</p>
+<p>A warning sign will be shown for values concerning this issue. The "Max InnoDB row count" plugin parameter can be defined in the Plugin Back-end Settings. The default value is 100.000. Setting this value too high might slow down your system. Please check the source below for more technical information.</p>
+
+<p><strong>Source</strong><br/>
+<a href="https://dev.mysql.com/doc/refman/5.7/en/tables-table.html" target="_blank">MySQL 5.7 Reference Manual / INFORMATION_SCHEMA Tables / The INFORMATION_SCHEMA TABLES Table</a></p>

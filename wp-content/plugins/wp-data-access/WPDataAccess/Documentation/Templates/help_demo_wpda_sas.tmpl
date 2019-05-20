@@ -1,0 +1,127 @@
+<div class="doc_title">Demo project of a school administration system</div>
+<p><a href="?page=wpda_help&docid=demo_wpda_sas_video">Show me the video...</a>
+</p>
+<p>Folder "tutorials" contains a working demo of a simple student administration system (WPDA_SAS).
+The demo is meant to give you an impression of the possibilities of the Data Projects tool.
+It contains a number of tables and views that are prefixed with “wpda_sas_”.
+The demo app stores its data in these tables.
+Some test data is provided as well.
+You can use the Data Projects tool to see how the demo project and its pages are configured.
+Be aware that table options for the demo tables are defined as well.
+</p>
+<p>I hope the demo inspires you to create your own WordPress apps.
+If you have any questions or run into trouble, please use the WordPress forum to get in touch.
+</p>
+<p><strong>Follow these steps to install the demo</strong></p>
+<ul class="doc_list">
+  <li>Goto the Data Explorer</li>
+  <li>Click on button "Import data/Execute script(s)"</li>
+  <li>Click "Choose File"</li>
+  <li>Navigate to the WP Data Access plugin folder</li>
+  <li>Navigate to the tutorials folder below the plugin folder</li>
+  <li>Navigate to folder wpda_sas</li>
+  <li>Select file wpda_sas.zip (<a href="#nozip">I cannot import ZIP files</a>)</li>
+  <li>Uncheck checkbox hide errors</li>
+  <li>Click on button "Import file/Execute script(s)"</li>
+</ul>
+<p><strong>If you have errors</strong></p>
+<p>Please use the forum for help. Your request might help others as well.
+</p>
+<p><strong>If the demo project was installed correctly</strong></p>
+<p>Refresh your page.
+The WPDA_SAS menu should appear in your WordPress Dashboard.
+Check out the next section to get un understanding of the functionality of the demo.
+</p>
+<p><strong>App functionality</strong></p>
+<p>The demo provides app functionality for a simple school administration system.
+It supports three roles:
+<ul class="doc_list">
+  <li>An <strong>admin role</strong> for users who are responsible for general administrative tasks, like module, course, student and teacher administration. (WordPress role administrator)</li>
+  <li>A <strong>teacher role</strong> for teachers (really!). (WordPress role contributor)</li>
+  <li>A <strong>student role</strong> for students (you didn't expect that!). (WordPress role subscriber)</li>
+</ul>
+A data project is directly related to an app menu.
+This is the main menu offered in the WordPress dashboard.
+Every data project page is directly related to a sub menu.
+A WordPress role can be defined for a data project page.
+(you can also define multiple WordPress roles to a page as well)
+The plugin will only show pages to which the user has access.
+</p>
+<p>For the demo I used the standard WordPress roles.
+It might be wise to create your own (non WordPress) roles for your own WordPress app.
+</p>
+<p><strong>How to test general administrative functionality</strong></p>
+<p>If you log in as an administrator, you can administer module, course, teacher and student information.
+This part of the demo offers support for one to many and many to many relationships.
+Check out the different features to get familiar with these possibilities of the Data Projects tool.
+</p>
+<p><strong>How to test teacher functionality</strong></p>
+<p>If you log in as a contributor, you can edit your teacher profile (presuming you are a teacher).
+Before you can do so however, your account has to be connected to a teacher (a record in the teacher table).
+You can simply fake this by adding a user to your WordPress dashboard with the name <strong>teacher</strong>.
+Section "showing only user specific data" describes how this works.
+</p>
+<p><strong>How to test student functionality</strong></p>
+<p>
+If you log in as a subscriber, you can edit your student profile, view for which courses you are registered and view your grades (presuming you are a student).
+Before you can do so however, your account has to be connected to a student (a record in the student table).
+You can simply fake this by adding a user to your WordPress dashboard with the name <strong>student</strong>.
+Section "showing only user specific data" describes how this works.
+</p>
+<p><strong>Showing only user specific data</strong></p>
+<p>The demo offers user specific data editing and viewing for teachers and students.
+There are three simple steps to take.
+</p>
+<p>STEP 1</p>
+<p>Give the user access to your WordPress dashboard.
+</p>
+<p>STEP 2</p>
+<p>Make sure the user has the right WordPress role.
+</p>
+<p>STEP 3</p>
+<p>Navigate to the Data Project tool.
+Edit the pages to which the user(group) should have access and use the plugin environment variable $$USER$$ to set the WHERE clause item.
+See the example below.
+</p>
+<blockquote>
+For the demo I already added a column named “student_wp_username” to the “student” table.
+The value of this column corresponds with the WordPress username of the student.
+The Data Projects tool associates $$USER$$ with the WordPress username.
+For the demo this means that for students we define the WHERE clause as: student_wp_username = $$USER$$
+This will add a WHERE clause to the query of the list table and assures us to only show the student who is actually logged in.
+</blockquote>
+<blockquote>
+This is just one way simple to link a query to the user.
+You can certainly think of better options.
+This demo is just meant to help you to understand this feature.
+Just keep in mind that the environment variable $$USER$$ corresponds with the WordPress username.
+</blockquote>
+<p><strong>Data model</strong></p>
+<p>The demo project contains a numbers of sub folders.
+Sub folder <strong>diagram</strong> contains a diagram of the data model.
+There is a PNG version which you can view with any PNG viewer.
+The “mwb” file was created with MySQL Workbench.
+MySQL Workbench is a free tool from Oracle which you can use to edit the demo data model and build your own.
+Subfolder <strong>scripts</strong> contains all the scripts you need to create and drop the demo tables and views.
+There is a script to add some test data as well.
+Subfolder <strong>setup</strong> contains the installation files which are part of file "wpda_sas.zip".
+</p>
+<p><strong>No copyright of what so ever</strong></p>
+<p>Please feel free to use the demo app in what ever way that helps you.
+If you intend to implement your own version of a school administration system you can use the demo app as a head start.
+There is no copyright in any way.
+Folder "tutorials\wpda_sas" contains a number of subfolders that might be helpful.
+Check them out.
+Be inspired.
+Use them.
+</p>
+<a name="nozip"></a>
+<p><strong>I cannot import ZIP files (how can I still import the demo app?)</strong></p>
+<p>You must have ZipArchive installed to import ZIP files.
+If you do not have ZipArchive installed you can still import the demo application.
+In that case you need to import the SQL files which are part of the ZIP files.
+The SQL files you need to import the demo app are located in sub folder setup of folder wpda_sas.
+This folder contains two SQL script files: wpda_sas_database.sql and wpda_sas_project.sql.
+You need to import both files.
+The order in which you import them does not matter.
+</p>

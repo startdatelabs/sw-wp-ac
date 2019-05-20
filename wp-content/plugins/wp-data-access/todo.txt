@@ -1,0 +1,37 @@
+*** BUGS ***
+
++
+
+*** WORK IN PROGRESS ***
+
++ Add videos to documentation:
+  + Data Projects
+  + Data Backup tool
+  + Data Explorer
+  + Data Designer
+  + Data Menus
++ Update source documentation WPDataAccess & WPDataProjects
+
+*** NEXT ***
+
++ Move settings below and support them in project pages and dashboard menus:
+  + Table access
+    + Allow viewing structures
+    + Allow access to other schemas
+  + Allow drop/truncate?
+  + Row access
+  + Allow transactions?
+  + Allow imports?
++ Parent/child page - SHOW LESS/MORE PARENT
++ Display multiple lookup columns
++ Check JS/CSS versions for bootstrap, datatables and responsive
++ Add a force parameter to recreate repository
++ Export posts related to static pages in data projects (id +  author)
++ Prevent access to WP tables on main page import (?)
++ Allow to modify database tables directly from Data Designer
++ Backup data to Google Drive and OneDrive
++ If no primay key use unique index for Data Explorer row actions
+
+*** FUTURE ***
+
++ Data Command (SQL command line)

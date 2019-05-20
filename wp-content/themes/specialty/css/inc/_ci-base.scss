@@ -1,0 +1,576 @@
+/* -----------------------------------------
+	01. General
+----------------------------------------- */
+// Reset the box-sizing
+html {
+	box-sizing: border-box;
+	-ms-overflow-style: scrollbar; // sass-lint:disable-line no-vendor-prefixes
+	-webkit-tap-highlight-color: rgba($black, 0); // sass-lint:disable-line no-vendor-prefixes
+}
+
+* {
+	box-sizing: inherit;
+
+	&::before,
+	&::after {
+		box-sizing: inherit;
+	}
+}
+
+/* Basic Typography
+=================================== */
+body {
+	line-height: #{26 / $text-size-base};
+	font-size: #{$text-size-base}px;
+	background-color: $body-bg;
+	color: $text-color;
+	font-family: $primary-font;
+	-webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
+	-moz-osx-font-smoothing: grayscale; // sass-lint:disable-line no-vendor-prefixes
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: normal;
+	margin: 0 0 15px;
+	word-wrap: break-word;
+	text-rendering: optimizeLegibility;
+}
+
+h1 {
+	font-size: 24px;
+}
+
+h2 {
+	font-size: 20px;
+}
+
+h3 {
+	font-size: 18px;
+}
+
+h4 {
+	font-size: 16px;
+}
+
+h5 {
+	font-size: 14px;
+}
+
+h6 {
+	font-size: 12px;
+}
+
+p {
+	margin: 0 0 15px;
+}
+
+img {
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	transition: color .18s ease, background-color .18s ease, border-color .18s ease;
+	outline: none;
+	color: $accent-color;
+	text-decoration: none;
+
+	&:hover {
+		color: lighten($accent-color, 10%);
+		outline: none;
+		text-decoration: none;
+	}
+
+	&:active {
+		outline: none;
+	}
+}
+
+.group {
+	@include clearfix;
+}
+
+/* General Element Styling
+=================================== */
+/* Reset figure margin from normalize.css */
+figure {
+	margin: 0;
+}
+
+/* Lists */
+ul, ol {
+	padding-left: 20px;
+}
+
+ul {
+	list-style: disc;
+}
+
+ol {
+	list-style: decimal;
+}
+
+dl {
+	margin: 0 0 20px;
+}
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	margin: 0 0 15px;
+}
+
+/* Blockquotes */
+blockquote {
+	margin: 20px 0;
+	padding-left: 15px;
+	border-left: 3px solid $border-color;
+	font-size: 17px;
+	font-weight: 300;
+
+	cite {
+		display: block;
+		font-weight: bold;
+		font-style: italic;
+		margin: 10px 0 0;
+		color: rgba($text-color, .8);
+		font-size: 14px;
+	}
+}
+
+/* Tables */
+table {
+	border-collapse: separate;
+	border-spacing: 0;
+	width: 100%;
+}
+
+.entry-content {
+	table {
+		border-width: 1px 0 0 1px;
+		margin-bottom: 24px;
+	}
+
+	th,
+	td {
+		border-bottom: 1px solid rgba($black, .1);
+
+		&:first-child {
+			padding-left: 0;
+		}
+	}
+
+	caption,
+	th,
+	td {
+		font-weight: normal;
+		text-align: left;
+		padding: 5px;
+		vertical-align: middle;
+	}
+
+	th {
+		border-width: 0 1px 1px 0;
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: 85%;
+	}
+
+	td {
+		border-width: 0 1px 1px 0;
+	}
+}
+
+/* Code */
+code, kbd, tt, var, samp, pre {
+	font-family: monospace, serif;
+	hyphens: none;
+	font-style: normal;
+}
+
+pre {
+	padding: 15px;
+	border: 1px solid rgba($black, .1);
+}
+
+/* Various */
+address {
+	margin: 0 0 15px;
+}
+
+.sr-only,
+.screen-reader-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+/* Embeds and iframes
+=================================== */
+embed,
+iframe,
+object,
+video,
+audio {
+	margin-bottom: 15px;
+	max-width: 100%;
+}
+
+p > embed,
+p > iframe,
+p > object,
+p > audio,
+span > embed,
+span > iframe,
+span > object,
+span > audio {
+	margin-bottom: 0;
+}
+
+#map,
+.map {
+	* {
+		max-width: none !important;
+	}
+}
+
+/* General Form Styling
+=================================== */
+.form-field {
+	margin-bottom: 20px;
+}
+
+label {
+	display: block;
+	margin: 0 0 2px;
+	font-weight: normal;
+}
+
+input,
+textarea {
+	display: inline-block;
+	width: 100%;
+	max-width: 100%;
+	height: 42px;
+	padding: 6px 12px;
+	box-shadow: none;
+	line-height: normal;
+	border: 2px solid $border-color;
+	border-radius: 3px;
+	background-color: $white;
+	background-image: none;
+	color: $text-color;
+	font-size: 15px;
+	transition: border-color .18s ease;
+
+	&:hover,
+	&:focus {
+		border-color: $accent-color;
+		outline: none;
+	}
+
+	@include media-breakpoint-down(md) {
+		font-size: 16px;
+	}
+
+	@include media-breakpoint-down(xs) {
+		width: 100%;
+	}
+}
+
+input[type="search"] { /* Restoring box-sizing */
+	box-sizing: border-box;
+}
+
+textarea {
+	height: auto;
+}
+
+select {
+	max-width: 100%;
+	color: $text-color;
+	height: 42px;
+	border-color: $border-color;
+	border-style: solid;
+	border-width: 2px;
+	padding-left: 12px;
+	padding-right: 12px;
+	padding: 0;
+	background-color: $white;
+	border-radius: 2px;
+}
+
+.ci-select {
+	position: relative;
+	width: 100%;
+	height: 42px;
+
+	select {
+		width: 100%;
+		height: 100%;
+		appearance: none;
+		border-radius: 3px;
+		border: 2px solid $border-color;
+		padding: 6px 12px;
+		color: $text-color-light;
+		background-color: $white;
+
+		&::-ms-expand { // sass-lint:disable-line no-vendor-prefixes
+			display: none;
+		}
+	}
+
+	&::after {
+		font-family: "FontAwesome";
+		content: "\f107";
+		font-size: 20px;
+		position: absolute;
+		top: 0;
+		line-height: 42px;
+		right: 12px;
+		height: 100%;
+		color: $text-color;
+		pointer-events: none;
+	}
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	margin: 4px 0 0;
+	line-height: normal;
+	width: auto;
+	height: auto;
+}
+
+fieldset {
+	margin: 0 0 15px;
+	padding: 0;
+	border: 0;
+	min-width: 0;
+}
+
+/* Placeholder text color */
+@include placeholder {
+	color: rgba($text-color, .5);
+	font-weight: normal;
+	opacity: 1;
+}
+
+/* Buttons
+=================================== */
+.btn,
+.comment-reply-link,
+input[type="submit"],
+input[type="reset"],
+button {
+	@include button;
+	@include button-md;
+
+	&::before {
+		@include spinner($size: 24px, $border: 3px);
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin: -12px 0 0 -12px;
+		opacity: 0;
+		transition: opacity .18s ease;
+	}
+}
+
+.btn-sm {
+	@include button-sm;
+}
+
+.btn-lg {
+	@include button-lg;
+}
+
+.btn-block {
+	min-width: 100%;
+	display: block;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.btn-round {
+	border-radius: 30px;
+}
+
+.btn-transparent {
+	background-color: transparent;
+	border-color: $accent-color;
+	color: $accent-color;
+
+	&:hover {
+		color: $text-on-accent;
+		background-color: $accent-color;
+	}
+
+	&.btn-loading {
+		&:hover {
+			background-color: transparent;
+			color: $accent-color;
+		}
+	}
+}
+
+.btn-white {
+	background-color: $white;
+	color: $accent-color;
+
+	&:hover {
+		color: $accent-color;
+		background-color: $white;
+	}
+
+	&.btn-transparent {
+		border-color: $white;
+		color: $white;
+		background-color: transparent;
+
+		&:hover {
+			background-color: $white;
+			color: $accent-color;
+		}
+
+		&.btn-loading {
+			&:hover {
+				color: $white;
+				background-color: transparent;
+			}
+		}
+	}
+}
+
+.btn-loading {
+	cursor: not-allowed;
+	pointer-events: none;
+	text-indent: -999em;
+
+	&::before {
+		opacity: 1;
+	}
+}
+
+/* Magnific Popup Overrides
+=================================== */
+.mfp-bg {
+	background-color: $black;
+}
+
+.mfp-preloader {
+	color: $white;
+
+	a {
+		color: $white;
+
+		&:hover {
+			color: $white;
+		}
+	}
+}
+
+.mfp-container {
+	&:not(.mfp-s-error) {
+		.mfp-preloader {
+			@include spinner;
+			background-color: transparent;
+			text-indent: -999em;
+			margin: 0 auto;
+		}
+	}
+}
+
+button {
+	&.mfp-close,
+	&.mfp-arrow {
+		border: 0;
+		opacity: 1;
+
+		&:hover {
+			background: none;
+			border: 0;
+		}
+	}
+}
+
+.mfp-close-btn-in {
+	.mfp-close {
+		color: $white;
+	}
+}
+
+.mfp-image-holder,
+.mfp-iframe-holder {
+	.mfp-close {
+		color: $white;
+	}
+}
+
+.mfp-arrow {
+	line-height: .3;
+
+	&::before,
+	&::after {
+		border: 0;
+	}
+
+	&::after {
+		font-family: FontAwesome;
+		font-size: 70px;
+		color: $white;
+	}
+}
+
+.mfp-arrow-right {
+	&::after,
+	.mpf-a {
+		content: "\f105";
+	}
+}
+
+.mfp-arrow-left {
+	&::after,
+	.mpf-a {
+		content: "\f104";
+	}
+}
+
+/* Text Alignment Helpers
+=================================== */
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-justified {
+	text-align: justify;
+}
+
+/* Other Text Helpers
+=================================== */
+.text-theme {
+	font-weight: 700;
+	color: $accent-color;
+}
+
+.text-secondary {
+	@include text-secondary;
+}

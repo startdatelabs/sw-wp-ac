@@ -1,0 +1,53 @@
+// Grid
+// =========================================
+$enable-flex:         false !default;
+$enable-grid-classes: true !default;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 544px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+$container-max-widths: (
+  sm: 576px,
+  md: 720px,
+  lg: 940px,
+	xl: 1170px
+) !default;
+
+$grid-columns:      12 !default;
+$grid-gutter-width: 30px !default;
+
+
+// Colors
+// =========================================
+$white: #fff    !default;
+$black: #000    !default;
+$grey:  #e9e9e9 !default;
+
+$body-bg:           #f6f6f6 !default;
+$accent-color:      #00c6ff !default;
+$accent-color-dark: #2f3043 !default;
+$text-color:        #484848 !default;
+$text-color-light:  #828282 !default;
+$text-color-dark:   #343434 !default;
+$text-on-accent:    $white  !default;
+$border-color:      $grey   !default;
+
+$color-facebook:    #3b5998 !default;
+$color-twitter:     #00acee !default;
+$color-linkedin:    #dd4b39 !default;
+$color-google-plus: #0077b5 !default;
+
+$color-featured:    #fffded !default;
+
+$text-size-base: 16 !default;
+
+
+// Fonts
+// =========================================
+$primary-font:   "Lato", sans-serif;
+$secondary-font: serif;

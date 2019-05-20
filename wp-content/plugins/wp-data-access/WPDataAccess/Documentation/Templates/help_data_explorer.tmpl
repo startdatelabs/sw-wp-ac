@@ -1,0 +1,90 @@
+<div class="doc_title">Data Explorer</div>
+<p>Please note that there are two different types of data explorer pages!</p>
+<ol type="1">
+  <li>The data explorer main page to browse through your WordPress database to find specific tables and perform actions on them.</li>
+  <li>The data explorer tables pages to manage table data.</li>
+</ol>
+<p>Use the Data Explorer to explore your WordPress database. The Data Explorer is based on an extention of WordPress class WP_List_Table. WordPress users who are familiar with these list tables will recognize the look and feel right away.</p>
+
+<p><strong>1. Data Explorer Main Page</strong></p>
+<p>Manage tables and views from the Data Explorer main page (available from the Data Explorer menu). The following features are available:</p>
+<ul class="doc_list">
+  <li>Explore table or view<br/>
+      See next section.
+  </li>
+  <li>View table or view structure<br/>
+      Click on the <span class="dashicons dashicons-admin-tools"></span> icon.
+  </li>
+  <li>Export table(s)<br/>
+      To export an individual table click on the <span class="dashicons dashicons-admin-tools"></span> icon, select the Actions tab and click on the Export button.
+      Individual tables can be exported to SQL, XML, JSON, Excel and CSV.<br/>
+      To export multiple tables select the tables to be exported, select Export Table(s) from the bulk actions menu and click on the Apply button.
+      Selections of multiple tables can be exported to SQL only.
+   </li>
+  <li>Import table(s)<br/>
+      Click on the Import button at the top of the screen and follow the instructions.
+  </li>
+  <li>Rename table or view<br/>
+      To rename a table or view click on the <span class="dashicons dashicons-admin-tools"></span> icon, select the Actions tab and rename the table of view.
+  </li>
+  <li>Copy table<br/>
+      To copy a table click on the <span class="dashicons dashicons-admin-tools"></span> icon, select the Actions tab and copy the table either with or without data.
+  </li>
+  <li>Truncate table<br/>
+      To truncate a table click on the <span class="dashicons dashicons-admin-tools"></span> icon, select the Actions tab and truncate the table.
+  </li>
+  <li>Drop table or view<br/>
+      To drop a table or view click on the <span class="dashicons dashicons-admin-tools"></span> icon, select the Actions tab and drop the table of view.
+  </li>
+  <li>Optimize table<br/>
+      To optimize a table click on the <span class="dashicons dashicons-admin-tools"></span> icon, select the Actions tab and optimize the table.
+  </li>
+  <li>Alter table<br/>
+      To alter a table click on the <span class="dashicons dashicons-admin-tools"></span> icon, select the Actions tab and alter the table.
+      This action will load the table structure into the Data Designer.
+  </li>
+  <li>View table indexes<br/>
+      To view indexes click on the <span class="dashicons dashicons-admin-tools"></span> icon of the according table and select the Indexes tab.
+  </li>
+  <li>View or copy SQL create table or view statement<br/>
+      To view of copy a table or view definition click on the <span class="dashicons dashicons-admin-tools"></span> icon of the according table and select the SQL tab.
+  </li>
+  <li>Mark tables or views as favourites for quick access<br/>
+      Click on the <span class="dashicons dashicons-star-empty"></span> icon for a table you want to add to your favourites. Click again to remove. Choose from the listbox on the top of the screen if you want to see all tables, favourites only or only non favourites.
+  </li>
+</ul>
+<p><strong>Notes</strong></p>
+<p class="doc_margin">WordPress tables are protected by default. For obvious reasons it's not possible to drop, truncate or rename WordPress tables. Individual records of WordPress tables can be updated and deleted (see next section). Access to individual tables and views can be limited under plugin settings as well.</p>
+<p class="doc_margin">For obvious reasons not all actions on the Actions tab are available for views. For example, you cannot truncate a view.</p>
+
+<p><strong>2. Data Explorer Table Pages</strong></p>
+<p>Manage table data from the Data Explorer table page. The following features are available:</p>
+<ul class="doc_list">
+  <li>Export a selected number of records<br>
+      Select the rows you want to export, select Export from the bulk actions menu and click on the Apply button.
+      Selected rows can be exported to SQL, XML, JSON, Excel and CSV.
+  </li>
+  <li>Import previously exported records<br/>
+      Click on the Import button at the top of the screen and follow the instructions.
+  </li>
+  <li>View multiple records (list table) or individual records<br/>
+      Click on the view link of the record you want to view.
+  </li>
+  <li>Edit records (through data entry forms)<br/>
+      lick on the edit link of the record you want to edit.
+  </li>
+  <li>Delete records<br/>
+      To delete a single records, click on the delete link of the record you want to delete.<br/>
+      To delete multiple records at once, select the records you want to delete, select Delete Permanently from the bulk actions menu and click on the Apply button.
+  </li>
+  <li>Pagination<br/>
+      Standard WordPress list table functionality.
+  </li>
+  <li>Searching<br/>
+      Standard WordPress list table functionality.
+  </li>
+  <li>Sorting<br/>
+      Standard WordPress list table functionality.
+  </li>
+</ul>
+<p>Within the Data Explorer you can edit any table, even WordPress tables! Make sure you know what you are doing. Modification on WordPress tables might corrupt your WordPress database/installation.</p>

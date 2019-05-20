@@ -1,0 +1,199 @@
+// sass-lint:disable force-element-nesting, force-pseudo-nesting, no-empty-rulesets, no-mergeable-selectors, one-declaration-per-line
+/* -----------------------------------------
+	02. Main Navigation
+----------------------------------------- */
+.nav {
+	display: block;
+	margin-left: auto;
+}
+
+.navigation-main {
+	@include clearfix;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	line-height: normal;
+
+	/* Functional Styles
+	=================================== */
+	li { position: relative; }
+	> li { display: inline-block; }
+	a { display: block; white-space: nowrap; }
+
+	ul {
+		position: absolute;
+		z-index: 10;
+		visibility: hidden;
+		opacity: 0;
+		transition: transform .25s ease .2s, opacity .25s ease .2s, visibility 0s ease .35s;
+		transform: translate(0, 15px);
+	}
+
+	> li:last-child {
+		> ul {
+			right: 0;
+
+			&::before {
+				left: auto;
+				right: 10px;
+			}
+		}
+	}
+
+	ul ul {
+		top: 0;
+		right: 100%;
+		transform: translate(-5px, 0);
+	}
+
+	li:hover {
+		a {
+			transition-delay: 0s;
+		}
+
+		> ul {
+			transition-delay: 0s, 0s, 0s;
+			visibility: visible;
+			opacity: 1;
+		}
+
+		ul {
+			z-index: 15;
+		}
+	}
+
+	> li:hover > ul {
+		transform: translate(0, 10px);
+	}
+
+	li li:hover > ul {
+		transform: translate(0, 0);
+	}
+
+	// Development only
+	//> li:nth-child(2) {
+	//	 ul { transform: translate(0, 10px); visibility: visible !important; opacity: 1 !important; }
+	//	 ul ul { transform: translate(0, 0); opacity: 1 !important; }
+	// }
+
+	/* Visual Styles
+	=================================== */
+	// Sub-menu containers
+	ul {
+		padding: 0;
+		margin: 0 0 0 30px;
+		list-style: none;
+		background-color: $white;
+		min-width: 200px;
+		border-radius: 3px;
+		border-bottom: 2px solid $border-color;
+	}
+
+	// Global Menu Link Styles
+	a {
+		position: relative;
+		font-size: 12px;
+		text-transform: uppercase;
+		letter-spacing: .1em;
+	}
+
+	// First Level Menu Links
+	// -----------------------------------
+
+	// Default Styles
+	> li {
+		> a {
+			padding: 8px 0;
+			margin-left: 30px;
+			color: $text-on-accent;
+			border-bottom: 2px solid transparent;
+			transition-delay: .25s;
+		}
+
+		&.menu-item-btn {
+			> a {
+				padding: 6px 12px;
+				border: 2px solid $accent-color;
+				font-weight: 700;
+				border-radius: 2px;
+
+				&:hover {
+					background-color: $accent-color;
+				}
+			}
+		}
+
+		> ul {
+			&::before {
+				content: "";
+				position: absolute;
+				border: 5px solid transparent;
+				border-bottom-color: $white;
+				top: -10px;
+				left: 10px;
+			}
+		}
+	}
+
+	// Active & Hover
+	> li:hover > a,
+	> li > a:focus,
+	> .current-menu-item > a,
+	> .current-menu-parent > a,
+	> .current-menu-ancestor > a {
+		border-bottom: 2px solid $accent-color;
+	}
+
+	// Sub-Menu Links
+	// -----------------------------------
+
+	// Default Styles
+	li {
+		li {
+			a {
+				font-size: 11px;
+				padding: 9px 12px;
+				border-bottom: 1px solid $border-color;
+				color: $text-color;
+			}
+
+			&:last-child {
+				> a {
+					border-bottom: 0;
+				}
+			}
+		}
+	}
+
+	// Active & Hover
+	li li:hover > a,
+	li li > a:focus,
+	li .current-menu-item > a,
+	li .current-menu-parent > a,
+	li .current-menu-ancestor > a {
+		color: $accent-color;
+	}
+
+	// Arrows
+	// -----------------------------------
+
+	// First Level (Facing Down)
+	.menu-item-has-children > a::after {
+		content: "\f078";
+		font-family: FontAwesome;
+		font-size: 8px;
+		position: relative;
+		top: -4px;
+		right: -3px;
+		line-height: normal;
+	}
+
+	// Sub-Menus (Facing Right)
+	li .menu-item-has-children > a::after {
+		content: "\f054";
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}

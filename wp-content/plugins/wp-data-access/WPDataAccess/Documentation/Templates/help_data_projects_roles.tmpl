@@ -1,0 +1,17 @@
+<div class="doc_title">Data Projects - User Roles and WHERE Clauses</div>
+<p>A Data Project consists of one or more data administration and/or static pages.
+Use the role attribute to define which users should have access to a page.
+</p>
+<p>In a student administration system for example, you might need a page to inform students about their personal results.
+Suppose student results are stored in table STUDENT_RESULTS and has a column STUDENT_NAME that holds the WordPress username of the student.
+</p>
+<p>
+You can restrict the information shown by:<br/>
+(1) Give students WordPress role subscriber (for example).<br>
+(2) Add role subscriber to the student result page.<br>
+(3) Enter STUDENT_NAME = $$USER$$ to the WHERE Clause of the student result page.
+</p>
+<p>
+Students will see only their own results.
+If you have other users who need to see all results, you'll need a second student result page available to another role.
+</p>

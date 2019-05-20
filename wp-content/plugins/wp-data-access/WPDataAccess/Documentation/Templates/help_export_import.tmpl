@@ -1,0 +1,46 @@
+<div class="doc_title">Export/Import</div>
+<p>WP Data Access offers two types of exports and imports:</p>
+<ol type="1">
+  <li>Data Explorer main page export/import</li>
+  <li>Data Explorer table page export/import</li>
+</ol>
+
+<p><strong>1. Data Explorer main page export/import</strong></p>
+<p>Use these features to export/import tables.
+The SQL export file includes a create table statement for every exported table and an insert into statement for every exported row.</p>
+
+<p class="doc_margin"><strong>Export table(s)</strong></p>
+<p class="doc_margin">To export multiple tables at ones, select the desired tables, select Export Table from the Bulk Actions list and click Apply.
+This feature supports exports to SQL<sup>1)</sup> only.</p>
+<p class="doc_margin">To export a single table, click on the Manage link for the desired table and click on the Export button on the Actions tab.
+This feature supports exports to SQL<sup>1)</sup>, XML, JSON, Excel and CSV.</p>
+
+<p class="doc_margin"><strong>Import table(s)</strong></p>
+<p class="doc_margin">Click the "Import data/Execute script(s)" button at the top of the screen. Select the file you want to import and click Import File.</p>
+
+<iframe style="width:1280px; height:720px;" src="https://www.youtube.com/embed/qLlKNzCBMXE?vq=hd720" allowfullscreen></iframe>
+
+<p><strong>2. Data Explorer table page export/import</strong></p>
+<p>Use these features to export/import a selected number of rows from a specific table.
+The export file includes an insert into statement for every exported row. <sup>2)</sup></p>
+
+<p class="doc_margin"><strong>Export table data</strong></p>
+<p class="doc_margin">Use the search box to find the rows you want to export.
+If not all rows you want to export are visible, click on Screen Options (upper right corner of the page) and change Number of items per page accordingly.
+Select the rows you want to export.
+Select Export from the Bulk Actions list and click Apply.
+This feature supports exports to SQL<sup>1)</sup>, XML, JSON, Excel and CSV.
+</p>
+
+<p class="doc_margin"><strong>Import table data</strong></p>
+<p class="doc_margin">Click the import button on top of the screen. Select the file you to import and click Import File.</p>
+
+<iframe style="width:1280px; height:720px;" src="https://www.youtube.com/embed/YfYO2blnnag?vq=hd720" allowfullscreen></iframe>
+
+<p><sup>1)</sup> Export to SQL offers support for seemless export and import between WordPress databases that use different prefixes.
+The WordPress table prefix is replaced during export by variable {wp_prefix}, which is replaced by the WordPress table prefix on import.
+If you want to use another tool for import, disable checkbox "Export with variable WP prefix" in Back-End Settings on the Manage Plugin page.
+With "Export with variable WP prefix" disabled full table names will be written to the export file. (<a href="?page=wpda_help&docid=transfer">read more...</a>)</p>
+
+<p> <sup>2)</sup> The import feature on a Data Explorer table page only supports the import of data into the table displayed on the page.
+Any other statement than an insert into the table on the page will be rejected. Use the import feature of the Data Explorer main page to import any valid import file.</p>

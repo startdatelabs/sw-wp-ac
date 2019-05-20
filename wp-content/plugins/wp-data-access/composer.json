@@ -1,0 +1,14 @@
+{
+  "autoload": {
+    "psr-4": {
+      "WPDataAccess\\": "WPDataAccess/",
+      "WPDataProjects\\": "WPDataProjects/"
+    }
+  },
+  "require-dev": {
+    "phpdocumentor/phpdocumentor": "2.*"
+  },
+  "require": {
+    "guzzlehttp/guzzle": "6.*"
+  }
+}

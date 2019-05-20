@@ -1,0 +1,815 @@
+/* -----------------------------------------
+	04. Modules
+----------------------------------------- */
+
+/* Page Hero
+=================================== */
+.page-hero {
+	background-color: $accent-color-dark;
+	background-repeat: no-repeat;
+	background-position: center top;
+	color: $text-on-accent;
+	height: 350px;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+
+	.page-template-template-builder-php & {
+		height: 82px;
+	}
+
+	.container {
+		width: 100%;
+		margin-top: auto;
+		margin-bottom: auto;
+	}
+
+	&::before {
+		content: "";
+		background-color: rgba($accent-color-dark, .82);
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+}
+
+.page-hero-lg {
+	height: 500px;
+
+	.page-template-template-builder-php & {
+		height: 82px;
+	}
+}
+
+.page-hero-center {
+	text-align: center;
+}
+
+.page-hero-content {
+	margin-top: 50px;
+
+	.page-hero-lg & {
+		margin-top: 60px;
+	}
+}
+
+.page-title {
+	font-size: 40px;
+	line-height: 1.2;
+	font-weight: 300;
+	margin: 0;
+
+	.page-hero-lg & {
+		max-width: 570px;
+	}
+}
+
+.page-subtitle {
+	margin: 15px 0 0;
+}
+
+.page-hero-details {
+	span {
+		display: inline-block;
+		vertical-align: middle;
+		position: relative;
+		margin-right: 20px;
+
+		&::after {
+			content: "\2022";
+			position: absolute;
+			right: -16px;
+			font-size: 16px;
+			text-transform: none;
+			font-weight: 400;
+			opacity: .3;
+		}
+
+		&.item-badge {
+			&::after {
+				top: -1px;
+			}
+		}
+
+		&:last-child {
+			&::after {
+				display: none;
+			}
+		}
+	}
+}
+
+/* Filter Form
+=================================== */
+.form-filter {
+	position: relative;
+	background-color: rgba($black, .25);
+	padding: 30px 0;
+}
+
+/* Content Wrappers
+=================================== */
+.main {
+	padding: 60px 0;
+	position: relative;
+}
+
+.main-elevated {
+	padding-top: 0;
+	margin-top: -72px;
+}
+
+.content-wrap {
+	background-color: $white;
+	border-radius: 3px;
+	padding: 100px;
+	border-bottom: 2px solid rgba($border-color, .8);
+}
+
+.content-wrap-footer {
+	@include text-secondary;
+	padding: 15px 0;
+}
+
+.section-title-wrap {
+	@include clearfix;
+}
+
+.section-title {
+	@include section-title;
+
+	.entry-related & {
+		font-weight: 700;
+	}
+
+	.section-title-wrap & {
+		float: left;
+	}
+}
+
+.section-title-compliment {
+	@include section-title;
+	float: right;
+
+	a {
+		color: $text-color;
+	}
+
+	.fa {
+		margin-right: 5px;
+	}
+}
+
+/* Sidebar
+=================================== */
+.sidebar {
+	.main-elevated & {
+		margin-top: 100px;
+	}
+}
+
+/* Badges
+=================================== */
+.item-badge {
+	display: inline-block;
+	margin: 0;
+	line-height: normal;
+	padding: 2px 6px 3px;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: $text-on-accent;
+	background-color: $accent-color;
+	vertical-align: middle;
+	border-radius: 2px;
+
+	&:hover {
+		color: $text-on-accent;
+	}
+}
+
+/* List Items
+=================================== */
+.item-listing,
+ul.job_listings {
+	position: relative;
+	margin-bottom: 0;
+	border-top: 0;
+
+	&::after {
+		@include spinner($color: $accent-color);
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin: -20px 0 0 -20px;
+		z-index: 11;
+		display: none;
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-color: $white;
+		z-index: 10;
+		opacity: .6;
+		display: none;
+	}
+
+	&.is-loading {
+		&::after,
+		&::before {
+			display: block;
+		}
+	}
+}
+
+// Unfortunate but necessary selectors
+// to overcome plugin's specificity
+ul.job_listings {
+	li.list-item.job_listing {
+		padding: 30px;
+		border-bottom: 1px solid $border-color;
+
+		a {
+			background: none;
+			padding: 0;
+			opacity: 1;
+			display: inline-block;
+			line-height: normal;
+
+			&:hover,
+			&:focus {
+				background: none;
+			}
+		}
+	}
+}
+
+.list-item {
+	display: flex;
+	padding: 30px;
+	background-color: $white;
+	align-items: center;
+	line-height: normal;
+
+	&:first-child {
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+	}
+}
+
+.list-item-sm {
+	padding: 10px;
+}
+
+.list-item-featured,
+.job_position_featured {
+	background-color: $color-featured;
+}
+
+.list-item-callout {
+	background-color: $accent-color;
+	border-top: 2px solid rgba($black, .03);
+	border-bottom: 2px solid rgba($black, .03);
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+.list-item-error {
+	background-color: #ff6452;
+	text-align: center;
+	display: none;
+
+	.fa-warning {
+		text-align: center;
+		display: block;
+		font-size: 30px;
+		margin-bottom: 15px;
+	}
+}
+
+.list-item-secondary-info {
+	text-align: right;
+	margin-left: auto;
+
+	.widget & {
+		display: none;
+	}
+}
+
+.list-item-title-eyebrow {
+	display: block;
+	text-transform: uppercase;
+	font-size: 10px;
+	opacity: .4;
+	margin: -13px 0 3px;
+	padding: 0;
+	line-height: 1;
+	font-weight: 400;
+
+	.widget & {
+		display: none;
+	}
+}
+
+.list-item-title {
+	font-size: 20px;
+	margin: 0 0 4px;
+	letter-spacing: -.025em;
+	line-height: 1;
+
+	.entry-content & {
+		margin: 0 0 4px;
+	}
+
+	.list-item-callout & {
+		font-weight: 700;
+		color: $text-on-accent;
+	}
+
+	.widget & {
+		font-size: 15px;
+		margin-bottom: 5px;
+	}
+
+	.list-item-error & {
+		color: $white;
+		width: 100%;
+	}
+}
+
+.list-item-location {
+	margin: 0 0 3px;
+	line-height: normal;
+	color: $text-color-dark;
+
+	.entry-content & {
+		margin: 0 0 3px;
+	}
+}
+
+.list-item-time,
+.list-item-company {
+	font-size: 13px;
+	color: $text-color-light;
+	margin: 0;
+	display: inline-block;
+	vertical-align: middle;
+
+	.list-item-callout & {
+		color: $text-on-accent;
+	}
+
+	.list-item-sm & {
+		font-size: 12px;
+	}
+}
+
+.list-item-company {
+	.list-item-sm & {
+		max-width: 140px;
+	}
+}
+
+.list-item-tag {
+	margin-right: 5px;
+}
+
+.list-item-secondary-wrap {
+	background-color: $accent-color;
+	padding: 30px;
+	text-align: center;
+
+	&:last-child {
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		border-bottom: 2px solid $border-color;
+	}
+}
+
+.no_job_listings_found {
+	list-style: none;
+	text-align: center;
+	padding: 30px;
+	background-color: $white;
+}
+
+/* Custom Filters
+=================================== */
+.item-filters-array {
+	margin: 0;
+	padding: 0;
+}
+
+.item-filter {
+	display: block;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	border-bottom: 1px solid $border-color;
+	line-height: normal;
+	background-color: $white;
+
+	&:first-child {
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+	}
+
+	&:last-child {
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+		border-bottom-width: 2px;
+	}
+
+	input {
+		&:not([type="checkbox"]),
+		&:not([type="radio"]) {
+			appearance: none;
+		}
+	}
+}
+
+.checkbox-filter-label {
+	margin: 0;
+	padding: 12px;
+	display: block;
+	cursor: pointer;
+	position: relative;
+	top: 2px;
+	color: $text-color-light;
+
+	&::before {
+		content: "";
+		width: 18px;
+		height: 18px;
+		background-color: $grey;
+		position: absolute;
+		right: 12px;
+		border-radius: 2px;
+		transition: background-color .18s ease;
+	}
+
+	&::after {
+		font-family: "FontAwesome";
+		content: "\f00c";
+		position: absolute;
+		right: 15px;
+		top: 15px;
+		font-size: 12px;
+		color: $text-on-accent;
+		transform: scale(0);
+		opacity: 0;
+		transition: opacity .18s ease, transform .18s ease;
+	}
+}
+
+.item-filter-tag {
+	margin-left: -12px;
+	text-transform: uppercase;
+	font-size: 11px;
+	font-weight: 700;
+	display: inline-block;
+	height: 18px;
+	padding: 2px 20px 2px 15px;
+	min-width: 96px;
+	position: relative;
+	overflow: hidden;
+	user-select: none;
+	z-index: 1;
+	transition: color .18s ease .075s;
+}
+
+.item-filter-tag-bg {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	z-index: -1;
+	background-color: $accent-color;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	transform: translateX(calc(-100% + 5px));
+	transition: transform .25s ease;
+}
+
+.checkbox-filter {
+	position: absolute;
+	left: -9999px;
+
+	&:checked + label {
+		&::before {
+			background-color: $accent-color;
+		}
+
+		&::after {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		.item-filter-tag-badge {
+			transition-delay: 0s;
+			color: $white;
+		}
+
+		.item-filter-tag-bg {
+			transform: translateX(0);
+		}
+	}
+}
+
+/* Tag & Filter Colors
+=================================== */
+$job-types-map: (
+	contract: #1cbbb4,
+	freelance: #ed145b,
+	full-time: #f4a742,
+	part-time: #f26c4f,
+	internship: #630460,
+	temporary: #378b8e,
+	remote: #ed848f,
+);
+
+.item-filter-tag-bg,
+.item-badge {
+	@each $job-type, $bgcolor in $job-types-map {
+		&.job-type-#{$job-type} {
+			background-color: $bgcolor;
+		}
+	}
+}
+
+/* Entry Styles
+=================================== */
+.entry {
+	margin: 0 0 200px; // Offest entry thumb negative margin
+
+	&:only-of-type,
+	&:last-child {
+		margin: 0;
+	}
+
+	&:first-child {
+		img {
+			border-top-left-radius: 3px;
+			border-top-right-radius: 3px;
+		}
+	}
+
+	.search-results & {
+		margin-bottom: 60px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.entry-thumb {
+	display: block;
+	margin: -100px -100px 30px;
+}
+
+.entry-meta {
+	@include text-secondary;
+	margin-bottom: 10px;
+}
+
+.entry-time {
+	+ .entry-categories {
+		&::before {
+			content: "\2022";
+			display: inline-block;
+			margin: 0 5px;
+			opacity: .4;
+		}
+	}
+}
+
+.entry-title {
+	font-size: 32px;
+	font-weight: 300;
+	margin-bottom: 30px;
+}
+
+.entry-content {
+	@include clearfix;
+
+	h1, h2, h3, h4, h5, h6 {
+		margin-top: 40px;
+	}
+
+	p {
+		margin-bottom: 20px;
+	}
+
+	iframe,
+	blockquote,
+	.fluid-width-video-wrapper {
+		margin: 25px 0;
+	}
+
+	.fluid-width-video-wrapper {
+		iframe {
+			margin: 0;
+		}
+	}
+
+	.mce-tinymce {
+		iframe {
+			margin: 0;
+		}
+	}
+}
+
+.btn-read-more {
+	margin-top: 20px;
+}
+
+.btn-apply-content {
+	margin-top: 35px;
+}
+
+.search-notice {
+	border-bottom: 1px solid $border-color;
+	padding-bottom: 30px;
+	margin-bottom: 40px;
+
+	p {
+		&:only-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&:last-child {
+		border-bottom: 0;
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+}
+
+/* Entry Item Styles
+=================================== */
+.entry-related {
+	margin: 50px 0 40px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.entry-item {
+	background-color: $white;
+	font-size: 15px;
+	border-bottom: 2px solid $border-color;
+	margin-bottom: 30px;
+
+	p {
+		margin-bottom: 0;
+	}
+}
+
+.entry-item-thumb {
+	img {
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+	}
+
+	.job_listing & {
+		text-align: center;
+		padding: 25px 10px 0;
+
+		img {
+			border-radius: 0;
+			position: relative;
+			display: inline-block;
+			width: auto;
+			max-height: 90px;
+		}
+	}
+}
+
+.entry-item-content-wrap {
+	padding: 25px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+.entry-item-title {
+	font-size: 20px;
+	font-weight: 400;
+	letter-spacing: -.025em;
+	margin: -5px 0 10px;
+}
+
+/* Entry Sharing
+=================================== */
+.entry-share {
+	display: inline-block;
+	margin-left: 5px;
+	color: $text-color;
+	font-weight: 700;
+
+	&:hover {
+		color: inherit;
+	}
+}
+
+.entry-share-facebook {
+	color: $color-facebook;
+}
+
+.entry-share-twitter {
+	color: $color-twitter;
+}
+
+.entry-share-google-plus {
+	color: $color-google-plus;
+}
+
+.entry-share-linkedin {
+	color: $color-linkedin;
+}
+
+/* Pagination
+=================================== */
+.navigation {
+	text-align: center;
+	margin: 40px 0 0;
+
+	a,
+	span {
+		@include text-secondary;
+		display: inline-block;
+		margin: 0 3px;
+		padding: 9px 16px;
+		font-size: 12px;
+		color: $text-color;
+		background-color: $white;
+		border-radius: 3px;
+		border-bottom: 2px solid $border-color;
+	}
+
+	a:hover, // sass-lint:disable-line force-pseudo-nesting
+	.current {
+		background-color: $accent-color;
+		color: $text-on-accent;
+	}
+
+	.nav-links {
+		@include clearfix;
+	}
+
+	.nav-previous {
+		float: left;
+	}
+
+	.nav-next {
+		float: right;
+	}
+}
+
+.post-navigation {
+	// Styles specific to post navigation
+}
+
+/* Social Icons
+=================================== */
+.list-social-icons {
+	@include clearfix;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	li {
+		float: left;
+		margin: 0 5px 3px 0;
+	}
+}
+
+.social-icon {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	line-height: 28px;
+	font-size: 16px;
+	text-align: center;
+	color: $text-color-light;
+	background-color: transparent;
+	border: 2px solid $text-color-light;
+	border-radius: 50%;
+	opacity: .7;
+
+	&:hover {
+		color: $accent-color;
+		border-color: $accent-color;
+	}
+}

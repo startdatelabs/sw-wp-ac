@@ -1,0 +1,145 @@
+// Button Mixins
+@mixin button-reset {
+	position: relative;
+	display: inline-block;
+	font-weight: normal;
+	margin: 0;
+	line-height: normal;
+	border: 0;
+	box-shadow: none;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	white-space: nowrap;
+	transition: .18s background-color ease,
+	            .18s color ease,
+	            .18s border-color ease,
+							.18s opacity ease;
+	user-select: none;
+	border-radius: 0;
+	width: auto;
+	height: auto;
+	background-image: none;
+}
+
+@mixin button {
+	@include button-reset;
+	text-transform: uppercase;
+	background-color: $accent-color;
+	border: 2px solid transparent;
+	color: $text-on-accent;
+	font-weight: 700;
+	border-radius: 3px;
+
+	&:active {
+		outline: none;
+	}
+
+	&:hover {
+		color: $text-on-accent;
+		background-color: darken($accent-color, 2%);
+		text-decoration: none;
+	}
+}
+
+@mixin button-xs {
+	padding: 5px 16px;
+	font-size: 11px;
+	height: auto;
+}
+
+@mixin button-sm {
+	padding: 8px 18px;
+	font-size: 11px;
+	height: auto;
+}
+
+@mixin button-md {
+	padding: 11px 38px;
+	font-size: 13px;
+	height: 42px;
+}
+
+@mixin button-lg {
+	padding: 16px 42px;
+	font-size: 16px;
+	height: auto;
+}
+
+// Placeholders
+@mixin placeholder {
+	::-webkit-input-placeholder { @content }
+	:-moz-placeholder { @content }
+	::-moz-placeholder { @content }
+	:-ms-input-placeholder { @content }
+}
+
+@mixin placeholder-at {
+	&::-webkit-input-placeholder { @content }
+	&:-moz-placeholder { @content }
+	&::-moz-placeholder { @content }
+	&:-ms-input-placeholder { @content }
+}
+
+// Ensuring text doesn't overflow its container and breaks nicely
+@mixin truncate-text($overflow: ellipsis) {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: $overflow; // clip, ellipsis, or a string
+}
+
+// Loading spinner
+@keyframes rot {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(359deg);
+	}
+}
+
+@mixin spinner($color: #ffffff, $opacity: .35, $size: 40px, $border: 6px) {
+	border: $border solid rgba($color, $opacity);
+	border-top-color: rgba($color, $opacity * 2.5);
+	border-radius: 100%;
+	height: $size;
+	width: $size;
+	animation: rot .8s infinite linear;
+}
+
+@mixin section-title($fz: 14px) {
+	text-transform: uppercase;
+	font-size: $fz;
+	font-weight: 400;
+	display: block;
+	margin-bottom: 20px;
+}
+
+@mixin text-secondary($fz: 11px) {
+	text-transform: uppercase;
+	font-size: $fz;
+	line-height: normal;
+	font-weight: 700;
+	color: $text-color-light;
+}
+
+@mixin link-secondary($fz: 11px) {
+	@include text-secondary($fz);
+
+	&:hover {
+		color: $accent-color;
+	}
+}
+
+@mixin select-style {
+	display: block;
+	width: 100%;
+	padding: 6px 15px;
+	border-radius: 0;
+	font-size: 14px;
+	height: 40px;
+	font-weight: normal;
+	border: 1px solid $border-color;
+	background: $white;
+}

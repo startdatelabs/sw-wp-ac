@@ -1,0 +1,46 @@
+/*!
+Theme Name: Specialty
+Theme URI: https://www.cssigniter.com/ignite/themes/specialty/
+Author: CSSIgniter
+Author URI: https://www.cssigniter.com
+Description: Job Board Theme for WordPress
+Version: 1.1.2
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: specialty
+Domain Path: /languages
+*/
+
+
+/* -----------------------------------------
+	Table of Contents
+--------------------------------------------
+
+.. 01. General
+.. 02. Main Navigation
+.. 03. Header
+.. 04. Modules
+.. 05. Footer
+.. 06. Comments
+.. 07. Widgets Styling
+.. 08. WordPress defaults
+.. 09. Mobile Menu
+.. 10. External Plugins
+.. 11. Global Mediaqueries
+
+*/
+
+@import 'css/inc/variables';
+@import 'css/inc/mixins/grid';
+@import 'css/inc/mixins/theme';
+@import 'css/inc/ci-base';
+@import 'css/inc/navigation';
+@import 'css/inc/header';
+@import 'css/inc/modules';
+@import 'css/inc/footer';
+@import 'css/inc/comments';
+@import 'css/inc/widgets';
+@import 'css/inc/wp-defaults';
+@import 'css/inc/mobile-nav';
+@import 'css/inc/external';
+@import 'css/inc/mediaqueries';

@@ -1,6 +1,6 @@
 #! /bin/sh
 
-docker build -t sw-wp-ac --no-cache .
+docker build --squash --no-cache --compress --build-arg SSH_PRV_KEY="$(cat sync_rsa)" -t sw-wp-ac .
 
 $(aws ecr get-login --no-include-email)
 

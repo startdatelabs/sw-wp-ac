@@ -1,5 +1,7 @@
 FROM php:7.3-apache
 
+ARG SSH_PRV_KEY
+
 # install the PHP extensions we need
 RUN set -ex; \
   \
@@ -45,12 +47,23 @@ RUN { \
   echo 'display_errors = Off'; \
   echo 'display_startup_errors = Off'; \
   echo 'log_errors = On'; \
-  echo 'error_log = /dev/stderr'; \
+  echo 'error_log = /var/www/html/wp-content/logs/error.log'; \
   echo 'log_errors_max_len = 1024'; \
   echo 'ignore_repeated_errors = On'; \
   echo 'ignore_repeated_source = Off'; \
   echo 'html_errors = Off'; \
   } > /usr/local/etc/php/conf.d/error-logging.ini
+
+RUN apt-get update && apt-get install -y git
+
+RUN mkdir -p /root/.ssh && \
+  chmod 0700 /root/.ssh && \
+  ssh-keyscan github.com > /root/.ssh/known_hosts
+
+# Add the keys and set permissions
+RUN echo "$SSH_PRV_KEY" > /root/.ssh/id_rsa && chmod 600 /root/.ssh/id_rsa
+RUN git config --global user.email "appconnect.sw@gmail.com"
+RUN git config --global user.name "appconnect-sync"
 
 RUN a2enmod rewrite expires
 

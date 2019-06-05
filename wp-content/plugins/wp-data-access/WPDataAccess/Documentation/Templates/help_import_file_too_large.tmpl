@@ -1,0 +1,55 @@
+<div class="doc_title">PROBLEM</div>
+<p>The message "ERROR: File upload failed" usually means that you are trying to import a file which is too large.
+Although the plugin checks the file size against your "upload_max_size" settings there are other settings which might cause problems.
+</p>
+<div class="doc_title">EASY SOLUTIONS</div>
+<p>The simplest solution is to compress your SQL file and upload it as a ZIP file.
+WP Data Access will recognize ZIP files, extract them and process the content.
+This will only work however if you have ZipArchive installed and files might of course still be to large.
+</p>
+
+<div class="doc_title">BIT MORE WORK SOLUTIONS</div>
+<p>You can solve this problem by changing to following parameters:</p>
+<ul class="doc_list">
+  <li>file_uploads</li>
+  <li>upload_max_filesize</li>
+  <li>post_max_size</li>
+  <li>max_execution_time</li>
+  <li>max_input_time</li>
+</ul>
+<p>Navigate to "Manage Plugin" > "System Info" to check your settings!</p>
+<p>There are three different ways to change these parameter, all described below. Replace the values for the parameters with the ones prefer.</p>
+
+1) Add the following lines of code to the function.php file of your theme:
+
+<pre>
+@ini_set( 'file_uploads' , 'On' );
+@ini_set( 'upload_max_size' , '64M' );
+@ini_set( 'post_max_size', '64M');
+@ini_set( 'max_execution_time', '300' );
+@ini_set( 'max_input_time', '300' );
+</pre>
+
+2) Add the following lines to your php.ini file:
+
+<pre>
+file_uploads = On
+upload_max_filesize = 64M
+post_max_size = 64M
+max_execution_time = 300
+max_input_time = 300
+</pre>
+Don't forget to restart your web server!
+
+3) Add the following lines to your .htaccess file:
+
+<pre>
+php_value file_uploads On
+php_value upload_max_filesize 64M
+php_value post_max_size 64M
+php_value max_execution_time 300
+php_value max_input_time 300
+</pre>
+
+<div class="doc_title">BE AWARE!</div>
+<p>If you change the parameters to the ones mentioned above your users will be able to upload 64M files. That's most probably not what you want. Don't forget to decrease the parameter values after finishing your import.</p>

@@ -1,0 +1,8 @@
+<div class="doc_title">Known Limitations</div>
+<ul class="doc_list">
+  <li>Data entry support and table bulk actions are only supported for tables having a primary key. Unique indexes are not taken into account.</li>
+  <li>On activation the plugin creates a repository. If the plugin is networked activated on a multisite installation a repository is created for every blog. For blogs added later however, the repository cannot be created automatically. In that case the admin user of the blog will see a link on the plugin page which guides the user through a manual installation of the repository for that blog.</li>
+  <li>WP Data Access currently uses one plugin table (default table name: wp_wpda_menu_items). If you change the Wordpress database tables prefix after installing WP DAta Access, you'll need to change the prefix of the WP Data Access table equally.</li>
+  <li>WP Data Access automatically adds data entry forms to your list tables for data adminstration (unless turned of in the back-end settings). These forms however are generic forms with limited abilities. You have to decide for yourself whether the supported functionality is sufficient for your purpose. Developers who want to write their own solutions can add their own forms to list tables or extend the form class provided with WP Data Access. Please check out class WPDA_User_Menu_Form to see a working example (part of WP Data Access functionality).</li>
+  <li>There is a limit on the file size for imports. The maximum file size depends on your installation (<a href="/wp-admin/admin.php?page=wpda_help&docid=import_file_too_large">more...</a>).</li>
+</ul>

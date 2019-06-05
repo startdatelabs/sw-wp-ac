@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS {wp_prefix}{wpda_prefix}menu_items{wpda_postfix};

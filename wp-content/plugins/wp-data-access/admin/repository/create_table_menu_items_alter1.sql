@@ -1,0 +1,1 @@
+AlTER TABLE {wp_prefix}{wpda_prefix}menu_items ADD UNIQUE KEY (menu_name, menu_table_name, menu_capability);

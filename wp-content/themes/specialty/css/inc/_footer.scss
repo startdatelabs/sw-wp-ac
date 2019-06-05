@@ -1,0 +1,22 @@
+/* -----------------------------------------
+	05. Footer
+----------------------------------------- */
+.footer {
+	padding: 60px 0 55px;
+	background-color: $white;
+}
+
+.footer-widgets {
+	padding-bottom: 20px;
+}
+
+.footer-copy {
+	@include text-secondary;
+	font-weight: 400;
+	border-top: 1px solid $border-color;
+	padding-top: 17px;
+
+	p {
+		margin-bottom: 0;
+	}
+}

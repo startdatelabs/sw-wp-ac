@@ -1,0 +1,23 @@
+
+---Upload files---
+Widget file was not uploaded. Error: Specified file failed upload test.
+
+---Upload files---
+Customizer file was not uploaded. Error: Specified file failed upload test.
+
+---Upload files---
+Redux file was not uploaded. Error: Specified file failed upload test.
+
+---Upload files---
+The import files were successfully uploaded!
+Initial max execution time = 30
+Files info:
+Site URL = https://www.applicationconnect.com
+Data file = /var/www/html/wp-content/uploads/2019/05/specialty.wordpress.2017-03-20.xml
+Widget file = not defined!
+Customizer file = not defined!
+Redux files:
+not defined!
+
+---pt-ocdi/after_import---
+

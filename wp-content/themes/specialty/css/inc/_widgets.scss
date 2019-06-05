@@ -1,0 +1,286 @@
+/* -----------------------------------------
+	07. Widgets Styling
+----------------------------------------- */
+.widget {
+	margin: 0 0 55px;
+	font-size: 13px;
+
+	.footer & {
+		margin-bottom: 35px;
+	}
+
+	/* Nullify bottom margin for last elements in widgets and sidebars */
+	.sidebar & {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	p {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	select {
+		width: 100%;
+		padding: 5px 10px;
+		border-radius: 0;
+		border: 1px solid $border-color;
+	}
+}
+
+.widget-title {
+	font-size: 14px;
+	font-weight: 700;
+	color: $text-color-dark;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+	padding: 0;
+
+	label {
+		text-transform: none;
+		display: block;
+		font-size: inherit;
+		margin: 0;
+		line-height: inherit;
+		font-weight: inherit;
+	}
+}
+
+/* WIDGET: #Apply Button Widget
+========================================= */
+// sass-lint:disable class-name-format
+.widget_ci-apply-button-widget {
+	&:first-child {
+		margin-top: -100px;
+		margin-bottom: 90px;
+	}
+}
+// sass-lint:enable class-name-format
+
+/* WIDGET: #Company Info Widget
+========================================= */
+.card-info-media {
+	@include clearfix;
+	margin-bottom: 20px;
+}
+
+.card-info-thumb {
+	float: left;
+	width: 66px;
+	height: 66px;
+	margin-right: 15px;
+	border-radius: 3px;
+	background-color: $white;
+	padding: 3px;
+	border-bottom: 2px solid $border-color;
+
+	img {
+		border-radius: 2px;
+		position: relative;
+		transform: translateY(-50%);
+		top: 50%;
+		display: inline-block;
+	}
+}
+
+.card-info-title {
+	font-size: 16px;
+	line-height: normal;
+	margin-bottom: 3px;
+}
+
+.card-info-link {
+	font-size: 12px;
+	margin-bottom: 5px;
+}
+
+.card-info-socials {
+	font-size: 14px;
+	margin: 0;
+
+	a {
+		display: inline-block;
+		margin-right: 5px;
+	}
+}
+
+/* WIDGET: #Company Info Widget
+========================================= */
+.callout-wrapper {
+	padding: 35px 30px;
+	background-color: $white;
+	border-radius: 3px;
+	border-bottom: 2px solid $border-color;
+	text-align: center;
+
+	p {
+		font-size: 15px;
+		margin-bottom: 8px;
+		line-height: 1.35;
+	}
+
+	.text-secondary {
+		font-weight: 400;
+		margin-bottom: 20px;
+		font-size: 11px;
+	}
+}
+
+.callout-thumb {
+	margin-bottom: 17px;
+}
+
+/* WIDGET: #List Widgets
+========================================= */
+// sass-lint:disable class-name-format
+.widget_meta,
+.widget_pages,
+.widget_categories,
+.widget_archive,
+.widget_nav_menu,
+.widget_recent_entries {
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		ul {
+			margin-left: 15px;
+		}
+	}
+
+	li {
+		@include text-secondary;
+		line-height: normal;
+		display: block;
+		position: relative;
+
+		a {
+			color: $text-color-light;
+			display: inline-block;
+			margin: 0 3px 6px 0;
+
+			&:hover {
+				color: $accent-color;
+			}
+		}
+	}
+}
+
+.widget_recent_comments {
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	li {
+		display: block;
+		padding: 11px 0;
+		border-bottom: 1px solid $border-color;
+	}
+}
+
+.widget_pages,
+.widget_categories,
+.widget_archive {
+	select {
+		@include select-style;
+	}
+}
+// sass-lint:enable class-name-format
+
+/* WIDGET: #Search
+========================================= */
+.searchform {
+	> div {
+		position: relative;
+	}
+
+	input[type="text"],
+	input[type="search"] {
+		// Styling for the search input if required
+	}
+
+	.searchsubmit {
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 100%;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+
+/* WIDGET: #Text Widget
+========================================= */
+.widget_text { // sass-lint:disable-line class-name-format
+	p {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+/* WIDGET: #Calendar
+================================================== */
+#wp-calendar {
+	width: 100%;
+
+	a {
+		font-weight: bold;
+		font-style: italic;
+	}
+
+	caption {
+		text-align: left;
+		margin-top: 10px;
+		background: none repeat scroll 0 0 rgba($black, .03);
+		padding: 9px;
+	}
+
+	thead {
+		font-size: 10px;
+
+		th {
+			background: rgba($black, .1);
+			font-weight: bold;
+			padding: 8px;
+		}
+	}
+
+	tbody {
+		td {
+			background: none;
+			border: 1px solid rgba($black, .1);
+			text-align: center;
+			padding: 3px;
+
+			&:hover {
+				background: rgba($black, .1);
+			}
+		}
+
+		.pad {
+			background: none;
+		}
+	}
+
+	tfoot {
+		#next {
+			font-size: 10px;
+			text-transform: uppercase;
+			text-align: right;
+		}
+
+		#prev {
+			font-size: 10px;
+			text-transform: uppercase;
+			padding-top: 10px;
+		}
+	}
+}

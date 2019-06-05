@@ -1,0 +1,41 @@
+<div class="doc_title">Short Code Usage</div>
+<p>Use shortcode <strong>wpdataaccess</strong> to show database tables and views on your website. jQuery DataTables is used to provide dynamic HTML tables supporting pagination, sorting and searching. Choose between flat or responsive tables.</p>
+
+<p><strong>IMPORTANT!!!</strong><br/>
+You need to <strong>grant access</strong> explicitly to tables shown on your website! Your table and view data will not be shown on your website without this step!</p>
+
+<p>For security reasons you have to explicitly grant access to every table or view used in shortcode <strong>wpdataaccess</strong>. Without this feature adding &#91;wpdataaccess table="wp_options"&#93; for example to a page or post would allow any user to see the content of table wp_options, or any other table.</p>
+<p>Follow these steps to grant access to a table or view you allow users to add it's content to your website:</p>
+<ul class="doc_list">
+  <li>From the menu click "WP Data Access" > "Manage Plugin"</li>
+  <li>Click on tab "Front-End Settings"</li>
+  <li>Click on the table or view your want to grant access to (multiple selections possible)</li>
+  <li>Save your front-end settings</li>
+</ul>
+
+<p><strong>Short Code Parameters</strong></p>
+<p>The following parameters are supported:</p>
+<ul class="doc_list">
+  <li>table (table or view name)</li>
+  <li>columns (comma seperated list of columns, default: * = all columns)</li>
+  <li>responsive (yes or no, default: no)</li>
+  <li>responsive_cols (number of columns shown on the table, default = 1)</li>
+  <li>responsive_type (modal, collapsed (default) or expanded)</li>
+  <li>responsive_icon (yes or no, default: yes)</li>
+</ul>
+
+<p>Parameter table is mandatory. All other parameters are optional. Tables are shown in flat format by default.</p>
+<p>In it's simplest form usage looks like:</p>
+<p class="doc_margin"><strong>&#91;wpdataaccess table="wp_customers"&#93;</strong></p>
+
+<p>This will display a flat table showing all columns. You can limit the number and order of columns shown by providing parameter columns. The following example will only show the columns name, address and city in that particular order:</p>
+<p class="doc_margin"><strong>&#91;wpdataaccess table="wp_customers" columns="name,address,city"&#93;</strong></p>
+
+<p>The default value for parameter responsive is "no". If you omit this parameter, a flat table is shown and parameters responsive_cols, responsive_type and responsive_icon are not taken into account.</p>
+
+<p>Use parameter responsive = "yes" to add responsive tables to your website. Parameters responsive_cols, responsive_type and responsive_icon can be used to manage the layout and behaviour of your responsive tables. For example:</p>
+<p class="doc_margin"><strong>&#91;wpdataaccess <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;table="wp_customers" columns="name,address,city,ID" <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;responsive="yes" responsive_cols="1" responsive_type="modal" responsive_icon="yes" <br/>
+&#93;</strong>
+</p>

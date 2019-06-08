@@ -1,12 +1,14 @@
 <?php
 /**
- * File containing the class WP_Job_Manager_Email_Template.
+ * Abstract class for an email notification built using templates.
  *
  * @package wp-job-manager
+ *
+ * @since 1.31.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit; // Exit if accessed directly.
 }
 
 /**

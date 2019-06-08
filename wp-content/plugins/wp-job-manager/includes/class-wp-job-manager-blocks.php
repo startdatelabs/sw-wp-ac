@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WP_Job_Manager_Blocks.
+ * WP_Job_Manager_Blocks
  */
 class WP_Job_Manager_Blocks {
 	/**

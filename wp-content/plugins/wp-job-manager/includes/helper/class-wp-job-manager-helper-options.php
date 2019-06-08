@@ -1,9 +1,4 @@
 <?php
-/**
- * File containing the class WP_Job_Manager_Helper_Options.
- *
- * @package wp-job-manager
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

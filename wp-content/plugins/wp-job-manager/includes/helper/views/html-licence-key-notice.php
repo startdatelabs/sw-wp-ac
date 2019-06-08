@@ -1,12 +1,6 @@
 <?php
-/**
- * File containing the view for license key notices.
- *
- * @package wp-job-manager
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit; // Exit if accessed directly.
 }
 ?>
 <div class="updated">

@@ -1,12 +1,12 @@
 <?php
 /**
- * File containing the class WP_Job_Manager_Email.
+ * Abstract email notification class.
  *
  * @package wp-job-manager
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit; // Exit if accessed directly.
 }
 
 /**
@@ -27,6 +27,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *     include_once 'emails/custom-plugin-sent-resume.php`;
  * }
  * ```
+ *
+ * @package wp-job-manager
  *
  * @since 1.31.0
  */

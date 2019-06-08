@@ -1,10 +1,4 @@
 <?php
-/**
- * File containing the class WP_Job_Manager_Taxonomy_Meta.
- *
- * @package wp-job-manager
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -12,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Handles taxonomy meta custom fields. Just used for job type.
  *
+ * @package wp-job-manager
  * @since 1.28.0
  */
 class WP_Job_Manager_Taxonomy_Meta {

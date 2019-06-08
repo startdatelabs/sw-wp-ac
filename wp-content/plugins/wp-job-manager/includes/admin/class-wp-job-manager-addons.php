@@ -1,17 +1,18 @@
 <?php
 /**
- * File containing the class WP_Job_Manager_Addons.
+ * Addons Page.
  *
  * @package wp-job-manager
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit; // Exit if accessed directly.
 }
 
 /**
  * Handles the admin add-ons page.
  *
+ * @package wp-job-manager
  * @since 1.1.0
  */
 class WP_Job_Manager_Addons {

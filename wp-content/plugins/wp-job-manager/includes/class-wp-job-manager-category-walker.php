@@ -1,12 +1,6 @@
 <?php
-/**
- * File containing the class WP_Job_Manager_Category_Walker.
- *
- * @package wp-job-manager
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit; // Exit if accessed directly.
 }
 
 /**

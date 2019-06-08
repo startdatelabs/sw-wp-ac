@@ -1,12 +1,6 @@
 <?php
-/**
- * File containing the view to show the table for managing license keys.
- *
- * @package wp-job-manager
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit; // Exit if accessed directly.
 }
 ?>
 <h1 class="screen-reader-text"><?php esc_html_e( 'Licenses', 'wp-job-manager' ); ?></h1>

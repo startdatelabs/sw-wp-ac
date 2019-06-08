@@ -1,17 +1,13 @@
 <?php
-/**
- * File containing the class WP_Job_Manager_Email_Employer_Expiring_Job.
- *
- * @package wp-job-manager
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit; // Exit if accessed directly.
 }
 
 /**
  * Email notification to employers when a job is expiring.
  *
+ * @package wp-job-manager
  * @since 1.31.0
  * @extends WP_Job_Manager_Email
  */

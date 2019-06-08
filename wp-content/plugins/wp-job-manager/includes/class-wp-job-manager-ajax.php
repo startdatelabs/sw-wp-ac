@@ -1,17 +1,13 @@
 <?php
-/**
- * File containing the class WP_Job_Manager_Ajax.
- *
- * @package wp-job-manager
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit; // Exit if accessed directly.
 }
 
 /**
  * Handles Job Manager's Ajax endpoints.
  *
+ * @package wp-job-manager
  * @since 1.0.0
  */
 class WP_Job_Manager_Ajax {
@@ -136,8 +132,6 @@ class WP_Job_Manager_Ajax {
 			$search_categories = array_filter( array( sanitize_text_field( stripslashes( $search_categories ) ) ) );
 		}
 
-		$job_types_filtered = ! is_null( $filter_job_types ) && count( $types ) !== count( $filter_job_types );
-
 		$args = array(
 			'search_location'   => $search_location,
 			'search_keywords'   => $search_keywords,
@@ -174,7 +168,7 @@ class WP_Job_Manager_Ajax {
 			'max_num_pages' => $jobs->max_num_pages,
 		);
 
-		if ( $jobs->post_count && ( $search_location || $search_keywords || $search_categories || $job_types_filtered ) ) {
+		if ( $jobs->post_count && ( $search_location || $search_keywords || $search_categories ) ) {
 			// translators: Placeholder %d is the number of found search results.
 			$message               = sprintf( _n( 'Search completed. Found %d matching record.', 'Search completed. Found %d matching records.', $jobs->found_posts, 'wp-job-manager' ), $jobs->found_posts );
 			$result['showing_all'] = true;

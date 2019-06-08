@@ -54,7 +54,19 @@ RUN { \
   echo 'html_errors = Off'; \
   } > /usr/local/etc/php/conf.d/error-logging.ini
 
-RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install -y git logrotate nano
+
+RUN { \
+  echo ''; \
+  echo '/var/www/html/wp-content/logs/error.log	{'; \
+  echo '    size 20M'; \
+  echo '    create 0664 www-data www-data'; \
+  echo '    missingok'; \
+  echo '    rotate 10'; \
+  echo '    compress'; \
+  echo '    delaycompress'; \
+  echo '}'; \
+  } >> /etc/logrotate.conf
 
 RUN mkdir -p /root/.ssh && \
   chmod 0700 /root/.ssh && \

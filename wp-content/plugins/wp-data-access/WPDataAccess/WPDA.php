@@ -42,7 +42,7 @@ namespace WPDataAccess {
 		/**
 		 * Option wpda_version and it's default value
 		 */
-		const OPTION_WPDA_VERSION = [ 'wpda_version', '2.0.13' ];
+		const OPTION_WPDA_VERSION = [ 'wpda_version', '2.0.14' ];
 		/**
 		 * Option wpda_prefix and it's default value
 		 */
@@ -177,6 +177,10 @@ namespace WPDataAccess {
 		 * Option wpda_be_text_wrap and it's default value
 		 */
 		const OPTION_BE_TEXT_WRAP = [ 'wpda_be_text_wrap', 400 ];
+		/**
+		 * Option wpda_be_debug and it's default value
+		 */
+		const OPTION_BE_DEBUG = [ 'wpda_be_debug', 'off' ];
 
 		// Front-end options.
 		/**
@@ -389,7 +393,7 @@ namespace WPDataAccess {
 			self::load_wp_tables();
 
 			if ( 0 === count( self::$wp_tables ) ) {
-				wp_die( 'ERROR: No WordPress table found???' );
+				wp_die( 'ERROR: No WordPress table found' );
 			}
 
 			return self::$wp_tables;

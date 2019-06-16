@@ -10,14 +10,16 @@
 <p>Manage tables and views from the Data Explorer main page (available from the Data Explorer menu). The following features are available:</p>
 <ul class="doc_list">
   <li>Explore table or view<br/>
-      See next section
+      See next section.
   </li>
   <li>View table or view structure<br/>
       Click on the <span class="dashicons dashicons-admin-tools"></span> icon.
   </li>
   <li>Export table(s)<br/>
-      To export an individual table click on the <span class="dashicons dashicons-admin-tools"></span> icon, select the Actions tab and click on the Export button.<br/>
-      To export multiple tables select the tables tot be exported, select Export Table(s) from the bulk actions menu and click on the Apply button.
+      To export an individual table click on the <span class="dashicons dashicons-admin-tools"></span> icon, select the Actions tab and click on the Export button.
+      Individual tables can be exported to SQL, XML, JSON, Excel and CSV.<br/>
+      To export multiple tables select the tables to be exported, select Export Table(s) from the bulk actions menu and click on the Apply button.
+      Selections of multiple tables can be exported to SQL only.
    </li>
   <li>Import table(s)<br/>
       Click on the Import button at the top of the screen and follow the instructions.
@@ -34,11 +36,15 @@
   <li>Drop table or view<br/>
       To drop a table or view click on the <span class="dashicons dashicons-admin-tools"></span> icon, select the Actions tab and drop the table of view.
   </li>
+  <li>Optimize table<br/>
+      To optimize a table click on the <span class="dashicons dashicons-admin-tools"></span> icon, select the Actions tab and optimize the table.
+  </li>
+  <li>Alter table<br/>
+      To alter a table click on the <span class="dashicons dashicons-admin-tools"></span> icon, select the Actions tab and alter the table.
+      This action will load the table structure into the Data Designer.
+  </li>
   <li>View table indexes<br/>
       To view indexes click on the <span class="dashicons dashicons-admin-tools"></span> icon of the according table and select the Indexes tab.
-  </li>
-  <li>Drop index<br/>
-      To drop an index click on the <span class="dashicons dashicons-admin-tools"></span> icon of the according table, select the Indexes tab and drop the index.
   </li>
   <li>View or copy SQL create table or view statement<br/>
       To view of copy a table or view definition click on the <span class="dashicons dashicons-admin-tools"></span> icon of the according table and select the SQL tab.
@@ -55,7 +61,8 @@
 <p>Manage table data from the Data Explorer table page. The following features are available:</p>
 <ul class="doc_list">
   <li>Export a selected number of records<br>
-      Select the records you want to export, select Export from the bulk actions menu and click on the Apply button.
+      Select the rows you want to export, select Export from the bulk actions menu and click on the Apply button.
+      Selected rows can be exported to SQL, XML, JSON, Excel and CSV.
   </li>
   <li>Import previously exported records<br/>
       Click on the Import button at the top of the screen and follow the instructions.

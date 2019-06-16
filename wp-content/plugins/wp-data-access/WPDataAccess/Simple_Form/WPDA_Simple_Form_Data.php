@@ -174,11 +174,11 @@ namespace WPDataAccess\Simple_Form {
 							break;
 						case 'date':
 							// Too many formats for a simple dynamic solution.
-							// TODO : Add generic date validation to the next release.
+							// TODO : Add generic date validation...
 							break;
 						case 'time':
 							// Too many formats for a simple dynamic solution.
-							// TODO : Add generic time validation to the next release.
+							// TODO : Add generic time validation...
 							break;
 						case 'enum':
 							// Check if value in enum: also JS checked in form.

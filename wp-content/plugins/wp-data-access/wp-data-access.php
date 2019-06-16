@@ -3,7 +3,7 @@
  * Plugin Name:       WP Data Access
  * Plugin URI:        https://wpdataaccess.com/
  * Description:       A WordPress data administration and publication tool that helps you to manage your Wordpress data and database and build data driven WordPress apps that run in the WordPress dashboard and add dynamic WordPress tables to your website.
- * Version:           2.0.13
+ * Version:           2.0.14
  * Author:            Peter Schulz
  * Author URI:        https://www.linkedin.com/in/peterschulznl/
  * Text Domain:       wp-data-access
@@ -54,7 +54,7 @@ register_deactivation_hook( __FILE__, 'deactivate_wp_data_access' );
  * @since   1.5.2
  */
 function wpda_update_db_check() {
-	if (WPDataAccess\WPDA::OPTION_WPDA_VERSION[1] !== get_option( WPDataAccess\WPDA::OPTION_WPDA_VERSION[0] ) ) {
+	if ( WPDataAccess\WPDA::OPTION_WPDA_VERSION[1] !== get_option( WPDataAccess\WPDA::OPTION_WPDA_VERSION[0] ) ) {
 		activate_wp_data_access();
 	}
 }

@@ -210,6 +210,19 @@
     font-weight: bold;
 }
 
+.wpda-table-structure tbody tr.wpda_column_inserted {
+    background-color: lightgreen;
+}
+
+.wpda-table-structure tbody tr.wpda_column_updated {
+    background-color: orange;
+}
+
+.wpda-table-structure tbody tr.wpda_column_deleted {
+    background-color: red;
+    display: none;
+}
+
 /* END DESIGN FORM */
 
 a.disabled {
@@ -284,3 +297,17 @@ span.drop-index:active, span.drop-index:hover {
 }
 
 /* END DOCUMENTATION */
+
+.label_disabled {
+    color: grey;
+    pointer-events: none;
+}
+
+.export_image {
+    background-image: url(../img/export.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    width:800px;
+    height:280px;
+    padding-top: 20px;
+}

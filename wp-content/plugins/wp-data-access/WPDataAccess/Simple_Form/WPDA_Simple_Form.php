@@ -410,7 +410,7 @@ namespace WPDataAccess\Simple_Form {
 			// Get OLD and NEW values for all items.
 			foreach ( $this->wpda_list_columns->get_table_columns() as $column ) {
 				if ( isset( $_REQUEST[ $column['column_name'] . '_old' ] ) ) {
-					$this->form_items_old_values[ $column['column_name'] ] = sanitize_text_field( wp_unslash( $_REQUEST[ $column['column_name'] . '_old' ] ) ); // input var okay.
+					$this->form_items_old_values[ $column['column_name'] ] = wp_unslash( $_REQUEST[ $column['column_name'] . '_old' ] ); // input var okay.
 				}
 				if ( isset( $_REQUEST[ $column['column_name'] ] ) ) {
 					if ( is_array( $_REQUEST[ $column['column_name'] ] ) ) {
@@ -422,7 +422,7 @@ namespace WPDataAccess\Simple_Form {
 							$this->form_items_new_values[ $column['column_name'] ] = substr( $column_array, 0, strlen( $column_array )-1 );
 						}
 					} else {
-						$this->form_items_new_values[ $column['column_name'] ] = sanitize_text_field( wp_unslash( $_REQUEST[ $column['column_name'] ] ) ); // input var okay.
+						$this->form_items_new_values[ $column['column_name'] ] = wp_unslash( $_REQUEST[ $column['column_name'] ] ); // input var okay.
 					}
 				}
 			}
@@ -592,7 +592,7 @@ namespace WPDataAccess\Simple_Form {
 					<p></p>
 				<?php } ?>
 				<form id="<?php echo esc_attr( $this->current_form_id ); ?>"
-					  method="post"
+					  method="post" enctype="multipart/form-data"
 					  action="?page=<?php echo esc_attr( $this->page ); ?><?php echo '' === $this->schema_name ? '' : '&schema_name=' . esc_attr( $this->schema_name ); ?>&table_name=<?php echo esc_attr( $this->table_name ); ?><?php echo esc_attr( $add_param ); ?>">
 					<div class="wpda_simple_form_border">
 						<table class="wpda_simple_table">
@@ -644,6 +644,10 @@ namespace WPDataAccess\Simple_Form {
 												$item_events .= "$event_name=$event_code ";
 											}
 										}
+
+										// Get column value.
+										$column_value = $item->get_item_value();
+										$column_value = esc_html( str_replace( '&', '&amp;', $column_value ) );
 
 										if ( 'enum' === $item->get_data_type() || 'set' === $item->get_data_type() ) {
 
@@ -727,7 +731,6 @@ namespace WPDataAccess\Simple_Form {
 											}
 
 											// Set column value.
-											$column_value = esc_attr( $item->get_item_value() );
 											if ( 'new' === $this->action ) {
 												// Check if there is a default value.
 												if ( $item->get_item_default_value() !== null ) {
@@ -740,7 +743,7 @@ namespace WPDataAccess\Simple_Form {
 
 											<input name="<?php echo esc_attr( $item->get_item_name() ); ?>"
 												   id="<?php echo esc_attr( $item->get_item_name() ); ?>"
-												   value="<?php echo esc_attr( $column_value ); ?>"
+												   value="<?php echo $column_value; ?>"
 												   class="wpda_data_type_<?php echo esc_attr( $item->get_data_type() ); ?> <?php echo esc_attr( $class_primary_key ); ?> <?php echo esc_attr( $item->get_item_class() ); ?> <?php if ('NO' === $item->is_nullable() && $item->get_item_extra() !== 'auto_increment') { echo 'wpda_not_null'; } ?>"
 												<?php echo esc_attr( $max_length ); ?>
 												<?php echo esc_attr( $item_events ); ?>
@@ -792,7 +795,7 @@ namespace WPDataAccess\Simple_Form {
 
 										<input type="hidden"
 											   name="<?php echo esc_attr( $item->get_item_name() ); ?>_old"
-											   value="<?php echo esc_attr( $item->get_item_value() ); ?>"
+											   value="<?php echo $column_value; ?>"
 										/>
 
 										<?php echo '' === $label_after ? '' : '<label>' . esc_attr( $label_after ) . '</label>'; ?>

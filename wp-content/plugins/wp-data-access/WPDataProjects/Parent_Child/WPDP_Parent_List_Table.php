@@ -145,7 +145,7 @@ namespace WPDataProjects\Parent_Child {
 						$i++;
 					}
 					$this->delete_row_relationship( $table_name, $row_to_be_deleted );
-				} else {
+				} elseif ( isset( $child['relation_1n'] ) ) {
 					$table_name        = $child['table_name'];
 					$row_to_be_deleted = [];
 					$i                 = 0;

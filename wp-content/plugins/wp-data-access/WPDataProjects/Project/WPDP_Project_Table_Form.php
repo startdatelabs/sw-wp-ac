@@ -217,39 +217,32 @@ namespace WPDataProjects\Project {
 		public function show() {
 			?>
 			<div class="wrap">
-				<h1>
+				<h1 class="wp-heading-inline">
 					<a
-							href="javascript:void(0)"
-							onclick="javascript:location.href='?page=wpdp&tab=tables'"
-							style="display: inline-block; vertical-align: unset;"
-							class="dashicons dashicons-arrow-left-alt"
-							title="<?php echo __( 'Back to table list', 'wp-data-access' ); ?>"
+						href="javascript:void(0)"
+						onclick="javascript:location.href='?page=wpdp&tab=tables'"
+						style="display: inline-block; vertical-align: unset;"
+						class="dashicons dashicons-arrow-left-alt"
+						title="<?php echo __( 'Back to table list', 'wp-data-access' ); ?>"
 					></a>&nbsp;
-					<?php echo __( 'Back to table list', 'wp-data-access' ); ?>
+					<span><?php echo __( 'Table Options', 'wp-data-access' ); ?></span>
 				</h1>
 				<form
-						method="post"
-						action="?page=<?php echo esc_attr( $this->page ); ?>&tab=tables"
-						style="display: inline-block; vertical-align: unset;"
+					method="post"
+					action="?page=<?php echo esc_attr( $this->page ); ?>&tab=tables"
+					style="display: inline-block; vertical-align: unset;"
 				>
-					<table cellspacing="0" cellpadding="0" border="0">
-						<tr>
-							<td>
-								<input type="hidden" name="action" value="reconcile">
-								<input type="hidden" name="wpda_table_name"
-									   value="<?php echo esc_attr( $this->wpda_table_name ); ?>">
-								<input type="submit"
-									   value="<?php echo esc_html__( 'Reconcile Table', 'wp-data-access' ); ?>"
-									   class="page-title-action">
-								&nbsp;
-							</td>
-							<td style="vertical-align: top;">
-								<label><input type="checkbox" name="keep_options">Keep options?</label>
-							</td>
-						</tr>
-					</table>
+					<div>
+						<input type="hidden" name="action" value="reconcile">
+						<input type="hidden" name="wpda_table_name"
+							   value="<?php echo esc_attr( $this->wpda_table_name ); ?>">
+						<input type="submit" class="page-title-action"
+							   value="<?php echo esc_html__( 'Reconcile Table', 'wp-data-access' ); ?>">
+						<label style="vertical-align:text-bottom;"><input type="checkbox" name="keep_options">Keep options?</label>
+					</div>
 				</form>
 			</div>
+			<br class="clear"/>
 			<?php
 			$this->show_table_info();
 			if ( true === $this->has_primary_key ) {

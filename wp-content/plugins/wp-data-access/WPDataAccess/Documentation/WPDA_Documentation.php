@@ -73,12 +73,14 @@ namespace WPDataAccess\Documentation {
 								<strong>Data(base) Administration</strong><br/>
 								<ul>
 									<li><a href="?page=<?php echo self::PAGE; ?>&docid=data_explorer">Data Explorer</a></li>
-									<li><a href="?page=<?php echo self::PAGE; ?>&docid=export_import">Export/Import</a></li>
+									<li><a href="?page=<?php echo self::PAGE; ?>&docid=export_import">Export/Import - Video Tutorials</a> <span style="color:red">(NEW)</span></li>
 									<li><a href="?page=<?php echo self::PAGE; ?>&docid=data_backup">Data Backup</a></li>
+									<li><a href="?page=<?php echo self::PAGE; ?>&docid=transfer">Transfer to other (WordPress) databases</a> <span style="color:red">(NEW)</span></li>
 								</ul>
 								<strong>Data Publication</strong><br/>
 								<ul>
 									<li><a href="?page=<?php echo self::PAGE; ?>&docid=short_code_usage">Short Code Usage</a></li>
+									<li><a href="//wordpress.org/support/topic/jquery-datatables-style/#post-11614475" target="_blank">Data Projects - How can I style jQuery DataTables?</a> <span class="dashicons dashicons-external"></span> <span style="color:red">(NEW)</span></li>
 								</ul>
 								<strong>Data Apps</strong><br/>
 								<ul>
@@ -88,6 +90,7 @@ namespace WPDataAccess\Documentation {
 									<li><a href="?page=<?php echo self::PAGE; ?>&docid=data_projects_menus">Data Projects - Manage Dashboard Menus</a></li>
 									<li><a href="?page=<?php echo self::PAGE; ?>&docid=data_projects_roles">Data Projects - User Roles and WHERE Clauses</a></li>
 									<li><a href="?page=<?php echo self::PAGE; ?>&docid=data_projects_videos">Data Projects - Video Tutorials</a></li>
+									<li><a href="//wordpress.org/support/topic/listbox-on-data-entry-page/#post-11511062" target="_blank">Data Projects - How to I create a listbox?</a> <span class="dashicons dashicons-external"></span> <span style="color:red">(NEW)</span></li>
 								</ul>
 								<strong>Source Code</strong><br/>
 								<ul>

@@ -250,6 +250,18 @@ if ( ! class_exists('XmlExportACF') )
 						$field_value = date($format, (is_numeric($field_value) ? $field_value : (empty($field_options['return_format']))? strtotime($field_value): DateTime::createFromFormat('Y-m-d H:i:s', $field_value)->getTimestamp()));
 						break;
 					case 'date_picker':
+
+					    // In case the date is in format Y-m-d H:i:s, convert it to Ymd
+					    if(strpos($field_value,'-') !== false) {
+                            $dateParts = explode(" ", $field_value);
+					        $field_value = $dateParts[0];
+					        $dateParts = explode("-", $field_value);
+					        $year = $dateParts[0];
+					        $month = $dateParts[1];
+					        $day = $dateParts[2];
+					        $field_value = $year.$month.$day;
+
+                        }
 						$format = empty($field_options['return_format']) ? 'Y-m-d' : $field_options['return_format'];
 						$field_value = date($format, (empty($field_options['return_format']))? strtotime($field_value): DateTime::createFromFormat('Ymd', $field_value)->getTimestamp());
 						break;

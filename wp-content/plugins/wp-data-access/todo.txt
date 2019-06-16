@@ -14,6 +14,14 @@
 
 *** NEXT ***
 
++ Move settings below and support them in project pages and dashboard menus:
+  + Table access
+    + Allow viewing structures
+    + Allow access to other schemas
+  + Allow drop/truncate?
+  + Row access
+  + Allow transactions?
+  + Allow imports?
 + Parent/child page - SHOW LESS/MORE PARENT
 + Display multiple lookup columns
 + Check JS/CSS versions for bootstrap, datatables and responsive

@@ -118,7 +118,7 @@ namespace WPDataProjects\Project {
 					if ( isset( $this->sorted_tables[ $item['wpda_table_name'] ] ) ) {
 						return $this->sorted_tables[ $item['wpda_table_name'] ]['create_time'];
 					} else {
-						return esc_html__( '--- NOT FOUND ---', 'wp-data-access' );
+						return __( '--- NOT FOUND ---', 'wp-data-access' );
 					}
 					break;
 				case 'table_has_relations':

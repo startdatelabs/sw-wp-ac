@@ -49,6 +49,8 @@ namespace WPDataAccess\User_Menu {
 			$this->title            = 'Back';
 
 			parent::__construct( $schema_name, $table_name, $wpda_list_columns, $args );
+
+			$this->title = 'Dashboard Menu';
 		}
 
 		/**

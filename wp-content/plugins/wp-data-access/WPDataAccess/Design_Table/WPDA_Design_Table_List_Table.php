@@ -47,7 +47,7 @@ namespace WPDataAccess\Design_Table {
 				style="display: inline-block; vertical-align: unset;"
 			>
 				<div>
-					<input type="hidden" name="action" value="create_table">
+					<input type="hidden" name="action" value="edit">
 					<input type="submit" value="<?php echo esc_html__( 'Design new table', 'wp-data-access' ); ?>"
 						   class="page-title-action">
 

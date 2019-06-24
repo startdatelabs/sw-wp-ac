@@ -20,10 +20,10 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'wordpressdb');
+define( 'DB_NAME', 'wordpressdb' );
 
 /** MySQL database username */
-define( 'DB_USER', 'wordpressuser');
+define( 'DB_USER', 'wordpressuser' );
 
 /** MySQL database password */
 define( 'DB_PASSWORD', '29i1bYigsvuk');
@@ -32,10 +32,10 @@ define( 'DB_PASSWORD', '29i1bYigsvuk');
 define( 'DB_HOST', 'ecs01.sw:3306');
 
 /** Database Charset to use in creating database tables. */
-define( 'DB_CHARSET', 'utf8');
+define( 'DB_CHARSET', 'utf8' );
 
 /** The Database Collate type. Don't change this if in doubt. */
-define( 'DB_COLLATE', '');
+define( 'DB_COLLATE', '' );
 
 /**#@+
  * Authentication Unique Keys and Salts.
@@ -79,13 +79,21 @@ $table_prefix = 'wp_';
  */
 define( 'WP_DEBUG', false );
 
-// If we're behind a proxy server and using HTTPS, we need to alert Wordpress of that fact
-// see also http://codex.wordpress.org/Administration_Over_SSL#Using_a_Reverse_Proxy
+/* That's all, stop editing! Happy publishing. */
+
+define('FS_METHOD', 'direct');
+
+/**
+ * The WP_SITEURL and WP_HOME options are configured to access from any hostname or IP address.
+ * If you want to access only from an specific domain, you can modify them. For example:
+ *  define('WP_HOME','http://example.com');
+ *  define('WP_SITEURL','http://example.com');
+ *
+*/
+
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
 	$_SERVER['HTTPS'] = 'on';
 }
-
-/* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
@@ -94,3 +102,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Sets up WordPress vars and included files. */
 require_once( ABSPATH . 'wp-settings.php' );
+
+define('WP_TEMP_DIR', '/opt/bitnami/apps/wordpress/tmp');
+
+
+//  Disable pingback.ping xmlrpc method to prevent Wordpress from participating in DDoS attacks
+//  More info at: https://docs.bitnami.com/general/apps/wordpress/troubleshooting/xmlrpc-and-pingback/
+
+if ( !defined( 'WP_CLI' ) ) {
+    // remove x-pingback HTTP header
+    add_filter('wp_headers', function($headers) {
+        unset($headers['X-Pingback']);
+        return $headers;
+    });
+    // disable pingbacks
+    add_filter( 'xmlrpc_methods', function( $methods ) {
+            unset( $methods['pingback.ping'] );
+            return $methods;
+    });
+    add_filter( 'auto_update_translation', '__return_false' );
+}

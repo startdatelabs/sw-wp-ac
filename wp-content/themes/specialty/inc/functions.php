@@ -28,8 +28,8 @@ if ( ! function_exists( 'specialty_color_luminance' ) ) :
 
 		// Convert to decimal and change luminosity.
 		for ( $i = 0; $i < 3; $i ++ ) {
-			$dec = hexdec( substr( $hex, $i * 2, 2 ) );
-			$dec = min( max( 0, $dec + $dec * $percent ), 255 );
+			$dec      = hexdec( substr( $hex, $i * 2, 2 ) );
+			$dec      = min( max( 0, $dec + $dec * $percent ), 255 );
 			$new_hex .= str_pad( dechex( $dec ), 2, 0, STR_PAD_LEFT );
 		}
 
@@ -56,9 +56,7 @@ if ( ! function_exists( 'specialty_hex2rgba' ) ) :
 		}
 
 		// Remove # if provided
-		if ( '#' === $color[0] ) {
-			$color = substr( $color, 1 );
-		}
+		$color = ltrim( $color, '#' );
 
 		// Check if color has 6 or 3 characters and get values
 		if ( strlen( $color ) === 6 ) {
@@ -71,7 +69,7 @@ if ( ! function_exists( 'specialty_hex2rgba' ) ) :
 
 		$rgb = array_map( 'hexdec', $hex );
 
-		if ( false === $opacity ) {
+		if ( false !== $opacity ) {
 			$opacity = abs( floatval( $opacity ) );
 			if ( $opacity > 1 ) {
 				$opacity = 1.0;

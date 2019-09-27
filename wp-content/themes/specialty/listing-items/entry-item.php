@@ -1,9 +1,8 @@
-<?php $thumb_size = get_post_type() === 'job_listing' ? 'specialty_wpjm_company_logo' : 'specialty_entry_item'; ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'entry-item' ); ?>>
 	<?php if ( has_post_thumbnail() ) : ?>
 		<figure class="entry-item-thumb">
 			<a href="<?php the_permalink(); ?>">
-				<?php the_post_thumbnail( $thumb_size ); ?>
+				<?php the_post_thumbnail( 'specialty_entry_item' ); ?>
 			</a>
 		</figure>
 	<?php endif; ?>

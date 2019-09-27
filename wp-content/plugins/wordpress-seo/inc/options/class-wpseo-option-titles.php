@@ -98,13 +98,6 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 	);
 
 	/**
-	 * Used for "caching" during pageload.
-	 *
-	 * @var array
-	 */
-	protected $enriched_defaults = null;
-
-	/**
 	 * Array of variable option name patterns for the option.
 	 *
 	 * @var array
@@ -240,8 +233,10 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 	 * @return  void
 	 */
 	public function enrich_defaults() {
-		$enriched_defaults = $this->enriched_defaults;
-		if ( null !== $enriched_defaults ) {
+		$cache_key = 'yoast_titles_rich_defaults_' . $this->option_name;
+
+		$enriched_defaults = wp_cache_get( $cache_key );
+		if ( false !== $enriched_defaults ) {
 			$this->defaults += $enriched_defaults;
 			return;
 		}
@@ -296,7 +291,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 			}
 		}
 
-		$this->enriched_defaults = $enriched_defaults;
+		wp_cache_set( $cache_key, $enriched_defaults );
 		$this->defaults += $enriched_defaults;
 	}
 
@@ -310,7 +305,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 	 * @return void
 	 */
 	public function invalidate_enrich_defaults_cache() {
-		$this->enriched_defaults = null;
+		wp_cache_delete( 'yoast_titles_rich_defaults_' . $this->option_name );
 	}
 
 	/**

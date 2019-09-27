@@ -25,8 +25,8 @@ if ( is_position_featured() ) {
 } elseif ( in_array( get_post_status(), array( 'expired' ), true ) ) {
 	$eyebrow_text = esc_html__( 'Expired', 'specialty' );
 }
-?>
 
+?>
 <li <?php job_listing_class( 'list-item list-item-sm' ); ?>>
 	<div class="list-item-main-info">
 		<?php if ( ! empty( $eyebrow_text ) ) : ?>

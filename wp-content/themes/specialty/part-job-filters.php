@@ -24,6 +24,7 @@
 
 	if ( is_tax( 'job_listing_category' ) ) {
 		$term = get_queried_object();
+
 		$_GET['search_categories'] = $selected_category = array( $term->term_id );
 	}
 ?>
@@ -34,26 +35,28 @@
 
 	<?php
 		$has_categories = true;
+
 		$count = wp_count_terms( 'job_listing_category', array(
 			'hide_empty' => 1, // Hide empty, as they are not displayed by the dropdown anyway.
 		) );
+
 		if ( is_wp_error( $count ) || 0 === intval( $count ) || is_tax( 'job_listing_category' ) ) {
 			$has_categories = false;
 		}
 
 		$col_classes = array(
 			'keywords' => 'col-lg-3 col-xs-12',
-			'location'    => 'col-lg-3 col-xs-12',
-			'category'    => 'col-lg-3 col-xs-12',
-			'button'      => 'col-lg-3 col-xs-12',
+			'location' => 'col-lg-3 col-xs-12',
+			'category' => 'col-lg-3 col-xs-12',
+			'button'   => 'col-lg-3 col-xs-12',
 		);
 
 		if ( ! get_option( 'job_manager_enable_categories' ) || ! $has_categories ) {
 			$col_classes = array(
 				'keywords' => 'col-lg-4 col-xs-12',
-				'location'    => 'col-lg-4 col-xs-12',
-				'category'    => '',
-				'button'      => 'col-lg-3 push-lg-1 col-xs-12',
+				'location' => 'col-lg-4 col-xs-12',
+				'category' => '',
+				'button'   => 'col-lg-3 push-lg-1 col-xs-12',
 			);
 		}
 	?>

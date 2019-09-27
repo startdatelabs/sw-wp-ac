@@ -760,13 +760,10 @@ namespace WPDataAccess\List_Table {
 					__( 'Output limited to %1$s characters', 'wp-data-access' ),
 					WPDA::get_option( WPDA::OPTION_BE_TEXT_WRAP )
 				);
-				// return stripslashes( substr( $column_content, 0, WPDA::get_option( WPDA::OPTION_BE_TEXT_WRAP ) ) ) .
-				//	' <a href="javascript:void(0)" title="' . $title . '">&bull;&bull;&bull;</a>';
-				return substr( esc_html( str_replace( '&', '&amp;', $column_content ) ), 0, WPDA::get_option( WPDA::OPTION_BE_TEXT_WRAP ) ) .
+				return stripslashes( substr( $column_content, 0, WPDA::get_option( WPDA::OPTION_BE_TEXT_WRAP ) ) ) .
 					' <a href="javascript:void(0)" title="' . $title . '">&bull;&bull;&bull;</a>';
 			} else {
-				// return stripslashes( $column_content );
-				return esc_html( str_replace( '&', '&amp;', $column_content ) );
+				return stripslashes( $column_content );
 			}
 		}
 
@@ -1332,10 +1329,6 @@ namespace WPDataAccess\List_Table {
 
 					break;
 				case 'bulk-export':
-				case 'bulk-export-xml':
-				case 'bulk-export-json':
-				case 'bulk-export-excel':
-				case 'bulk-export-csv':
 					// Check access rights.
 					if ( ! WPDA::is_wpda_table( $this->table_name ) ) {
 						if ( 'on' !== WPDA::get_option( WPDA::OPTION_BE_EXPORT_ROWS ) ) {
@@ -1361,28 +1354,13 @@ namespace WPDataAccess\List_Table {
 					$wp_nonce_action = 'wpda-export-*';
 					$wp_nonce        = isset( $_REQUEST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ) : ''; // input var okay.
 					if ( ! wp_verify_nonce( $wp_nonce, $wp_nonce_action ) ) {
-						die( __( 'ERROR: Not authorized', 'wp-data-access' ) );
+						die( esc_html__( 'ERROR: Not authorized', 'wp-data-access' ) );
 					}
 
 					$bulk_rows = $_REQUEST['bulk-selected'];
 					$no_rows   = count( $bulk_rows ); // # rows to be exported.
 
-					$format_type = '';
-					switch ( $this->current_action() ) {
-						case 'bulk-export-xml':
-							$format_type = 'xml';
-							break;
-						case 'bulk-export-json':
-							$format_type = 'json';
-							break;
-						case 'bulk-export-excel':
-							$format_type = 'excel';
-							break;
-						case 'bulk-export-csv':
-							$format_type = 'csv';
-					}
-
-					$querystring = "?action=wpda_export&type=row&mysql_set=off&show_create=off&show_comments=off&schema_name={$this->schema_name}&table_names={$this->table_name}&_wpnonce=$wp_nonce&format_type=$format_type";
+					$querystring = "?action=wpda_export&type=row&mysql_set=off&show_create=off&show_comments=off&schema_name={$this->schema_name}&table_names={$this->table_name}&_wpnonce=$wp_nonce";
 
 					$j = 0;
 					for ( $i = 0; $i < $no_rows; $i++ ) {
@@ -1841,11 +1819,7 @@ namespace WPDataAccess\List_Table {
 					WPDA::get_option( WPDA::OPTION_BE_EXPORT_ROWS ) === 'on'
 				)
 			) {
-				$actions['bulk-export'] = __( 'Export to SQL', 'wp-data-access' );
-				$actions['bulk-export-xml'] = __( 'Export to XML', 'wp-data-access' );
-				$actions['bulk-export-json'] = __( 'Export to JSON', 'wp-data-access' );
-				$actions['bulk-export-excel'] = __( 'Export to Excel', 'wp-data-access' );
-				$actions['bulk-export-csv'] = __( 'Export to CSV', 'wp-data-access' );
+				$actions['bulk-export'] = __( 'Export', 'wp-data-access' );
 			}
 
 			return $actions;

@@ -47,8 +47,8 @@ namespace WPDataProjects\Project {
 					"?page={$this->page}",
 					$this->schema_name,
 					[
-						__( 'IMPORT DATA PROJECTS', 'wp-data-access' ),
-						''
+						__( 'Import projects previously exported for Data Projects. Data is imported immediately after file upload.', 'wp-data-access' ),
+						null
 					]
 				);
 			} catch ( \Exception $e ) {

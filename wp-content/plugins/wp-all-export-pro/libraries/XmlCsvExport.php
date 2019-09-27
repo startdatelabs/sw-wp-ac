@@ -920,7 +920,7 @@ final Class XmlCsvExport
     /**
      * @return \Wpae\Csv\CsvWriter
      */
-    private static function getCsvWriter()
+    public static function getCsvWriter()
     {
         if (is_null(self::$csvWriter)) {
 

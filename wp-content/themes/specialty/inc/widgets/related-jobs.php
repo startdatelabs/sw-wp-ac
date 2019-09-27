@@ -58,7 +58,7 @@ if ( ! class_exists( 'CI_Widget_Related_Jobs' ) ) :
 			return $instance;
 		}
 
-		function form( $instance ) {
+		public function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, $this->defaults );
 
 			$title = $instance['title'];
@@ -67,7 +67,7 @@ if ( ! class_exists( 'CI_Widget_Related_Jobs' ) ) :
 			<p><label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'specialty' ); ?></label><input id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" class="widefat"/></p>
 			<p><label for="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>"><?php esc_html_e( 'Number of jobs:', 'specialty' ); ?></label><input id="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'count' ) ); ?>" type="text" value="<?php echo esc_attr( $count ); ?>" class="widefat"/></p>
 			<?php
-		} // form
+		}
 
 		public static function get_related_jobs( $post_id, $count ) {
 			$post_id   = absint( $post_id );
@@ -83,7 +83,7 @@ if ( ! class_exists( 'CI_Widget_Related_Jobs' ) ) :
 			}
 
 			$terms = get_the_terms( $post_id, $taxonomy );
-			if ( is_array( $terms ) and count( $terms ) > 0 ) {
+			if ( is_array( $terms ) && count( $terms ) > 0 ) {
 				$term_list = wp_list_pluck( $terms, 'slug' );
 				$term_list = array_values( $term_list );
 			}
@@ -92,12 +92,18 @@ if ( ! class_exists( 'CI_Widget_Related_Jobs' ) ) :
 				return false;
 			}
 
+			// WPJM wrongly reconstructs the cached query and causes problems. Disable caching.
+			add_filter( 'get_job_listings_cache_results', '__return_false' );
+
 			$related = get_job_listings( array(
 				'posts_per_page'    => $count + 1, // One more, because we'll need to remove the current job if it's in the results.
 				'orderby'           => 'rand',
 				'search_categories' => $term_list,
 				'fields'            => 'ids',
 			) );
+
+			// WPJM wrongly reconstructs the cached query and causes problems. Re-enable caching.
+			remove_filter( 'get_job_listings_cache_results', '__return_false' );
 
 			if ( empty( $related->posts ) ) {
 				return false;

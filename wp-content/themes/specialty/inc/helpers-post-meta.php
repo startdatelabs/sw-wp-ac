@@ -10,12 +10,12 @@ add_action( 'admin_enqueue_scripts', 'specialty_admin_register_post_meta_scripts
 function specialty_admin_register_post_meta_scripts( $hook ) {
 	$theme = wp_get_theme();
 
-	wp_register_style( 'specialty-post-meta', get_template_directory_uri() . '/inc/css/post-meta.css', array(), $theme->get( 'Version' ) );
+	wp_register_style( 'specialty-post-meta', get_template_directory_uri() . '/inc/css/post-meta.css', array(), specialty_asset_version() );
 	wp_register_script( 'specialty-post-meta', get_template_directory_uri() . '/inc/js/post-meta.js', array(
 		'media-editor',
 		'jquery',
-		'jquery-ui-sortable'
-	), $theme->get( 'Version' ) );
+		'jquery-ui-sortable',
+	), specialty_asset_version() );
 
 	$settings = array(
 		'ajaxurl'             => admin_url( 'admin-ajax.php' ),
@@ -47,15 +47,15 @@ function specialty_can_save_meta( $post_type ) {
 		return false;
 	}
 
-	if ( isset( $_POST['post_view'] ) and $_POST['post_view'] == 'list' ) {
+	if ( isset( $_POST['post_view'] ) && 'list' === $_POST['post_view'] ) {
 		return false;
 	}
 
-	if ( ! isset( $_POST['post_type'] ) or $_POST['post_type'] != $post_type ) {
+	if ( ! isset( $_POST['post_type'] ) || $post_type !== $_POST['post_type'] ) {
 		return false;
 	}
 
-	if ( ! isset( $_POST[ $post_type . '_nonce' ] ) or ! wp_verify_nonce( $_POST[ $post_type . '_nonce' ], basename( __FILE__ ) ) ) {
+	if ( ! isset( $_POST[ $post_type . '_nonce' ] ) || ! wp_verify_nonce( $_POST[ $post_type . '_nonce' ], basename( __FILE__ ) ) ) {
 		return false;
 	}
 
@@ -91,13 +91,14 @@ function specialty_metabox_input( $fieldname, $label, $params = array() ) {
 		'esc_func'    => 'esc_attr',
 		'before'      => '<p class="ci-field-group ci-field-input">',
 		'after'       => '</p>',
-		'default'     => ''
+		'default'     => '',
 	);
+
 	$params = wp_parse_args( $params, $defaults );
 
 	$custom_keys = get_post_custom_keys( $post->ID );
 
-	if ( is_array( $custom_keys ) && in_array( $fieldname, $custom_keys ) ) {
+	if ( is_array( $custom_keys ) && in_array( $fieldname, $custom_keys, true ) ) {
 		$value = get_post_meta( $post->ID, $fieldname, true );
 		$value = call_user_func( $params['esc_func'], $value );
 	} else {
@@ -125,13 +126,14 @@ function specialty_metabox_textarea( $fieldname, $label, $params = array() ) {
 		'esc_func'    => 'esc_textarea',
 		'before'      => '<p class="ci-field-group ci-field-textarea">',
 		'after'       => '</p>',
-		'default'     => ''
+		'default'     => '',
 	);
+
 	$params = wp_parse_args( $params, $defaults );
 
 	$custom_keys = get_post_custom_keys( $post->ID );
 
-	if ( is_array( $custom_keys ) && in_array( $fieldname, $custom_keys ) ) {
+	if ( is_array( $custom_keys ) && in_array( $fieldname, $custom_keys, true ) ) {
 		$value = get_post_meta( $post->ID, $fieldname, true );
 		$value = call_user_func( $params['esc_func'], $value );
 	} else {
@@ -157,13 +159,14 @@ function specialty_metabox_dropdown( $fieldname, $options, $label, $params = arr
 	$defaults = array(
 		'before'  => '<p class="ci-field-group ci-field-dropdown">',
 		'after'   => '</p>',
-		'default' => ''
+		'default' => '',
 	);
+
 	$params = wp_parse_args( $params, $defaults );
 
 	$custom_keys = get_post_custom_keys( $post->ID );
 
-	if ( is_array( $custom_keys ) && in_array( $fieldname, $custom_keys ) ) {
+	if ( is_array( $custom_keys ) && in_array( $fieldname, $custom_keys, true ) ) {
 		$value = get_post_meta( $post->ID, $fieldname, true );
 	} else {
 		$value = $params['default'];
@@ -177,7 +180,7 @@ function specialty_metabox_dropdown( $fieldname, $options, $label, $params = arr
 
 	?>
 		<select id="<?php echo esc_attr( $fieldname ); ?>" name="<?php echo esc_attr( $fieldname ); ?>">
-			<?php foreach ( $options as $opt_val => $opt_label ): ?>
+			<?php foreach ( $options as $opt_val => $opt_label ) : ?>
 				<option value="<?php echo esc_attr( $opt_val ); ?>" <?php selected( $value, $opt_val ); ?>><?php echo esc_html( $opt_label ); ?></option>
 			<?php endforeach; ?>
 		</select>
@@ -194,13 +197,14 @@ function specialty_metabox_radio( $fieldname, $optionname, $optionval, $label, $
 	$defaults = array(
 		'before'  => '<p class="ci-field-group ci-field-radio">',
 		'after'   => '</p>',
-		'default' => ''
+		'default' => '',
 	);
+
 	$params = wp_parse_args( $params, $defaults );
 
 	$custom_keys = get_post_custom_keys( $post->ID );
 
-	if ( is_array( $custom_keys ) && in_array( $fieldname, $custom_keys ) ) {
+	if ( is_array( $custom_keys ) && in_array( $fieldname, $custom_keys, true ) ) {
 		$value = get_post_meta( $post->ID, $fieldname, true );
 	} else {
 		$value = $params['default'];
@@ -220,13 +224,14 @@ function specialty_metabox_checkbox( $fieldname, $value, $label, $params = array
 	$defaults = array(
 		'before'  => '<p class="ci-field-group ci-field-checkbox">',
 		'after'   => '</p>',
-		'default' => ''
+		'default' => '',
 	);
+
 	$params = wp_parse_args( $params, $defaults );
 
 	$custom_keys = get_post_custom_keys( $post->ID );
 
-	if ( is_array( $custom_keys ) && in_array( $fieldname, $custom_keys ) ) {
+	if ( is_array( $custom_keys ) && in_array( $fieldname, $custom_keys, true ) ) {
 		$checked = get_post_meta( $post->ID, $fieldname, true );
 	} else {
 		$checked = $params['default'];
@@ -243,7 +248,7 @@ function specialty_metabox_checkbox( $fieldname, $value, $label, $params = array
 function specialty_metabox_open_tab( $title ) {
 	?>
 	<div class="ci-cf-section">
-		<?php if ( ! empty( $title ) ): ?>
+		<?php if ( ! empty( $title ) ) : ?>
 			<h3 class="ci-cf-title"><?php echo esc_html( $title ); ?></h3>
 		<?php endif; ?>
 		<div class="ci-cf-inside">
@@ -281,13 +286,14 @@ function specialty_metabox_guide( $strings, $params = array() ) {
 		'after'       => '',
 		'after_each'  => '',
 	);
+
 	$params = wp_parse_args( $params, $defaults );
 
 	if ( empty( $strings ) ) {
 		return;
 	}
 
-	if ( $params['type'] == 'auto' ) {
+	if ( 'auto' === $params['type'] ) {
 		if ( is_array( $strings ) && count( $strings ) > 1 ) {
 			$params['type'] = 'ol';
 		} else {
@@ -299,15 +305,15 @@ function specialty_metabox_guide( $strings, $params = array() ) {
 		$strings = array( $strings );
 	}
 
-	if ( $params['type'] == 'p' ) {
+	if ( 'p' === $params['type'] ) {
 		$params['before_each'] = '<p class="ci-cf-guide">';
 		$params['after_each']  = '</p>';
-	} elseif ( $params['type'] == 'ol' ) {
+	} elseif ( 'ol' === $params['type'] ) {
 		$params['before']      = '<ol class="ci-cf-guide">';
 		$params['before_each'] = '<li>';
 		$params['after']       = '</ol>';
 		$params['after_each']  = '</li>';
-	} elseif ( $params['type'] == 'ul' ) {
+	} elseif ( 'ul' === $params['type'] ) {
 		$params['before']      = '<ul class="ci-cf-guide">';
 		$params['before_each'] = '<li>';
 		$params['after']       = '</ul>';
@@ -425,7 +431,7 @@ ENDJS;
  * @return void
  */
 function specialty_featgal_print_meta_html( $post_id = false, $gid = 1 ) {
-	if ( $post_id == false ) {
+	if ( false === (bool) $post_id ) {
 		global $post;
 		$post_id = $post->ID;
 	}
@@ -448,7 +454,7 @@ function specialty_featgal_print_meta_html( $post_id = false, $gid = 1 ) {
 		<div class="ci-upload-to-gallery-preview group">
 			<?php
 				$images = specialty_featgal_get_images( $ids );
-				if ( $images !== false and is_array( $images ) ) {
+				if ( false !== $images && is_array( $images ) ) {
 					foreach ( $images as $image ) {
 						?>
 						<div class="thumb">
@@ -505,7 +511,7 @@ function specialty_featgal_update_meta( $post_id, $POST, $gid = 1 ) {
 		}
 	}
 
-	if ( ! empty( $POST[ $f_rand ] ) and $POST[ $f_rand ] == 'rand' ) {
+	if ( ! empty( $POST[ $f_rand ] ) && $POST[ $f_rand ] == 'rand' ) {
 		$rand_string = 'rand';
 	}
 
@@ -515,7 +521,7 @@ function specialty_featgal_update_meta( $post_id, $POST, $gid = 1 ) {
 }
 
 function specialty_featgal_get_ids( $post_id = false, $gid = 1 ) {
-	if ( $post_id == false ) {
+	if ( false === (bool) $post_id ) {
 		global $post;
 		$post_id = $post->ID;
 	} else {
@@ -533,7 +539,7 @@ function specialty_featgal_get_ids( $post_id = false, $gid = 1 ) {
 	$ids = explode( ',', $ids );
 	$ids = array_filter( $ids );
 
-	if ( 'rand' == $rand ) {
+	if ( 'rand' === $rand ) {
 		shuffle( $ids );
 	}
 
@@ -541,7 +547,7 @@ function specialty_featgal_get_ids( $post_id = false, $gid = 1 ) {
 }
 
 function specialty_featgal_get_attachments( $post_id = false, $gid = 1, $extra_args = array() ) {
-	if ( $post_id == false ) {
+	if ( false === (bool) $post_id ) {
 		global $post;
 		$post_id = $post->ID;
 	} else {
@@ -568,11 +574,11 @@ function specialty_featgal_get_attachments( $post_id = false, $gid = 1, $extra_a
 	);
 
 	$custom_keys = get_post_custom_keys( $post_id );
-	if( is_null( $custom_keys ) ) {
+	if ( is_null( $custom_keys ) ) {
 		$custom_keys = array();
 	}
 
-	if ( ! in_array( 'ci_featured_gallery_' . $gid, $custom_keys ) ) {
+	if ( ! in_array( 'ci_featured_gallery_' . $gid, $custom_keys, true ) ) {
 		$args['post_parent'] = $post_id;
 		$args['order']       = 'ASC';
 		$args['orderby']     = 'menu_order';
@@ -580,7 +586,7 @@ function specialty_featgal_get_attachments( $post_id = false, $gid = 1, $extra_a
 		$args['post__in'] = $ids;
 		$args['orderby']  = 'post__in';
 
-		if ( $rand == 'rand' ) {
+		if ( 'rand' === $rand ) {
 			$args['orderby'] = 'rand';
 		}
 	} else {
@@ -588,7 +594,7 @@ function specialty_featgal_get_attachments( $post_id = false, $gid = 1, $extra_a
 		$args['post__in'] = array( - 1 );
 	}
 
-	if ( is_array( $extra_args ) and count( $extra_args ) > 0 ) {
+	if ( is_array( $extra_args ) && count( $extra_args ) > 0 ) {
 		$args = array_merge( $args, $extra_args );
 	}
 
@@ -602,7 +608,7 @@ function specialty_featgal_get_attachments( $post_id = false, $gid = 1, $extra_a
 function specialty_featgal_AJAXPreview() {
 	$ids  = $_POST['ids'];
 	$urls = specialty_featgal_get_images( $ids );
-	if ( $urls === false ) {
+	if ( false === $urls ) {
 		echo 'FAIL';
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			wp_die();
@@ -617,40 +623,40 @@ function specialty_featgal_AJAXPreview() {
 /**
  * Reads $csv for a comma separated list of image attachment IDs. Returns a php array of image URLs and IDs, or false.
  *
- * @param string $csv A comma separated list of image attachment IDs.
+ * @param false|string $csv A comma separated list of image attachment IDs.
  * @return array|bool
  */
 function specialty_featgal_get_images( $csv = false ) {
-	$ids = explode(',', $csv);
-	$ids = array_filter($ids);
+	$ids = explode( ',', $csv );
+	$ids = array_filter( $ids );
 
 	if ( count( $ids ) > 0 ) {
-		$ids         = array_map( 'intval', $ids );
-		$ids         = array_map( 'abs', $ids );
-		$urls        = array();
+		$ids  = array_map( 'intval', $ids );
+		$ids  = array_map( 'abs', $ids );
+		$urls = array();
 
 		global $_wp_additional_image_sizes;
 
 		$image_sizes = $_wp_additional_image_sizes;
 
 		foreach ( $ids as $id ) {
-			$thumb_file = specialty_get_image_src( $id, 'specialty_featgal_small_thumb' );
+			$thumb_file = wp_get_attachment_image_url( $id, 'specialty_featgal_small_thumb' );
 
 			$file = parse_url( $thumb_file );
 			$file = pathinfo( $file['path'] );
 			$file = basename( $file['basename'], '.' . $file['extension'] );
 
 			$size = $image_sizes['specialty_featgal_small_thumb']['width'] . 'x' . $image_sizes['specialty_featgal_small_thumb']['height'];
-			if ( specialty_substr_right( $file, strlen( $size ) ) == $size ) {
+			if ( specialty_substr_right( $file, strlen( $size ) ) === $size ) {
 				$file = $thumb_file;
 			} else {
-				$file = specialty_get_image_src( $id, 'thumbnail' );
+				$file = wp_get_attachment_image_url( $id, 'thumbnail' );
 			}
 
 			$data = array(
 				'id'  => $id,
 				//'url' => ci_get_image_src($id, 'specialty_featgal_small_thumb')
-				'url' => $file
+				'url' => $file,
 			);
 
 			$urls[] = $data;

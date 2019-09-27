@@ -25,28 +25,15 @@ do_action( 'single_job_listing_meta_before' ); ?>
 <ul class="job-listing-meta meta">
 	<?php do_action( 'single_job_listing_meta_start' ); ?>
 
-	<?php /*
-	<?php if ( get_option( 'job_manager_enable_types' ) ) { ?>
-		<?php $types = wpjm_get_the_job_types(); ?>
-		<?php if ( ! empty( $types ) ) : foreach ( $types as $type ) : ?>
-
-			<li class="job-type <?php echo esc_attr( sanitize_title( $type->slug ) ); ?>"><?php echo esc_html( $type->name ); ?></li>
-
-		<?php endforeach; endif; ?>
-	<?php } ?>
-
-	<li class="location"><?php the_job_location(); ?></li>
-    */ ?>
-
 	<li class="date-posted"><?php the_job_publish_date(); ?></li>
 
 	<?php if ( is_position_filled() ) : ?>
-		<li class="position-filled"><?php _e( 'This position has been filled', 'specialty' ); ?></li>
+		<li class="position-filled"><?php esc_html_e( 'This position has been filled', 'specialty' ); ?></li>
 	<?php elseif ( ! candidates_can_apply() && 'preview' !== $post->post_status ) : ?>
-		<li class="listing-expired"><?php _e( 'Applications have closed', 'specialty' ); ?></li>
+		<li class="listing-expired"><?php esc_html_e( 'Applications have closed', 'specialty' ); ?></li>
 	<?php endif; ?>
 
 	<?php do_action( 'single_job_listing_meta_end' ); ?>
 </ul>
 
-<?php do_action( 'single_job_listing_meta_after' ); ?>
+<?php do_action( 'single_job_listing_meta_after' );

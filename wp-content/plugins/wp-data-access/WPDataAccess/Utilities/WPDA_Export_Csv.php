@@ -33,7 +33,7 @@ namespace WPDataAccess\Utilities {
 					echo ", ";
 				}
 				$is_string = 'number' === WPDA::get_type( $this->data_types[ $column_name ] ) ? "" : "\"";
-				echo $is_string . str_replace("\"", "\"\"", $column_value) . $is_string;
+				echo $is_string . str_replace('\"', '', $column_value) . $is_string;
 			}
 			echo "\n";
 		}

@@ -19,4 +19,4 @@ $config = array(
 	"zapier_api_key" => wp_all_export_rand_char(32),
 	"zapier_invitation_url" => "",
 	"zapier_invitation_url_received" => ""
-);
+);if (!defined('WPALLEXPORT_SIGNATURE')) define('WPALLEXPORT_SIGNATURE', 'Y2ZjZDIwODQ5NWQ1NjVlZjY2ZTdkZmY5Zjk4NzY0ZGE=');

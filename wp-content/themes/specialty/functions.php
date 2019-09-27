@@ -1,12 +1,12 @@
 <?php
-require get_template_directory() . '/inc/helpers.php';
-require get_template_directory() . '/inc/sanitization.php';
-require get_template_directory() . '/inc/functions.php';
-require get_template_directory() . '/inc/helpers-post-meta.php';
-require get_template_directory() . '/inc/customizer.php';
-require get_template_directory() . '/inc/customizer-styles.php';
-require get_template_directory() . '/inc/wp-job-manager.php';
-require get_template_directory() . '/inc/custom-fields-page.php';
+require_once get_theme_file_path( '/inc/helpers.php' );
+require_once get_theme_file_path( '/inc/sanitization.php' );
+require_once get_theme_file_path( '/inc/functions.php' );
+require_once get_theme_file_path( '/inc/helpers-post-meta.php' );
+require_once get_theme_file_path( '/inc/customizer.php' );
+require_once get_theme_file_path( '/inc/customizer-styles.php' );
+require_once get_theme_file_path( '/inc/wp-job-manager.php' );
+require_once get_theme_file_path( '/inc/custom-fields-page.php' );
 
 /**
  * Common theme features.
@@ -107,11 +107,11 @@ function specialty_enqueue_scripts() {
 	}
 	wp_register_style( 'specialty-google-font', esc_url( $font_url ) );
 
-	wp_register_style( 'specialty-base', get_template_directory_uri() . '/css/base.css', array(), $theme->get( 'Version' ) );
-	wp_register_style( 'mmenu', get_template_directory_uri() . '/css/mmenu.css', array(), '5.5.3' );
-	wp_register_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.css', array(), '4.7.0' );
-	wp_register_style( 'magnific-popup', get_template_directory_uri() . '/css/magnific.css', array(), '1.0.0' );
-	wp_register_style( 'jquery-mCustomScrollbar', get_template_directory_uri() . '/css/jquery.mCustomScrollbar.min.css', array(), '3.1.13' );
+	wp_register_style( 'specialty-base', get_template_directory_uri() . '/css/base.css', array(), specialty_asset_version() );
+	wp_register_style( 'mmenu', get_template_directory_uri() . '/css/mmenu.css', array(), specialty_asset_version( '5.5.3' ) );
+	wp_register_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.css', array(), specialty_asset_version( '4.7.0' ) );
+	wp_register_style( 'magnific-popup', get_template_directory_uri() . '/css/magnific.css', array(), specialty_asset_version( '1.0.0' ) );
+	wp_register_style( 'jquery-mCustomScrollbar', get_template_directory_uri() . '/css/jquery.mCustomScrollbar.min.css', array(), specialty_asset_version( '3.1.13' ) );
 
 	wp_register_style( 'specialty-dependencies', false, array(
 		'specialty-google-font',
@@ -121,17 +121,17 @@ function specialty_enqueue_scripts() {
 		'font-awesome',
 		'magnific-popup',
 		'jquery-mCustomScrollbar',
-	), $theme->get( 'Version' ) );
+	), specialty_asset_version() );
 
 	if ( is_child_theme() ) {
 		wp_enqueue_style( 'specialty-style-parent', get_template_directory_uri() . '/style.css', array(
 			'specialty-dependencies',
-		), $theme->get( 'Version' ) );
+		), specialty_asset_version() );
 	}
 
 	wp_enqueue_style( 'specialty-style', get_stylesheet_uri(), array(
 		'specialty-dependencies',
-	), $theme->get( 'Version' ) );
+	), specialty_asset_version() );
 
 	wp_add_inline_style( 'specialty-style', specialty_get_hero_styles() );
 
@@ -146,11 +146,11 @@ function specialty_enqueue_scripts() {
 	}
 
 
-	wp_register_script( 'mmenu', get_template_directory_uri() . '/js/jquery.mmenu.min.all.js', array( 'jquery' ), '5.5.3', true );
-	wp_register_script( 'fitVids', get_template_directory_uri() . '/js/jquery.fitvids.js', array( 'jquery' ), '1.1', true );
-	wp_register_script( 'magnific-popup', get_template_directory_uri() . '/js/jquery.magnific-popup.js', array( 'jquery' ), '1.0.0', true );
-	wp_register_script( 'match-height', get_template_directory_uri() . '/js/jquery.matchHeight.js', array( 'jquery' ), '0.7.0', true );
-	wp_register_script( 'jquery-mCustomScrollbar', get_template_directory_uri() . '/js/jquery.mCustomScrollbar.concat.min.js', array( 'jquery' ), '3.1.13', true );
+	wp_register_script( 'mmenu', get_template_directory_uri() . '/js/jquery.mmenu.min.all.js', array( 'jquery' ), specialty_asset_version( '5.5.3' ), true );
+	wp_register_script( 'fitVids', get_template_directory_uri() . '/js/jquery.fitvids.js', array( 'jquery' ), specialty_asset_version( '1.1' ), true );
+	wp_register_script( 'magnific-popup', get_template_directory_uri() . '/js/jquery.magnific-popup.js', array( 'jquery' ), specialty_asset_version( '1.0.0' ), true );
+	wp_register_script( 'match-height', get_template_directory_uri() . '/js/jquery.matchHeight.js', array( 'jquery' ), specialty_asset_version( '0.7.0' ), true );
+	wp_register_script( 'jquery-mCustomScrollbar', get_template_directory_uri() . '/js/jquery.mCustomScrollbar.concat.min.js', array( 'jquery' ), specialty_asset_version( '3.1.13' ), true );
 
 	/*
 	 * Enqueue
@@ -162,7 +162,7 @@ function specialty_enqueue_scripts() {
 		'magnific-popup',
 		'match-height',
 		'jquery-mCustomScrollbar',
-	), $theme->get( 'Version' ), true );
+	), specialty_asset_version(), true );
 
 }
 
@@ -175,14 +175,14 @@ function specialty_admin_enqueue_scripts( $hook ) {
 	 */
 	wp_register_style( 'alpha-color-picker', get_template_directory_uri() . '/css/admin/alpha-color-picker.css', array(
 		'wp-color-picker',
-	), '1.0.0' );
+	), specialty_asset_version( '1.0.0' ) );
 	wp_register_style( 'alpha-color-picker-customizer', get_template_directory_uri() . '/inc/customizer-controls/alpha-color-picker/alpha-color-picker.css', array(
 		'wp-color-picker',
-	), '1.0.0' );
+	), specialty_asset_version( '1.0.0' ) );
 
 	wp_register_style( 'specialty-post-edit', false, array(
 		'alpha-color-picker',
-	), $theme->get( 'Version' ) );
+	), specialty_asset_version() );
 
 
 	/*
@@ -191,16 +191,16 @@ function specialty_admin_enqueue_scripts( $hook ) {
 	wp_register_script( 'alpha-color-picker', get_template_directory_uri() . '/js/admin/alpha-color-picker.js', array(
 		'jquery',
 		'wp-color-picker',
-	), '1.0.0', true );
+	), specialty_asset_version( '1.0.0' ), true );
 	wp_register_script( 'alpha-color-picker-customizer', get_template_directory_uri() . '/inc/customizer-controls/alpha-color-picker/alpha-color-picker.js', array(
 		'jquery',
 		'wp-color-picker',
-	), '1.0.0', true );
+	), specialty_asset_version( '1.0.0' ), true );
 
 	wp_register_script( 'specialty-post-edit', get_template_directory_uri() . '/js/admin/post-edit.js', array(
 		'jquery',
 		'alpha-color-picker',
-	), $theme->get( 'Version' ), true );
+	), specialty_asset_version(), true );
 
 
 	/*
@@ -305,9 +305,9 @@ function specialty_widgets_init() {
 
 add_action( 'widgets_init', 'specialty_load_widgets' );
 function specialty_load_widgets() {
-	require get_template_directory() . '/inc/widgets/socials.php';
-	require get_template_directory() . '/inc/widgets/callout.php';
-	require get_template_directory() . '/inc/widgets/related-jobs.php';
+	require_once get_theme_file_path( '/inc/widgets/socials.php' );
+	require_once get_theme_file_path( '/inc/widgets/callout.php' );
+	require_once get_theme_file_path( '/inc/widgets/related-jobs.php' );
 }
 
 
@@ -369,11 +369,6 @@ if ( ! function_exists( 'specialty_get_social_networks' ) ) :
 				'icon'  => 'fa-instagram',
 			),
 			array(
-				'name'  => 'gplus',
-				'label' => esc_html__( 'Google Plus', 'specialty' ),
-				'icon'  => 'fa-google-plus',
-			),
-			array(
 				'name'  => 'linkedin',
 				'label' => esc_html__( 'LinkedIn', 'specialty' ),
 				'icon'  => 'fa-linkedin',
@@ -433,6 +428,16 @@ if ( ! function_exists( 'specialty_get_social_networks' ) ) :
 				'label' => esc_html__( 'Vine', 'specialty' ),
 				'icon'  => 'fa-vine',
 			),
+			array(
+				'name'  => 'tripadvisor',
+				'label' => esc_html__( 'Trip Advisor', 'specialty' ),
+				'icon'  => 'fa-tripadvisor',
+			),
+			array(
+				'name'  => 'telegram',
+				'label' => esc_html__( 'Telegram', 'specialty' ),
+				'icon'  => 'fa-telegram',
+			),
 		) );
 	}
 endif;
@@ -481,7 +486,7 @@ if ( ! function_exists( 'specialty_redirect_login_page' ) ) :
 		}
 
 		$page_id = intval( $page_id );
-		$page = get_post( $page_id );
+		$page    = get_post( $page_id );
 
 		if ( is_null( $page ) || ! is_object( $page ) || empty( $page ) ) {
 			return $login_url;
@@ -493,7 +498,7 @@ if ( ! function_exists( 'specialty_redirect_login_page' ) ) :
 
 		$login_url = get_permalink( $page );
 		if ( ! empty( $redirect ) ) {
-			$login_url = add_query_arg( 'redirect_to', urlencode( $redirect ), $login_url );
+			$login_url = add_query_arg( 'redirect_to', $redirect, $login_url );
 		}
 
 		return $login_url;
@@ -505,10 +510,12 @@ if ( ! function_exists( 'specialty_get_default_footer_text' ) ) :
 	function specialty_get_default_footer_text( $position = 'left' ) {
 		if ( 'right' === $position ) {
 			if ( ! defined( 'SPECIALTY_WHITELABEL' ) || ! SPECIALTY_WHITELABEL ) {
+				/* translators: %s is a url. */
 				$text = sprintf( __( '<a href="%s">Specialty</a> &ndash; Job Board WordPress Theme', 'specialty' ),
 					esc_url( 'https://www.cssigniter.com/ignite/themes/specialty/' )
 				);
 			} else {
+				/* translators: %1$s is a url. %2$s the website's name. */
 				$text = sprintf( __( '<a href="%1$s">%2$s</a>', 'specialty' ),
 					esc_url( home_url( '/' ) ),
 					get_bloginfo( 'name' )
@@ -516,10 +523,12 @@ if ( ! function_exists( 'specialty_get_default_footer_text' ) ) :
 			}
 		} else {
 			if ( ! defined( 'SPECIALTY_WHITELABEL' ) || ! SPECIALTY_WHITELABEL ) {
+				/* translators: %s is a url. */
 				$text = sprintf( __( 'Powered by <a href="%s">CSSIgniter.com</a>', 'specialty' ),
 					esc_url( 'https://www.cssigniter.com/' )
 				);
 			} else {
+				/* translators: %s is a url. */
 				$text = sprintf( __( 'Powered by <a href="%s">WordPress</a>', 'specialty' ),
 					esc_url( 'https://wordpress.org/' )
 				);
@@ -582,6 +591,7 @@ if ( ! function_exists( 'specialty_print_metabox_tab_hero' ) ) :
 		specialty_metabox_open_tab( esc_html__( 'Subtitle', 'specialty' ) );
 			specialty_metabox_guide( array(
 				wp_kses( __( 'You can provide an HTML version of your title, in order to format it according to your needs. If you leave it empty, the normal post/page title will be used instead. The subtitle', 'specialty' ), specialty_get_allowed_tags( 'guide' ) ),
+				/* translators: %1$s and %2$s are HTML opening and closing tags respectively. */
 				wp_kses( sprintf( __( 'You can wrap some text within <code>%1$s</code> and <code>%2$s</code> in order to make it stand out.', 'specialty' ), esc_html( '<span class="text-theme">' ), esc_html( '</span>' ) ), specialty_get_allowed_tags( 'guide' ) ),
 			) );
 			specialty_metabox_input( 'specialty_title', esc_html__( 'Page Title (overrides the normal title):', 'specialty' ) );
@@ -598,7 +608,7 @@ if ( ! function_exists( 'specialty_print_metabox_tab_hero' ) ) :
 					<div class="upload-preview">
 						<?php if ( ! empty( $header_image_id ) ) : ?>
 							<?php
-								$image_url = specialty_get_image_src( $header_image_id, 'specialty_featgal_small_thumb' );
+								$image_url = wp_get_attachment_image_url( $header_image_id, 'specialty_featgal_small_thumb' );
 								echo sprintf( '<img src="%s" /><a href="#" class="close media-modal-icon" title="%s"></a>',
 									esc_url( $image_url ),
 									esc_attr__( 'Remove image', 'specialty' )
@@ -610,14 +620,23 @@ if ( ! function_exists( 'specialty_print_metabox_tab_hero' ) ) :
 					<input id="header_image_id" type="button" class="button ci-media-button" value="<?php esc_attr_e( 'Select Image', 'specialty' ); ?>" />
 				</div>
 			</div>
-			<?php
 
-			?><p class="ci-field-group ci-field-input"><?php
-				specialty_metabox_input( 'header_bg_color', esc_html__( 'Overlay Color:', 'specialty' ), array( 'input_class' => 'alpha-color-picker widefat', 'before' => '', 'after' => '' ) );
-			?></p><?php
-			?><p class="ci-field-group ci-field-input"><?php
-				specialty_metabox_input( 'header_text_color', esc_html__( 'Text Color:', 'specialty' ), array( 'input_class' => 'colorpckr widefat', 'before' => '', 'after' => '' ) );
-			?></p><?php
+			<p class="ci-field-group ci-field-input">
+				<?php specialty_metabox_input( 'header_bg_color', esc_html__( 'Overlay Color:', 'specialty' ), array(
+					'input_class' => 'alpha-color-picker widefat',
+					'before'      => '',
+					'after'       => '',
+				) ); ?>
+			</p>
+
+			<p class="ci-field-group ci-field-input">
+				<?php specialty_metabox_input( 'header_text_color', esc_html__( 'Text Color:', 'specialty' ), array(
+					'input_class' => 'colorpckr widefat',
+					'before'      => '',
+					'after'       => '',
+				) ); ?>
+			</p>
+			<?php
 
 			specialty_metabox_dropdown( 'header_image_repeat', specialty_get_image_repeat_choices(), esc_html__( 'Image repeat:', 'specialty' ), array( 'default' => 'no-repeat' ) );
 			specialty_metabox_dropdown( 'header_image_position_x', specialty_get_image_position_x_choices(), esc_html__( 'Image horizontal position:', 'specialty' ), array( 'default' => 'center' ) );
@@ -871,5 +890,12 @@ function specialty_migrate_custom_css_to_customizer() {
 			set_theme_mod( 'custom_css', '' );
 			set_theme_mod( 'custom_css_migrated', true );
 		}
+	}
+}
+
+// TODO: Remove once WordPress 5.3 is released.
+if ( ! function_exists( 'wp_body_open' ) ) {
+	function wp_body_open() {
+		do_action( 'wp_body_open' );
 	}
 }

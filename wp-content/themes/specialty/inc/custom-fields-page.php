@@ -12,6 +12,8 @@ endif;
 if ( ! function_exists( 'specialty_cpt_page_update_meta' ) ) :
 	function specialty_cpt_page_update_meta( $post_id ) {
 
+		// Nonce verification is being done inside specialty_can_save_meta()
+		// phpcs:disable WordPress.Security.NonceVerification
 		if ( ! specialty_can_save_meta( 'page' ) ) {
 			return;
 		}
@@ -19,6 +21,8 @@ if ( ! function_exists( 'specialty_cpt_page_update_meta' ) ) :
 		specialty_sanitize_metabox_tab_hero( $post_id );
 
 		update_post_meta( $post_id, 'specialty_job_listing_sidebar', specialty_sanitize_job_listing_layout_choices( $_POST['specialty_job_listing_sidebar'] ) );
+
+		// phpcs:enable
 	}
 endif;
 

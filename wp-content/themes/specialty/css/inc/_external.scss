@@ -37,7 +37,7 @@
 
 /* Select2
 ===================================== */
-.ci-select {
+.ci-select, .job-manager-form {
 	font-size: 15px;
 
 	.select2-container {
@@ -73,12 +73,13 @@
 					background: $border-color;
 					border: 0;
 					position: relative;
-					margin-top: 8px;
+					margin-top: 7px;
+					margin-right: 8px;
 
 					.select2-selection__choice__remove {
 						font-size: 16px;
 						position: absolute;
-						top: 6px;
+						top: 5px;
 						right: 3px;
 					}
 				}
@@ -88,6 +89,19 @@
 					height: 35px;
 					position: relative;
 					top: 2px;
+				}
+
+				.select2-search--inline {
+					margin-top: 0;
+				}
+				
+				.select2-selection__clear {
+					color: $text-color;
+					float: left;
+					line-height: 36px;
+					margin-top: 0;
+					position: relative;
+					top: 1px;
 				}
 			}
 		}
@@ -113,6 +127,17 @@
 ====================================== */
 div.job_listings {
 	margin-bottom: 0;
+}
+
+ul.job_listings {
+	li.job_listing.job_position_featured.list-item {
+		a {
+			background: none;
+			&:hover, &:focus {
+				background: none;
+			}
+		}
+	}
 }
 
 .entry-content .job_listing_preview_title .button,

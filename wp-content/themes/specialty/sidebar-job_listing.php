@@ -2,7 +2,7 @@
 
 	<aside class="widget widget_ci-apply-button-widget">
 		<?php if ( $apply = get_the_job_application_method() ) : ?>
-<a href="<?php echo esc_url( $apply->url ); ?>" target = "blank" class="application_button button btn btn-block"><?php esc_html_e( 'Apply for this job', 'specialty' ); ?></a>
+<a href="<?php echo esc_url( $apply->url ); ?>" class="application_button button btn btn-block"><?php esc_html_e( 'Apply for this job', 'specialty' ); ?></a>
 
 <?php endif; ?>
 	</aside>
@@ -33,15 +33,15 @@
 								</a>
 							<?php endif; ?>
 
-							<?php $post = get_post(); ?>
-							<?php if ( ! empty( $post->_company_facebook ) ) : ?>
-								<a href="<?php echo esc_url( $post->_company_facebook ); ?>" target="_blank">
+							<?php $_post = get_post(); ?>
+							<?php if ( ! empty( $_post->_company_facebook ) ) : ?>
+								<a href="<?php echo esc_url( $_post->_company_facebook ); ?>" target="_blank">
 									<i class="fa fa-facebook"></i><span class="sr-only"><?php esc_html_e( 'Facebook', 'specialty' ); ?></span>
 								</a>
 							<?php endif; ?>
 
-							<?php if ( ! empty( $post->_company_linkedin ) ) : ?>
-								<a href="<?php echo esc_url( $post->_company_linkedin ); ?>" target="_blank">
+							<?php if ( ! empty( $_post->_company_linkedin ) ) : ?>
+								<a href="<?php echo esc_url( $_post->_company_linkedin ); ?>" target="_blank">
 									<i class="fa fa-linkedin"></i><span class="sr-only"><?php esc_html_e( 'LinkedIn', 'specialty' ); ?></span>
 								</a>
 							<?php endif; ?>

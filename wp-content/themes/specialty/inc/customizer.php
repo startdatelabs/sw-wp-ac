@@ -72,6 +72,7 @@ function specialty_customize_register( $wpc ) {
 
 	$wpc->add_section( 'theme_jobs', array(
 		'title'       => esc_html_x( 'Job Listing Options', 'customizer section title', 'specialty' ),
+		/* translators: %s is a url. */
 		'description' => wp_kses( sprintf( __( 'All options require that the <a href="%s">WP Job Manager</a> plugin is active.', 'specialty' ), 'https://wordpress.org/plugins/wp-job-manager/' ), specialty_get_allowed_tags( 'guide' ) ),
 		'priority'    => 100,
 	) );
@@ -396,6 +397,7 @@ function specialty_customize_register( $wpc ) {
 	$wpc->add_control( new WP_Customize_Image_Control( $wpc, 'hero_image', array(
 		'section'     => 'colors_hero',
 		'label'       => esc_html__( 'Hero image', 'specialty' ),
+		/* translators: %s is a number of pixels. */
 		'description' => esc_html( sprintf( __( 'Recommended size of at least %s pixels.', 'specialty' ), $hero_size ) ),
 	) ) );
 
@@ -643,6 +645,7 @@ function specialty_customize_register( $wpc ) {
 		$wpc->add_control( 'social_' . $network['name'], array(
 			'type'    => 'url',
 			'section' => 'social',
+			/* translators: %s is a social network's name. e.g. Facebook URL */
 			'label'   => esc_html( sprintf( _x( '%s URL', 'social network url', 'specialty' ), $network['label'] ) ),
 		) );
 	}
@@ -707,6 +710,16 @@ function specialty_customize_register( $wpc ) {
 	//
 	// Jobs
 	//
+	$wpc->add_setting( 'theme_jobs_listing_company_logo_show', array(
+		'default'           => 1,
+		'sanitize_callback' => 'specialty_sanitize_checkbox',
+	) );
+	$wpc->add_control( 'theme_jobs_listing_company_logo_show', array(
+		'type'    => 'checkbox',
+		'section' => 'theme_jobs',
+		'label'   => esc_html__( 'Show company logo next to job listings.', 'specialty' ),
+	) );
+
 	$wpc->add_setting( 'theme_jobs_listing_create_alert', array(
 		'default'           => 1,
 		'sanitize_callback' => 'specialty_sanitize_checkbox',
@@ -778,7 +791,7 @@ function specialty_customize_register( $wpc ) {
 		SPECIALTY_NAME
 	);
 
-	if ( ! empty( $sample_content_url ) && ( ! defined( 'SPECIALTY_WHITELABEL' ) || SPECIALTY_WHITELABEL == false ) ) {
+	if ( ! empty( $sample_content_url ) && ( ! defined( 'SPECIALTY_WHITELABEL' ) || false === (bool) SPECIALTY_WHITELABEL ) ) {
 		$wpc->add_setting( 'sample_content_link', array(
 			'default' => '',
 		) );
@@ -787,6 +800,7 @@ function specialty_customize_register( $wpc ) {
 			'label'       => esc_html__( 'Resources', 'specialty' ),
 			'description' => array(
 				wp_kses(
+					/* translators: %s is a url. */
 					sprintf( __( '<a href="%s" target="_blank">Download the theme\'s sample content</a> to get things moving.', 'specialty' ),
 						esc_url( $sample_content_url )
 					),

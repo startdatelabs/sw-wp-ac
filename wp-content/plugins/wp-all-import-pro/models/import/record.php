@@ -2988,7 +2988,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                         }
                     }
 
-					$is_images_to_update = apply_filters('pmxi_is_images_to_update', true, $articleData, $current_xml_node);
+					$is_images_to_update = apply_filters('pmxi_is_images_to_update', true, $articleData, $current_xml_node, $pid);
 
 					if ( ! in_array($this->options['custom_type'], array('shop_order', 'import_users', 'shop_customer')) ) {
 						$logger and call_user_func($logger, __('<b>IMAGES:</b>', 'wp_all_import_plugin'));
@@ -3127,7 +3127,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 												$bn  = wp_all_import_sanitize_filename(urldecode(wp_all_import_basename($url)));
                                                 $default_extension = pmxi_getExtension($bn);
 												
-												if ( "yes" == $this->options[$option_slug . 'download_images'] and ! empty($auto_extensions_bundle[$slug][$i]) and preg_match('%^(jpg|jpeg|png|gif)$%i', $auto_extensions_bundle[$slug][$i])){
+												if ( "yes" == $this->options[$option_slug . 'download_images'] and ! empty($auto_extensions_bundle[$slug][$i]) and preg_match('%^(jpg|jpeg|png|gif|webp)$%i', $auto_extensions_bundle[$slug][$i])){
 													$img_ext = $auto_extensions_bundle[$slug][$i];
 												}
 												else {
@@ -3182,7 +3182,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                                             $image_filename = wp_unique_filename($targetDir, $image_filename);
                                                             $image_filepath = $targetDir . '/' . $image_filename;
                                                             imagejpeg($img, $image_filepath);
-                                                            if( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
+                                                            if( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP, IMAGETYPE_WEBP))) {
                                                                 $logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s is not a valid image and cannot be set as featured one', 'wp_all_import_plugin'), $image_filepath));
                                                                 $logger and !$is_cron and PMXI_Plugin::$session->warnings++;
                                                             } else {
@@ -3307,7 +3307,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 																}
 																// validate import images
 																elseif($bundle_data['type'] == 'images'){
-																	if( preg_match('%\W(svg)$%i', wp_all_import_basename($image_filepath)) or $image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath) and in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP)) ) {
+																	if( preg_match('%\W(svg)$%i', wp_all_import_basename($image_filepath)) or $image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath) and in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP, IMAGETYPE_WEBP)) ) {
 																		$create_image = true;											
 																		$logger and call_user_func($logger, sprintf(__('- Image `%s` has been successfully found', 'wp_all_import_plugin'), $wpai_image_path));
 																	}
@@ -3987,7 +3987,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
         } else{
 
             if($type == 'images'){
-                if( preg_match('%\W(svg)$%i', wp_all_import_basename($image_filepath)) or $file_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath) and in_array($file_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG))) {
+                if( preg_match('%\W(svg)$%i', wp_all_import_basename($image_filepath)) or $file_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath) and in_array($file_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_WEBP))) {
                     $downloaded = true;
                     if (preg_match('%\W(svg)$%i', wp_all_import_basename($image_filepath))){
                         $file_info = true;

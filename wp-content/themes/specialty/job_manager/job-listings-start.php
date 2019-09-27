@@ -8,4 +8,3 @@
 </div>
 
 <ul class="job_listings item-listing">
-

@@ -18,18 +18,27 @@
  * @package WordPress
  */
 
+/** Enable W3 Total Cache */
+define('WP_CACHE', true); // Added by W3 Total Cache
+
+//define( 'WP_CACHE_KEY_SALT', 'applicationconnect_' );
+//$memcached_servers = array('wp-memcached.pricov.cfg.use1.cache.amazonaws.com:11211');
+
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define( 'DB_NAME', 'wordpressdb' );
 
 /** MySQL database username */
-define( 'DB_USER', 'wordpressuser' );
-
+#define( 'DB_USER', 'wordpressuser' );
+define( 'DB_USER', 'root' );
 /** MySQL database password */
-define( 'DB_PASSWORD', '29i1bYigsvuk');
+#define( 'DB_PASSWORD', '29i1bYigsvuk');
+define( 'DB_PASSWORD', 'sw2019Admin');
 
 /** MySQL hostname */
-define( 'DB_HOST', 'ecs01.sw:3306');
+# define( 'DB_HOST', 'ecs01.sw:3306');
+#define( 'DB_HOST', 'localhost:3306');
+define( 'DB_HOST', 'ac.cmayvbazlck3.us-east-1.rds.amazonaws.com:3306');
 
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -122,3 +131,4 @@ if ( !defined( 'WP_CLI' ) ) {
     });
     add_filter( 'auto_update_translation', '__return_false' );
 }
+

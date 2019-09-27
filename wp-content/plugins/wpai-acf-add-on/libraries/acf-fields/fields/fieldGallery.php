@@ -29,16 +29,6 @@ class FieldGallery extends Field {
         if (is_array($xpath)) {
             if (!empty($xpath['gallery'])) {
                 $values = $this->getByXPath($xpath['gallery']);
-                foreach ($values as $i => $value) {
-                    $imgs = array();
-                    $line_imgs = explode("\n", $value);
-                    if (!empty($line_imgs)) {
-                        foreach ($line_imgs as $line_img) {
-                            $imgs = array_merge($imgs, empty($xpath['delim']) ? array($line_img) : str_getcsv($line_img, $xpath['delim']));
-                        }
-                    }
-                    $values[$i] = $imgs;
-                }
             }
         }
         else {
@@ -68,6 +58,27 @@ class FieldGallery extends Field {
         $values = $this->getOption('values');
         $xpath  = $this->getOption('xpath');
         $is_append_new = empty($xpath['only_append_new']) ? 0 : 1;
+
+        $parents = $this->getParents();
+        if (!empty($parents)){
+            $value = '';
+            foreach ($parents as $parent) {
+                $value = explode($parent['delimiter'], $values[$this->getPostIndex()]);
+                $value = $value[$parent['index']];
+            }
+            $values[$this->getPostIndex()] = $value;
+        }
+
+        foreach ($values as $i => $value) {
+            $imgs = array();
+            $line_imgs = explode("\n", $value);
+            if (!empty($line_imgs)) {
+                foreach ($line_imgs as $line_img) {
+                    $imgs = array_merge($imgs, empty($xpath['delim']) ? array($line_img) : str_getcsv($line_img, $xpath['delim']));
+                }
+            }
+            $values[$i] = array_filter($imgs);
+        }
 
         $gallery_ids = $is_append_new ? ACFService::get_post_meta($this, $this->getPostID(), $this->getFieldName()) : array();
         if (empty($gallery_ids)){

@@ -31,6 +31,19 @@ final class ACFService{
      */
     public static function update_post_meta(Field $field, $pid, $name, $value) {
 
+        // Prepare field data for acf/update_value filter.
+        $fieldData = [
+            'key' => $field->getFieldKey(),
+            'name' => $field->getFieldName(),
+            'type' => $field->getType(),
+            'save_custom' => 0,
+            'save_other_choice'	=> 0,
+            'allow_null' 		=> 0,
+            'return_format'		=> 'value',
+            'save_terms' => 0
+        ];
+        // Apply filters to field value.
+        $value = apply_filters( "acf/update_value", $value, $pid, $fieldData, $value );
         $cf_value = apply_filters('pmxi_acf_custom_field', $value, $pid, $name);
 
         switch ($field->getImportType()) {
@@ -80,6 +93,20 @@ final class ACFService{
      * @param bool $logger
      */
     public static function associate_terms($pid, $assign_taxes, $tx_name, $logger = FALSE) {
+
+        $use_wp_set_object_terms = apply_filters('wp_all_import_use_wp_set_object_terms', false, $tx_name);
+        if ($use_wp_set_object_terms) {
+            $term_ids = [];
+            if (!empty($assign_taxes)) {
+                foreach ($assign_taxes as $ttid) {
+                    $term = get_term_by('term_taxonomy_id', $ttid, $tx_name);
+                    if ($term) {
+                        $term_ids[] = $term->term_id;
+                    }
+                }
+            }
+            return wp_set_object_terms($pid, $term_ids, $tx_name);
+        }
 
         global $wpdb;
 

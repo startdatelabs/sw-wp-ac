@@ -25,7 +25,7 @@
 	if ( is_page_template( array( 'template-nosidebar.php', 'template-login.php' ) ) || is_404() ) {
 		$layout_class = 'col-xl-10 offset-xl-1 col-lg-10 offset-lg-1 col-xs-12';
 	}
-?>
+	?>
 	<div class="page-hero">
 		<?php if ( ! empty( $title ) && ! is_page_template( 'template-builder.php' ) ) : ?>
 		<div class="container">
@@ -48,5 +48,4 @@
 		<?php if ( is_page_template( array( 'template-listing-jobs.php' ) ) ) {
 			get_template_part( 'part-job-filters' );
 		} ?>
-
 	</div>

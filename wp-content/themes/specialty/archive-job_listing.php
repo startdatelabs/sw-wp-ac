@@ -13,7 +13,7 @@
 						$content_classes = '';
 						$sidebar_classes = '';
 
-						$sidebar = 'full';
+						$sidebar         = 'full';
 						$content_classes = 'col-xs-12';
 						$sidebar_classes = 'col-xl-3 col-lg-4 col-xs-12';
 
@@ -46,6 +46,7 @@
 
 							if ( is_tax( 'job_listing_type' ) ) {
 								$term = get_queried_object();
+
 								$_GET['job_type'] = $selected_types = array( $term->slug );
 							}
 							if ( ! empty( $_GET['job_type'] ) ) {
@@ -74,7 +75,7 @@
 
 								<?php if ( 'full' === $sidebar ) : ?>
 									<div class="section-title-wrap">
-										<?php echo $title; ?>
+										<?php echo wp_kses_post( $title ); ?>
 
 										<span class="section-title-compliment">
 											<a href="#" class="sidebar-wrap-trigger">
@@ -83,7 +84,7 @@
 										</span>
 									</div>
 								<?php else : ?>
-									<?php echo $title; ?>
+									<?php echo wp_kses_post( $title ); ?>
 								<?php endif; ?>
 
 
@@ -154,7 +155,7 @@
 													$class = 'job-type-' . sanitize_title( $job_type->name );
 												?>
 												<li class="item-filter">
-													<input type="checkbox" id="job-type-<?php echo esc_attr( $job_type->term_id ); ?>" class="checkbox-filter" name="job_type[]" value="<?php echo esc_attr( $job_type->slug ); ?>" <?php checked( 1, in_array( $job_type->slug, $selected_types ) ); ?>>
+													<input type="checkbox" id="job-type-<?php echo esc_attr( $job_type->term_id ); ?>" class="checkbox-filter" name="job_type[]" value="<?php echo esc_attr( $job_type->slug ); ?>" <?php checked( 1, in_array( $job_type->slug, $selected_types, true ) ); ?>>
 													<label class="checkbox-filter-label" for="job-type-<?php echo esc_attr( $job_type->term_id ); ?>">
 														<span class="item-filter-tag item-filter-tag-badge">
 															<?php echo esc_html( $job_type->name ); ?>
@@ -175,7 +176,7 @@
 										<?php $ranges = specialty_wpjm_get_salary_ranges(); ?>
 										<?php foreach ( $ranges as $range => $text ) : ?>
 											<li class="item-filter">
-												<input type="checkbox" id="filter-salary-<?php echo esc_attr( $range ); ?>" class="checkbox-filter" name="salary_range[]" value="<?php echo esc_attr( $range ); ?>" <?php checked( 1, in_array( $range, $salary_ranges ) ); ?>>
+												<input type="checkbox" id="filter-salary-<?php echo esc_attr( $range ); ?>" class="checkbox-filter" name="salary_range[]" value="<?php echo esc_attr( $range ); ?>" <?php checked( 1, in_array( $range, $salary_ranges, true ) ); ?>>
 												<label class="checkbox-filter-label" for="filter-salary-<?php echo esc_attr( $range ); ?>">
 													<span class="item-filter-tag"><?php echo esc_html( $text ); ?></span>
 												</label>
@@ -205,4 +206,4 @@
 
 </form>
 
-<?php get_footer(); ?>
+<?php get_footer();

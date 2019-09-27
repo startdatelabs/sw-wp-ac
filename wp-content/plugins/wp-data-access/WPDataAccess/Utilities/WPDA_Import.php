@@ -192,16 +192,22 @@ namespace WPDataAccess\Utilities {
 				<div class="wpda_upload">
 					<?php if ( $file_uploads_enabled ) { ?>
 						<p>
-							<strong><?php echo __( sprintf( 'SUPPORTS ONLY DATA IMPORTS FOR TABLE `%s`', esc_attr( $this->table_name ) ), 'wp-data-access' ); ?></strong>
+							<strong><?php echo esc_html__( 'INFO', 'wp-data-access' ); ?></strong>
 						</p>
 						<p class="wpda_list_indent">
 							<?php
-							echo 'Supports only file type <strong>sql</strong>. ' . __( 'Maximum supported file size is <strong>', 'wp-data-access' ) . @ini_get('upload_max_filesize') . '</strong>.';
+							/* translators: %s: table name */
+							$text = __(
+								'Supports only data imports for table %s. To import data into another table navigate to that table from the Data Explorer and start the import from there or perform the import from the Data Explorer main page. Data is imported immediately after file upload.',
+								'wp-data-access'
+							);
+							echo sprintf( esc_attr( $text ), esc_attr( $this->table_name ) );
 							?>
 						</p>
 						<form id="form_import_table" method="post" action="<?php echo esc_attr( $this->url ); ?>"
 							enctype="multipart/form-data">
 							<input type="file" name="filename" id="filename" accept=".sql">
+							<?php echo __('Max file size: ') . @ini_get('upload_max_filesize'); ?>
 							<input type="submit" value="<?php echo esc_html__( 'Import file', 'wp-data-access' ); ?>"
 								class="button button-secondary"
 								onclick="return before_submit_upload()">

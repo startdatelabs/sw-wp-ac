@@ -420,8 +420,18 @@ $export_id = $export->id;
                 ?>
                 var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-                $('#timezone').val(timeZone);
-                $('#timezone').trigger("chosen:updated");
+                if($('#timezone').find("option:contains('"+ timeZone +"')").length != 0){
+                    $('#timezone').trigger("chosen:updated");
+                    $('#timezone').val(timeZone);
+                    $('#timezone').trigger("chosen:updated");
+                }else{
+                    var parts = timeZone.split('/');
+                    var lastPart = parts[parts.length-1];
+                    var opt = $('#timezone').find("option:contains('"+ lastPart +"')");
+
+                    $('#timezone').val(opt.val());
+                    $('#timezone').trigger("chosen:updated");
+                }
 
                 <?php
                 }

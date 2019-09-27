@@ -296,17 +296,22 @@ textarea {
 }
 
 select {
+	width: 100%;
 	max-width: 100%;
 	color: $text-color;
+	box-shadow: none;
+	line-height: normal;
 	height: 42px;
-	border-color: $border-color;
-	border-style: solid;
-	border-width: 2px;
-	padding-left: 12px;
-	padding-right: 12px;
-	padding: 0;
+	border: 2px solid $border-color;
+	padding: 0 12px;
 	background-color: $white;
 	border-radius: 2px;
+	appearance: none;
+	background-clip: padding-box;
+	background-size: 9px;
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+	background-position: right .8rem center;
+	background-repeat: no-repeat;
 }
 
 .ci-select {
@@ -349,6 +354,10 @@ input[type="radio"] {
 	line-height: normal;
 	width: auto;
 	height: auto;
+}
+input[type=file] {
+    height: auto;
+	cursor: pointer;
 }
 
 fieldset {

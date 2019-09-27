@@ -10,6 +10,10 @@
 	display: block;
 }
 
+.alpha-color-picker-wrap .wp-picker-input-wrap.hidden {
+	display: none;
+}
+
 .alpha-color-picker-wrap .wp-picker-container {
 	display: inline-block;
 }

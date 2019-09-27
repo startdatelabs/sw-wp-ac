@@ -1652,6 +1652,7 @@
 				action: 'wpae_preview',
 				data: $('form.wpallexport-step-3').serialize(),
 				custom_xml: xml_editor.getValue(),
+				wp_query: $('.wpallexport-wp-query').val(),
 				tagno: tagno,
 				security: wp_all_export_security
 		    };

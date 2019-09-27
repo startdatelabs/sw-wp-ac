@@ -50,58 +50,53 @@ namespace WPDataAccess\Utilities {
 		 * Text to inform user (line 1).
 		 * @var string
 		 */
-		protected $info_title = '';
+		protected $info_text_l1 = null;
 
 		/**
-		 * Text to inform user (line 1).
+		 * Text to inform user (line 2).
 		 * @var string
 		 */
-		protected $info_text = '';
-
-		/**
-		 * Indicicates whether ZipArchive is installed.
-		 * @var bool
-		 */
-		protected $isinstalled_ziparchive = false;
+		protected $info_text_l2 = null;
 
 		/**
 		 * WPDA_Import constructor
 		 *
-		 * Checks if ZipArchive is installed to support the import of ZIP files.
+		 * Checks if imports are allowed. Throws an exception if imports are not allowed.
 		 *
 		 * @since   1.6.0
 		 *
 		 * @param string $page Page where to post data (url).
 		 * @param string $schema_name Database schema name.
 		 * @param array  $args Extra arguments.
+		 * @throws \Exception Throws exception if export is disabled.
 		 */
 		public function __construct( $page, $schema_name, $args = null ) {
+
+			if ( 'on' !== WPDA::get_option( WPDA::OPTION_BE_ALLOW_IMPORTS ) ) {
+				// Prevent import object being created: exception must be handled in calling method.
+				throw new \Exception( __( 'ERROR: Not authorized', 'wp-data-access' ) );
+			}
 
 			$this->url         = $page;
 			$this->schema_name = $schema_name;
 
-			$this->isinstalled_ziparchive = class_exists( '\ZipArchive' );
-
-			if ( ! is_null( $args ) && isset( $args[0] ) && isset( $args[1] ) ) {
-				$this->info_title = $args[0];
-				$this->info_text  = $args[1];
+			if ( ! is_null( $args ) && isset( $args[0] ) ) {
+				$this->info_text_l1 = $args[0];
 			} else {
-				$this->info_title = __(
-					'IMPORT DATA/EXECUTE SCRIPT(S)',
-					'wp-data-access');
-				if ( $this->isinstalled_ziparchive ) {
-					$this->info_text  = __(
-						'Supports <strong>sql</strong> and <strong>zip</strong> file types.',
-						'wp-data-access'
-					);
-				} else {
-					$this->info_text  = __(
-						'Supports only file type <strong>sql</strong> (install <strong>ZipArchive</strong> for <strong>zip</strong> file type support).',
-						'wp-data-access'
-					);
-				}
+				$this->info_text_l1 = __(
+					'Imports files that have been exported using the export feature of this plugin from any page. Supports multiple table imports. Data is imported immediately after file upload.',
+					'wp-data-access'
+				);
 			}
 
+			if ( ! is_null( $args ) && isset( $args[0] ) ) {
+				$this->info_text_l2 = $args[1];
+			} else {
+				$this->info_text_l2 = __(
+					'Executes script files containing multiple SQL statements. Supports ZIP files containing multiple script files. Script files are executed immediately after file upload.',
+					'wp-data-access'
+				);
+			}
 		}
 
 		/**
@@ -135,7 +130,7 @@ namespace WPDataAccess\Utilities {
 								'application/x-zip-compressed' === $_FILES['filename']['type']
 						) {
 					        // Process ZIP file.
-                            if ( $this->isinstalled_ziparchive ) {
+                            if ( class_exists( '\ZipArchive' ) ) {
                                 $zip = new \ZipArchive;
                                 if ( $zip->open( $_FILES['filename']['tmp_name'] ) ) {
                                     for ( $i = 0; $i < $zip->numFiles; $i++ ) {
@@ -166,6 +161,8 @@ namespace WPDataAccess\Utilities {
 		}
 
 		protected function import( $file_name ) {
+
+			global $wpdb;
 
 			// Check if errors should be shown.
             $hide_errors = isset( $_REQUEST['hide_errors'] ) ? $_REQUEST['hide_errors'] : 'off';
@@ -307,7 +304,7 @@ namespace WPDataAccess\Utilities {
 
 			$file_uploads_enabled = @ini_get('file_uploads');
 
-		    if ( $this->isinstalled_ziparchive ) {
+		    if ( class_exists( '\ZipArchive' ) ) {
 		        $file_extentions = '.sql,.zip';
             } else {
                 $file_extentions = '.sql';
@@ -333,16 +330,21 @@ namespace WPDataAccess\Utilities {
 				<div class="wpda_upload">
 					<?php if ( $file_uploads_enabled ) { ?>
 						<p>
-							<strong><?php echo $this->info_title; ?></strong>
+							<strong><?php echo __( 'INFO', 'wp-data-access' ); ?></strong>
 						</p>
 						<p class="wpda_list_indent">
 							<?php
-							echo $this->info_text . ' ' . __( 'Maximum supported file size is <strong>', 'wp-data-access' ) . @ini_get('upload_max_filesize') . '</strong>.';
+							echo sprintf( esc_attr( $this->info_text_l1 ) );
+							if ( ! is_null( $this->info_text_l2 ) ) {
+								echo '<br/>';
+								echo sprintf( esc_attr( $this->info_text_l2 ) );
+							}
 							?>
 						</p>
 						<form id="form_import_multi_table" method="post" action="<?php echo esc_attr( $this->url ); ?>&impchk"
 							  enctype="multipart/form-data">
 							<input type="file" name="filename" id="filename" accept="<?php echo esc_attr( $file_extentions ); ?>">
+							<?php echo __('Max file size: ') . @ini_get('upload_max_filesize'); ?>
 							<input type="submit" value="<?php echo __( 'Import file/Execute script(s)', 'wp-data-access' ); ?>"
 								   class="button button-secondary"
 								   onclick="return before_submit_upload()">

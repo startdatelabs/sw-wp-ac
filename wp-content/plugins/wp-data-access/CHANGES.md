@@ -1,30 +1,8 @@
 ### ChangeLog for WP Data Access
 
-#### 2.0.14 /  2019-06-08
-
-* Changed: Import from Data Explorer main page is always allowed (admin user)
-* Added: Data Designer integrated with Data Explorer (alter table and indexes directly from Data Explorer) 
-* Fixed: Cannot enter html characters in Simple Form text fields (support topic 11562559 - leouesb)
-* Added: Export from Data Explorer table page to XML, JSON, Excel and CSV  (support topic 11565221 - rswebmaster)
-* Fixed: Error on delete parent when parent has lookups defined
-* Added: Reconcile button to Data Designer
-* Added: (re)Create index button to Data Designer
-* Added: Alter table button to Data Designer
-* Added: Drop index button to Data Designer
-* Added: Drop table button to Data Designer
-* Added: Show alter table script button to Data Designer
-* Added: Show create table script button to Data Designer
-* Added: Allow to show/hide deleted columns (compared with database table)
-* Added: Highlight new, deleted and modified columns in Data Designer
-* Added: Listbox to Data Backup to enable viewing all scheduled WordPress jobs
-* Added: Data Backup button to Data Explorer header
-* Changed: Uniform layout and behaviour for all buttons and links in page titles 
-* Changed: Import title and info text (checks if zip upload is allowed)  
-* Fixed: Export to csv deletes double quotes in text
-
 #### 2.0.13 / 2019-05-17
 
-* Fixed: Database name containing minus character leads to query errors (support topic 11540179 - Prause)
+* Fixed: Database name containing minus character leads to query errors (see support forum topic 11540179 - Prause)
 * Added: Export tables from Data Explorer to SQL (with(out) WP prefix), XML, json, Excel, csv files (support topic 11533487 - rswebmaster)
 
 #### 2.0.12 / 2019-05-14

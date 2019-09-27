@@ -200,11 +200,6 @@ namespace WPDataAccess\Design_Table {
 			if ( isset( $_REQUEST['column_name'] ) ) {
 				$no_columns = count( $_REQUEST['column_name'] );
 				for ( $i = 0; $i < $no_columns; $i++ ) {
-					if ( isset( $_REQUEST['row_action'][$i] ) && 'd' === $_REQUEST['row_action'][$i] ) {
-						// Do not process deleted rows.
-						continue;
-					}
-
 					$column_name    = sanitize_text_field( wp_unslash( $_REQUEST['column_name'][ $i ] ) );
 					$data_type      = sanitize_text_field( wp_unslash( $_REQUEST['data_type'][ $i ] ) );
 					$type_attribute = sanitize_text_field( wp_unslash( $_REQUEST['type_attribute'][ $i ] ) );
@@ -243,11 +238,6 @@ namespace WPDataAccess\Design_Table {
 			if ( isset( $_REQUEST['column_names'] ) ) {
 				$no_columns = count( $_REQUEST['column_names'] );
 				for ( $i = 0; $i < $no_columns; $i++ ) {
-					if ( isset( $_REQUEST['row_action'][$i] ) && 'd' === $_REQUEST['row_action'][$i] ) {
-						// Do not process deleted rows.
-						continue;
-					}
-
 					$index_name   = sanitize_text_field( wp_unslash( $_REQUEST['index_name'][ $i ] ) );
 					$unique       = sanitize_text_field( wp_unslash( $_REQUEST['unique'][ $i ] ) );
 					$column_names = sanitize_text_field( wp_unslash( $_REQUEST['column_names'][ $i ] ) );

@@ -620,7 +620,7 @@ if ( ! function_exists( 'specialty_get_hero_styles' ) ) :
 
 			if ( $single_image_id || $single_bg_color ) {
 				if ( $single_image_id ) {
-					$image = specialty_get_image_src( $single_image_id, 'specialty_hero' );
+					$image = wp_get_attachment_image_url( $single_image_id, 'specialty_hero' );
 				} else {
 					$image = '';
 				}

@@ -17,10 +17,6 @@
 			'url' => get_permalink(),
 		), 'https://twitter.com/share' );
 
-		$gplus = add_query_arg( array(
-			'url' => get_permalink(),
-		), 'https://plus.google.com/share' );
-
 		$linkedin = add_query_arg( array(
 			'mini'    => 'true',
 			'url'     => get_permalink(),
@@ -37,7 +33,6 @@
 	?>
 	<a class="entry-share entry-share-facebook" href="<?php echo esc_url( $facebook ); ?>" <?php echo $target_safe; ?>><?php esc_html_e( 'Facebook', 'specialty' ); ?></a>
 	<a class="entry-share entry-share-twitter" href="<?php echo esc_url( $twitter ); ?>" <?php echo $target_safe; ?>><?php esc_html_e( 'Twitter', 'specialty' ); ?></a>
-	<a class="entry-share entry-share-google-plus" href="<?php echo esc_url( $gplus ); ?>" <?php echo $target_safe; ?>><?php esc_html_e( 'Google Plus', 'specialty' ); ?></a>
 	<a class="entry-share entry-share-linkedin" href="<?php echo esc_url( $linkedin ); ?>" <?php echo $target_safe; ?>><?php esc_html_e( 'LinkedIn', 'specialty' ); ?></a>
 	<a class="entry-share entry-share-email" href="<?php echo esc_url( $email ); ?>" <?php echo $target_safe; ?>><?php esc_html_e( 'Email', 'specialty' ); ?></a>
 </div>

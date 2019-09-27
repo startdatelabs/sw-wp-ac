@@ -193,6 +193,21 @@
 									</div>
 								<?php endif; ?>
 
+								<div class="widget widget_ci-filters-widget">
+									<h3 class="widget-title"><?php esc_html_e( 'Compensation', 'specialty' ); ?></h3>
+									<ul class="item-filters-array">
+										<?php $ranges = specialty_wpjm_get_salary_ranges(); ?>
+										<?php foreach ( $ranges as $range => $text ) : ?>
+											<li class="item-filter">
+												<input type="checkbox" id="filter-salary-<?php echo esc_attr( $range ); ?>" class="checkbox-filter" name="salary_range[]" value="<?php echo esc_attr( $range ); ?>" <?php checked( 1, in_array( $range, $salary_ranges ) ); ?>>
+												<label class="checkbox-filter-label" for="filter-salary-<?php echo esc_attr( $range ); ?>">
+													<span class="item-filter-tag"><?php echo esc_html( $text ); ?></span>
+												</label>
+											</li>
+										<?php endforeach; ?>
+									</ul>
+								</div>
+
 								<?php dynamic_sidebar( 'jobs' ); ?>
 							</div>
 						</div>

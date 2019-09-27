@@ -1,10 +1,10 @@
 <div class="doc_title">Data Backup</div>
-<p><strong>Use the Data Backup tool to schedule unattended data backups</strong></p>
+<p><strong>Use the Data Backup tool to schedule data backups</strong></p>
 <ul class="doc_list">
   <li>Select the tables you want to backup</li>
   <li>Define a unique backup id</li>
   <li>Select your backup location (backup to local or dropbox folder)</li>
-  <li>Define a backup interval or select "Run once" for </li>
+  <li>Define a backup interval</li>
   <li>Define the number of backup files you want to keep</li>
 </ul>
 <p><strong>Recover a data backup</strong></p>
@@ -18,9 +18,5 @@
 <ul class="doc_list">
   <li>You need to define and activate at least one storage device in Data Backup Settings to use the Data Backup Tool</li>
   <li>Data backup files can be written to a local folder or a Dropbox folder</li>
-  <li>To write backup files to your Dropbox you must first grant access to the WP Data Access Dropbox app (which does not yet have production status)</li>
-  <li>Exported SQL files can be imported into a  WordPress database with a different table prefix.
-      The WordPress table prefix is replaced during export by variable {wp_prefix}, which is replaced by the WordPress table prefix on import.
-      If you want to use another tool for import, disable checkbox "Export with variable WP prefix" in Back-End Settings on the Manage Plugin page.
-      With "Export with variable WP prefix" disabled full table names will be written to the export file.</li>
+  <li>To write backup files to your Dropbox you must first grant access to the WP Data Access Dropbox app</li>
 </ul>

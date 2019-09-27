@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Specialty\n"
-"POT-Creation-Date: 2019-03-29 11:33+0200\n"
+"POT-Creation-Date: 2019-06-07 17:55+0300\n"
 "PO-Revision-Date: 2015-11-03 15:33+0200\n"
 "Last-Translator: Anastis Sourgoutsidis <anastis@cssigniter.com>\n"
 "Language-Team: Anastis Sourgoutsidis <anastis@cssigniter.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: style.css\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -26,7 +26,8 @@ msgid ""
 "The page you were looking for can not be found! Perhaps try searching?"
 msgstr ""
 
-#: archive-job_listing.php:71 inc/wp-job-manager.php:134
+#. translators: %d is a number of jobs found.
+#: archive-job_listing.php:72 inc/wp-job-manager.php:135
 #: template-listing-jobs.php:92
 #, php-format
 msgid "%d job found"
@@ -34,24 +35,24 @@ msgid_plural "%d jobs found"
 msgstr[0] ""
 msgstr[1] ""
 
-#: archive-job_listing.php:81 archive-job_listing.php:202
+#: archive-job_listing.php:82 archive-job_listing.php:203
 #: template-listing-jobs.php:102 template-listing-jobs.php:226
 msgid "Filters"
 msgstr ""
 
-#: archive-job_listing.php:107 template-listing-jobs.php:131
+#: archive-job_listing.php:108 template-listing-jobs.php:131
 msgid "Load More Jobs"
 msgstr ""
 
-#: archive-job_listing.php:149 template-listing-jobs.php:173
+#: archive-job_listing.php:150 template-listing-jobs.php:173
 msgid "Job Type"
 msgstr ""
 
-#: archive-job_listing.php:173 template-listing-jobs.php:197
+#: archive-job_listing.php:174 template-listing-jobs.php:197
 msgid "Compensation"
 msgstr ""
 
-#: archive-job_listing.php:198 part-job-filters.php:92
+#: archive-job_listing.php:199 part-job-filters.php:95
 #: template-listing-jobs.php:222
 msgid "Search"
 msgstr ""
@@ -139,11 +140,11 @@ msgstr ""
 msgid "Fourth column on footer."
 msgstr ""
 
-#: functions.php:353 part-social-sharing.php:38 sidebar-job_listing.php:36
+#: functions.php:353 part-social-sharing.php:34 sidebar-job_listing.php:36
 msgid "Facebook"
 msgstr ""
 
-#: functions.php:358 part-social-sharing.php:39 sidebar-job_listing.php:29
+#: functions.php:358 part-social-sharing.php:35 sidebar-job_listing.php:29
 msgid "Twitter"
 msgstr ""
 
@@ -155,209 +156,218 @@ msgstr ""
 msgid "Instagram"
 msgstr ""
 
-#: functions.php:373 part-social-sharing.php:40
-msgid "Google Plus"
-msgstr ""
-
-#: functions.php:378 part-social-sharing.php:41 sidebar-job_listing.php:42
+#: functions.php:373 part-social-sharing.php:36 sidebar-job_listing.php:42
 msgid "LinkedIn"
 msgstr ""
 
-#: functions.php:383
+#: functions.php:378
 msgid "Tumblr"
 msgstr ""
 
-#: functions.php:388
+#: functions.php:383
 msgid "Flickr"
 msgstr ""
 
-#: functions.php:393
+#: functions.php:388
 msgid "Bloglovin"
 msgstr ""
 
-#: functions.php:398
+#: functions.php:393
 msgid "YouTube"
 msgstr ""
 
-#: functions.php:403
+#: functions.php:398
 msgid "Vimeo"
 msgstr ""
 
-#: functions.php:408
+#: functions.php:403
 msgid "Dribbble"
 msgstr ""
 
-#: functions.php:413
+#: functions.php:408
 msgid "WordPress"
 msgstr ""
 
-#: functions.php:418
+#: functions.php:413
 msgid "500px"
 msgstr ""
 
-#: functions.php:423
+#: functions.php:418
 msgid "Soundcloud"
 msgstr ""
 
-#: functions.php:428
+#: functions.php:423
 msgid "Spotify"
 msgstr ""
 
-#: functions.php:433
+#: functions.php:428
 msgid "Vine"
 msgstr ""
 
-#: functions.php:508
+#: functions.php:433
+msgid "Trip Advisor"
+msgstr ""
+
+#: functions.php:438
+msgid "Telegram"
+msgstr ""
+
+#. translators: %s is a url.
+#: functions.php:514
 #, php-format
 msgid "<a href=\"%s\">Specialty</a> &ndash; Job Board WordPress Theme"
 msgstr ""
 
-#: functions.php:512
+#. translators: %1$s is a url. %2$s the website's name.
+#: functions.php:519
 #, php-format
 msgid "<a href=\"%1$s\">%2$s</a>"
 msgstr ""
 
-#: functions.php:519
+#. translators: %s is a url.
+#: functions.php:527
 #, php-format
 msgid "Powered by <a href=\"%s\">CSSIgniter.com</a>"
 msgstr ""
 
-#: functions.php:523
+#. translators: %s is a url.
+#: functions.php:532
 #, php-format
 msgid "Powered by <a href=\"%s\">WordPress</a>"
 msgstr ""
 
-#: functions.php:542
+#: functions.php:551
 msgid "Right sidebar"
 msgstr ""
 
-#: functions.php:543
+#: functions.php:552
 msgid "Left sidebar"
 msgstr ""
 
-#: functions.php:544
+#: functions.php:553
 msgid "No sidebar"
 msgstr ""
 
-#: functions.php:582
+#: functions.php:591
 msgid "Subtitle"
 msgstr ""
 
-#: functions.php:584
+#: functions.php:593
 msgid ""
 "You can provide an HTML version of your title, in order to format it "
 "according to your needs. If you leave it empty, the normal post/page title "
 "will be used instead. The subtitle"
 msgstr ""
 
-#: functions.php:585
+#. translators: %1$s and %2$s are HTML opening and closing tags respectively.
+#: functions.php:595
 #, php-format
 msgid ""
 "You can wrap some text within <code>%1$s</code> and <code>%2$s</code> in "
 "order to make it stand out."
 msgstr ""
 
-#: functions.php:587
+#: functions.php:597
 msgid "Page Title (overrides the normal title):"
 msgstr ""
 
-#: functions.php:588
+#: functions.php:598
 msgid "Page Subtitle:"
 msgstr ""
 
-#: functions.php:591
+#: functions.php:601
 msgid "Hero section"
 msgstr ""
 
-#: functions.php:596
+#: functions.php:606
 msgid "Hero image:"
 msgstr ""
 
-#: functions.php:604 inc/helpers-post-meta.php:29 inc/widgets/callout.php:104
+#: functions.php:614 inc/helpers-post-meta.php:29 inc/widgets/callout.php:104
 msgid "Remove image"
 msgstr ""
 
-#: functions.php:610 inc/widgets/callout.php:110
+#: functions.php:620 inc/widgets/callout.php:110
 msgid "Select Image"
 msgstr ""
 
-#: functions.php:616
+#: functions.php:625
 msgid "Overlay Color:"
 msgstr ""
 
-#: functions.php:619
+#: functions.php:633
 msgid "Text Color:"
 msgstr ""
 
-#: functions.php:622
+#: functions.php:641
 msgid "Image repeat:"
 msgstr ""
 
-#: functions.php:623
+#: functions.php:642
 msgid "Image horizontal position:"
 msgstr ""
 
-#: functions.php:624
+#: functions.php:643
 msgid "Image vertical position:"
 msgstr ""
 
-#: functions.php:625
+#: functions.php:644
 msgid "Image attachment:"
 msgstr ""
 
-#: functions.php:626 inc/customizer.php:453
+#: functions.php:645 inc/customizer.php:455
 msgid "Scale the image to cover its containing area."
 msgstr ""
 
-#: functions.php:635
+#: functions.php:654
 msgid "No repeat"
 msgstr ""
 
-#: functions.php:636
+#: functions.php:655
 msgid "Tile"
 msgstr ""
 
-#: functions.php:637
+#: functions.php:656
 msgid "Tile Horizontally"
 msgstr ""
 
-#: functions.php:638
+#: functions.php:657
 msgid "Tile Vertically"
 msgstr ""
 
-#: functions.php:657
+#: functions.php:676
 msgid "Left"
 msgstr ""
 
-#: functions.php:658 functions.php:679
+#: functions.php:677 functions.php:698
 msgid "Center"
 msgstr ""
 
-#: functions.php:659
+#: functions.php:678
 msgid "Right"
 msgstr ""
 
-#: functions.php:678
+#: functions.php:697
 msgid "Top"
 msgstr ""
 
-#: functions.php:680
+#: functions.php:699
 msgid "Bottom"
 msgstr ""
 
-#: functions.php:699
+#: functions.php:718
 msgid "Scroll"
 msgstr ""
 
-#: functions.php:700
+#: functions.php:719
 msgid "Fixed"
 msgstr ""
 
-#: functions.php:815
+#: functions.php:834
 msgid "Demo Import"
 msgstr ""
 
-#: header.php:43
+#: header.php:45
 msgid "Menu"
 msgstr ""
 
@@ -369,7 +379,7 @@ msgstr ""
 msgid "Job Listing Options"
 msgstr ""
 
-#: inc/custom-fields-page.php:45
+#: inc/custom-fields-page.php:49
 msgid "Sidebar:"
 msgstr ""
 
@@ -438,288 +448,295 @@ msgctxt "customizer section title"
 msgid "Job Listing Options"
 msgstr ""
 
-#: inc/customizer.php:75
+#. translators: %s is a url.
+#: inc/customizer.php:76
 #, php-format
 msgid ""
 "All options require that the <a href=\"%s\">WP Job Manager</a> plugin is "
 "active."
 msgstr ""
 
-#: inc/customizer.php:80
+#: inc/customizer.php:81
 msgctxt "customizer section title"
 msgid "Footer Options"
 msgstr ""
 
-#: inc/customizer.php:90
+#: inc/customizer.php:91
 msgctxt "customizer section title"
 msgid "Other"
 msgstr ""
 
-#: inc/customizer.php:91
+#: inc/customizer.php:92
 msgid "Other options affecting the whole site."
 msgstr ""
 
-#: inc/customizer.php:120
+#: inc/customizer.php:121
 msgid "Automatically generated excerpt length (in words)"
 msgstr ""
 
-#: inc/customizer.php:130
+#: inc/customizer.php:131
 msgid "Pagination method"
-msgstr ""
-
-#: inc/customizer.php:132
-msgctxt "pagination method"
-msgid "Numbered links"
 msgstr ""
 
 #: inc/customizer.php:133
 msgctxt "pagination method"
+msgid "Numbered links"
+msgstr ""
+
+#: inc/customizer.php:134
+msgctxt "pagination method"
 msgid "\"Previous - Next\" links"
 msgstr ""
 
-#: inc/customizer.php:149
+#: inc/customizer.php:150
 msgid "Show featured image."
 msgstr ""
 
-#: inc/customizer.php:159
+#: inc/customizer.php:160
 msgid "Show date."
 msgstr ""
 
-#: inc/customizer.php:169
+#: inc/customizer.php:170
 msgid "Show categories."
 msgstr ""
 
-#: inc/customizer.php:179
+#: inc/customizer.php:180
 msgid "Show social sharing icons."
 msgstr ""
 
-#: inc/customizer.php:189
+#: inc/customizer.php:190
 msgid "Show related posts."
 msgstr ""
 
-#: inc/customizer.php:199
+#: inc/customizer.php:200
 msgid "Show comments."
 msgstr ""
 
-#: inc/customizer.php:224
+#: inc/customizer.php:225
 msgid "Accent color"
 msgstr ""
 
-#: inc/customizer.php:233
+#: inc/customizer.php:234
 msgid "Text color on accent"
 msgstr ""
 
-#: inc/customizer.php:242
+#: inc/customizer.php:243
 msgid "Global text color"
 msgstr ""
 
-#: inc/customizer.php:251 inc/customizer.php:494
+#: inc/customizer.php:252 inc/customizer.php:496
 msgid "Border color"
 msgstr ""
 
-#: inc/customizer.php:260
+#: inc/customizer.php:261
 msgid "Element backgrounds (content wrap, job listings, filters, etc)"
 msgstr ""
 
-#: inc/customizer.php:269
+#: inc/customizer.php:270
 msgid "Button background color"
 msgstr ""
 
-#: inc/customizer.php:278
+#: inc/customizer.php:279
 msgid "Button text color"
 msgstr ""
 
-#: inc/customizer.php:287
+#: inc/customizer.php:288
 msgid "Button hover background color"
 msgstr ""
 
-#: inc/customizer.php:296
+#: inc/customizer.php:297
 msgid "Button hover text color"
 msgstr ""
 
-#: inc/customizer.php:305
+#: inc/customizer.php:306
 msgid "Footer background color"
 msgstr ""
 
-#: inc/customizer.php:319
+#: inc/customizer.php:320
 msgid "Main text color"
 msgstr ""
 
-#: inc/customizer.php:328
+#: inc/customizer.php:329
 msgid "Main hover &amp; active text color"
 msgstr ""
 
-#: inc/customizer.php:337
+#: inc/customizer.php:338
 msgid "Subnavigation text color"
 msgstr ""
 
-#: inc/customizer.php:346
+#: inc/customizer.php:347
 msgid "Subnavigation hover &amp; active text color"
 msgstr ""
 
-#: inc/customizer.php:355
+#: inc/customizer.php:356
 msgid "Subnavigation background"
 msgstr ""
 
-#: inc/customizer.php:364
+#: inc/customizer.php:365
 msgid "Subnavigation border color"
 msgstr ""
 
-#: inc/customizer.php:378 inc/customizer.php:467
+#: inc/customizer.php:379 inc/customizer.php:469
 msgid "Text color"
 msgstr ""
 
-#: inc/customizer.php:386
+#: inc/customizer.php:387
 msgid "Background Color"
 msgstr ""
 
-#: inc/customizer.php:387
+#: inc/customizer.php:388
 msgid ""
 "Select a color for your hero section. This will be visible <strong>on top</"
 "strong> of the image, so adjust the opacity to achieve the required result."
 msgstr ""
 
-#: inc/customizer.php:398
+#: inc/customizer.php:399
 msgid "Hero image"
 msgstr ""
 
-#: inc/customizer.php:399
+#. translators: %s is a number of pixels.
+#: inc/customizer.php:401
 #, php-format
 msgid "Recommended size of at least %s pixels."
 msgstr ""
 
-#: inc/customizer.php:409
+#: inc/customizer.php:411
 msgid "Image repeat"
 msgstr ""
 
-#: inc/customizer.php:420
+#: inc/customizer.php:422
 msgid "Image horizontal position"
 msgstr ""
 
-#: inc/customizer.php:431
+#: inc/customizer.php:433
 msgid "Image vertical position"
 msgstr ""
 
-#: inc/customizer.php:442
+#: inc/customizer.php:444
 msgid "Image attachment"
 msgstr ""
 
-#: inc/customizer.php:476
+#: inc/customizer.php:478
 msgid "Link color"
 msgstr ""
 
-#: inc/customizer.php:485
+#: inc/customizer.php:487
 msgid "Link hover color"
 msgstr ""
 
-#: inc/customizer.php:503
+#: inc/customizer.php:505
 msgid "Widget titles color"
 msgstr ""
 
-#: inc/customizer.php:518
+#: inc/customizer.php:520
 msgid "Content H1 size"
 msgstr ""
 
-#: inc/customizer.php:528
+#: inc/customizer.php:530
 msgid "Content H2 size"
 msgstr ""
 
-#: inc/customizer.php:538
+#: inc/customizer.php:540
 msgid "Content H3 size"
 msgstr ""
 
-#: inc/customizer.php:548
+#: inc/customizer.php:550
 msgid "Content H4 size"
 msgstr ""
 
-#: inc/customizer.php:558
+#: inc/customizer.php:560
 msgid "Content H5 size"
 msgstr ""
 
-#: inc/customizer.php:568
+#: inc/customizer.php:570
 msgid "Content H6 size"
 msgstr ""
 
-#: inc/customizer.php:578
+#: inc/customizer.php:580
 msgid "Content body text size"
 msgstr ""
 
-#: inc/customizer.php:588
+#: inc/customizer.php:590
 msgid "Widgets title size"
 msgstr ""
 
-#: inc/customizer.php:598
+#: inc/customizer.php:600
 msgid "Widgets text size"
 msgstr ""
 
-#: inc/customizer.php:608
+#: inc/customizer.php:610
 msgid "Don't uppercase widget titles"
 msgstr ""
 
-#: inc/customizer.php:618
+#: inc/customizer.php:620
 msgid "Uppercase content titles"
 msgstr ""
 
-#: inc/customizer.php:633
+#: inc/customizer.php:635
 msgid "Open social and sharing links in a new tab."
 msgstr ""
 
-#: inc/customizer.php:646
+#. translators: %s is a social network's name. e.g. Facebook URL
+#: inc/customizer.php:649
 #, php-format
 msgctxt "social network url"
 msgid "%s URL"
 msgstr ""
 
-#: inc/customizer.php:657
+#: inc/customizer.php:660
 msgid "RSS Feed"
 msgstr ""
 
-#: inc/customizer.php:666 part-hero-large.php:6 part-hero.php:6
+#: inc/customizer.php:669 part-hero-large.php:6 part-hero.php:6
 msgid "From the blog"
 msgstr ""
 
-#: inc/customizer.php:672
+#: inc/customizer.php:675
 msgid "Blog section title"
 msgstr ""
 
-#: inc/customizer.php:676 part-hero-large.php:15 part-hero.php:15
+#: inc/customizer.php:679 part-hero-large.php:15 part-hero.php:15
 msgid "Search results"
 msgstr ""
 
-#: inc/customizer.php:682
+#: inc/customizer.php:685
 msgid "Search title"
 msgstr ""
 
-#: inc/customizer.php:686 part-hero-large.php:17 part-hero.php:17
+#: inc/customizer.php:689 part-hero-large.php:17 part-hero.php:17
 msgid "Page not found"
 msgstr ""
 
-#: inc/customizer.php:692
+#: inc/customizer.php:695
 msgid "404 (not found) title"
 msgstr ""
 
-#: inc/customizer.php:696 part-related.php:8 part-related.php:9
+#: inc/customizer.php:699 part-related.php:8 part-related.php:9
 msgid "Related Articles"
 msgstr ""
 
-#: inc/customizer.php:702
+#: inc/customizer.php:705
 msgid "Related Posts section title"
 msgstr ""
 
-#: inc/customizer.php:717
+#: inc/customizer.php:720
+msgid "Show company logo next to job listings."
+msgstr ""
+
+#: inc/customizer.php:730
 msgid "Show alert creation box on job listing."
 msgstr ""
 
-#: inc/customizer.php:718
+#: inc/customizer.php:731
 msgid ""
 "This only applies on pages with the \"Job Listing\" template assigned."
 msgstr ""
 
-#: inc/customizer.php:728
+#: inc/customizer.php:741
 msgid "Report Job email address"
 msgstr ""
 
-#: inc/customizer.php:729
+#: inc/customizer.php:742
 msgid ""
 "When an email address is provided, a \"Report this listing\" link will "
 "appear on the bottom of single job pages. While anti-spam measures are "
@@ -728,89 +745,90 @@ msgid ""
 "you want to completely disable reporting, just leave this empty."
 msgstr ""
 
-#: inc/customizer.php:739
+#: inc/customizer.php:752
 msgid "Only logged in users can report a job."
 msgstr ""
 
-#: inc/customizer.php:740
+#: inc/customizer.php:753
 msgid ""
 "When disabled, all visitors will have access to the reporting link, "
 "exposing your email address to more people."
 msgstr ""
 
-#: inc/customizer.php:755
+#: inc/customizer.php:768
 msgid "Left footer text"
 msgstr ""
 
-#: inc/customizer.php:756 inc/customizer.php:767
+#: inc/customizer.php:769 inc/customizer.php:780
 msgid ""
 "Allowed tags: a (href|class), img (alt|src|class), span (class), i "
 "(class), b, em, strong."
 msgstr ""
 
-#: inc/customizer.php:766
+#: inc/customizer.php:779
 msgid "Right footer text"
 msgstr ""
 
-#: inc/customizer.php:787
+#: inc/customizer.php:800
 msgid "Resources"
 msgstr ""
 
-#: inc/customizer.php:790
+#. translators: %s is a url.
+#: inc/customizer.php:804
 #, php-format
 msgid ""
 "<a href=\"%s\" target=\"_blank\">Download the theme's sample content</a> "
 "to get things moving."
 msgstr ""
 
-#: inc/customizer.php:804
+#: inc/customizer.php:818
 msgid "Login page"
 msgstr ""
 
-#: inc/customizer.php:805
+#: inc/customizer.php:819
 msgid ""
 "The selected page needs to have the <strong>Login</strong> template "
 "assigned. Once an appropriate page has been selected, all login links will "
 "be redirected to that page."
 msgstr ""
 
-#: inc/customizer.php:823
+#: inc/customizer.php:837
 msgid "Limit logo size (for Retina display)"
 msgstr ""
 
-#: inc/customizer.php:824
+#: inc/customizer.php:838
 msgid ""
 "This option will limit the image size to half its width. You will need to "
 "upload your image in 2x the dimension you want to display it in."
 msgstr ""
 
-#: inc/customizer.php:834
+#: inc/customizer.php:848
 msgid "Show site title below the logo."
 msgstr ""
 
-#: inc/customizer.php:844
+#: inc/customizer.php:858
 msgid "Show the tagline below the logo."
 msgstr ""
 
-#: inc/customizer.php:854
+#: inc/customizer.php:868
 msgid "Logo top padding"
 msgstr ""
 
-#: inc/customizer.php:864
+#: inc/customizer.php:878
 msgid "Logo bottom padding"
 msgstr ""
 
-#: inc/functions.php:104
+#: inc/functions.php:102
 msgctxt "previous post"
 msgid "Previous"
 msgstr ""
 
-#: inc/functions.php:105
+#: inc/functions.php:103
 msgctxt "next post"
 msgid "Next"
 msgstr ""
 
-#: inc/functions.php:106
+#: inc/functions.php:104
 msgid "Posts navigation"
 msgstr ""
 
@@ -842,23 +860,23 @@ msgstr ""
 msgid "Gallery preview not available."
 msgstr ""
 
-#: inc/helpers-post-meta.php:30 inc/helpers-post-meta.php:456
+#: inc/helpers-post-meta.php:30 inc/helpers-post-meta.php:462
 msgid "Remove from gallery"
 msgstr ""
 
-#: inc/helpers-post-meta.php:263
+#: inc/helpers-post-meta.php:268
 msgid "Click to toggle"
 msgstr ""
 
-#: inc/helpers-post-meta.php:445
+#: inc/helpers-post-meta.php:451
 msgid "Add Images"
 msgstr ""
 
-#: inc/helpers-post-meta.php:447
+#: inc/helpers-post-meta.php:453
 msgid "Randomize order"
 msgstr ""
 
-#: inc/helpers-post-meta.php:462
+#: inc/helpers-post-meta.php:468
 msgid "Your gallery images will appear here"
 msgstr ""
 
@@ -870,6 +888,14 @@ msgid ""
 "\">Download the sample content</a> to get things moving."
 msgstr ""
 
+#: inc/helpers.php:542
+msgid "Home"
+msgstr ""
+
+#: inc/helpers.php:543
+msgid "Set primary menu"
+msgstr ""
+
 #: inc/widgets/callout.php:15
 msgid "Displays an image, callout text, and a button."
 msgstr ""
@@ -879,7 +905,7 @@ msgid "Theme - Callout"
 msgstr ""
 
 #: inc/widgets/callout.php:93 inc/widgets/related-jobs.php:67
-#: inc/widgets/socials.php:45
+#: inc/widgets/socials.php:46
 msgid "Title:"
 msgstr ""
 
@@ -921,11 +947,11 @@ msgstr ""
 msgid "Displays the site's social icons."
 msgstr ""
 
-#: inc/widgets/socials.php:12
+#: inc/widgets/socials.php:13
 msgid "Theme - Social Icons"
 msgstr ""
 
-#: inc/widgets/socials.php:46
+#: inc/widgets/socials.php:47
 msgid ""
 "This widget displays your site's social icons. In order to set them up, "
 "you need to visit <strong>Appearance > Customize > Social Networks</"
@@ -996,15 +1022,15 @@ msgstr ""
 msgid "There are currently no vacancies."
 msgstr ""
 
-#: job_manager/content-single-job_listing-meta.php:44
+#: job_manager/content-single-job_listing-meta.php:31
 msgid "This position has been filled"
 msgstr ""
 
-#: job_manager/content-single-job_listing-meta.php:46
+#: job_manager/content-single-job_listing-meta.php:33
 msgid "Applications have closed"
 msgstr ""
 
-#: job_manager/job-application.php:7 sidebar-job_listing.php:4
+#: job_manager/job-application.php:10 sidebar-job_listing.php:4
 msgid "Apply for this job"
 msgstr ""
 
@@ -1030,31 +1056,31 @@ msgstr ""
 msgid "Activate Alert"
 msgstr ""
 
-#: part-job-filters.php:32
+#: part-job-filters.php:33
 msgid "Dismiss filters"
 msgstr ""
 
-#: part-job-filters.php:63
+#: part-job-filters.php:66
 msgid "Job Keywords"
 msgstr ""
 
-#: part-job-filters.php:64
+#: part-job-filters.php:67
 msgid "Keywords"
 msgstr ""
 
-#: part-job-filters.php:67
+#: part-job-filters.php:70
 msgid "Job Location"
 msgstr ""
 
-#: part-job-filters.php:68
+#: part-job-filters.php:71
 msgid "Location"
 msgstr ""
 
-#: part-job-filters.php:72
+#: part-job-filters.php:75
 msgid "Job Category"
 msgstr ""
 
-#: part-job-filters.php:80
+#: part-job-filters.php:83
 msgid "Any category"
 msgstr ""
 
@@ -1062,7 +1088,7 @@ msgstr ""
 msgid "Share it:"
 msgstr ""
 
-#: part-social-sharing.php:42
+#: part-social-sharing.php:37
 msgid "Email"
 msgstr ""
 
@@ -1076,7 +1102,8 @@ msgid ""
 "your terms and search again."
 msgstr ""
 
-#: search.php:16
+#. translators: %d is a number of search results.
+#: search.php:17
 #, php-format
 msgid "%d result found."
 msgid_plural "%d results found."
@@ -1101,13 +1128,14 @@ msgstr ""
 msgid "Company Information"
 msgstr ""
 
-#: single-job_listing.php:36
+#. translators: %s is a job title.
+#: single-job_listing.php:37
 #, php-format
 msgid "Job Reported: %s"
 msgstr ""
 
 #. translators: %1$s is new-line character.
-#: single-job_listing.php:42
+#: single-job_listing.php:43
 #, php-format
 msgid ""
 "Job Listing URL: %2$s%1$sJob Listing Title: %3$s%1$s%1$sPlease provide the "
@@ -1115,7 +1143,7 @@ msgid ""
 "problem.%1$s"
 msgstr ""
 
-#: single-job_listing.php:60
+#: single-job_listing.php:61
 msgid "Report this listing"
 msgstr ""
 
@@ -1140,7 +1168,11 @@ msgid "https://www.cssigniter.com"
 msgstr ""
 
 #. Template Name of the plugin/theme
-msgid "Login"
+msgid "Page Builder"
+msgstr ""
+
+#. Template Name of the plugin/theme
+msgid "Job Listing"
 msgstr ""
 
 #. Template Name of the plugin/theme
@@ -1148,13 +1180,9 @@ msgid "Fullwidth Page"
 msgstr ""
 
 #. Template Name of the plugin/theme
-msgid "Page Builder"
-msgstr ""
-
-#. Template Name of the plugin/theme
 msgid "No Sidebar"
 msgstr ""
 
 #. Template Name of the plugin/theme
-msgid "Job Listing"
+msgid "Login"
 msgstr ""

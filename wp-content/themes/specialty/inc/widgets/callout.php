@@ -80,7 +80,7 @@ if ( ! class_exists( 'CI_Widget_Callout' ) ) :
 			return $instance;
 		}
 
-		function form( $instance ) {
+		public function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, $this->defaults );
 
 			$title       = $instance['title'];
@@ -98,7 +98,7 @@ if ( ! class_exists( 'CI_Widget_Callout' ) ) :
 					<div class="upload-preview">
 						<?php if ( ! empty( $image_id ) ) : ?>
 							<?php
-								$image_url = specialty_get_image_src( $image_id, 'specialty_featgal_small_thumb' );
+								$image_url = wp_get_attachment_image_url( $image_id, 'specialty_featgal_small_thumb' );
 								echo sprintf( '<img src="%s" /><a href="#" class="close media-modal-icon" title="%s"></a>',
 									esc_url( $image_url ),
 									esc_attr__( 'Remove image', 'specialty' )
@@ -117,7 +117,7 @@ if ( ! class_exists( 'CI_Widget_Callout' ) ) :
 			<p><label for="<?php echo esc_attr( $this->get_field_id( 'button_text' ) ); ?>"><?php esc_html_e( 'Button text:', 'specialty' ); ?></label><input id="<?php echo esc_attr( $this->get_field_id( 'button_text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'button_text' ) ); ?>" type="text" value="<?php echo esc_attr( $button_text ); ?>" class="widefat"/></p>
 			<p><label for="<?php echo esc_attr( $this->get_field_id( 'button_url' ) ); ?>"><?php esc_html_e( 'Button URL:', 'specialty' ); ?></label><input id="<?php echo esc_attr( $this->get_field_id( 'button_url' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'button_url' ) ); ?>" type="text" value="<?php echo esc_url( $button_url ); ?>" class="widefat"/></p>
 			<?php
-		} // form
+		}
 	}
 
 

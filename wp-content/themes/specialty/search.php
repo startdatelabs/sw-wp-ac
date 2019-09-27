@@ -13,7 +13,8 @@
 						$found = $wp_query->found_posts;
 						$none  = esc_html__( 'No results found. Please broaden your terms and search again.', 'specialty' );
 						$one   = esc_html__( 'Just one result found. We either nailed it, or you might want to broaden your terms and search again.', 'specialty' );
-						$many  = sprintf( _n( '%d result found.', '%d results found.', $found, 'specialty' ), $found );
+						/* translators: %d is a number of search results. */
+						$many = sprintf( _n( '%d result found.', '%d results found.', $found, 'specialty' ), $found );
 					?>
 					<div class="search-notice">
 						<div class="entry-content">
@@ -39,4 +40,4 @@
 	</div>
 </main>
 
-<?php get_footer(); ?>
+<?php get_footer();

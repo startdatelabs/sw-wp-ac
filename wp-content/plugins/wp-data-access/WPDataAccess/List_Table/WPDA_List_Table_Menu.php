@@ -102,8 +102,18 @@ namespace WPDataAccess\List_Table {
 
 			$this->wpda_main_favourites = $this->get_favourites();
 
-			// Instantiate WPDA_Import.
-			$this->wpda_import = new WPDA_Import_Multi( "?page={$this->page}", $this->schema_name );
+			if ( ! ( isset( $args['allow_import'] ) && 'off' === $args['allow_import'] ) ) {
+				try {
+					// Instantiate WPDA_Import.
+					$this->wpda_import = new WPDA_Import_Multi(
+						"?page={$this->page}",
+						$this->schema_name
+					);
+				} catch ( \Exception $e ) {
+					// If import is turned off instantition will fail. Handle is set to null (check in future calls).
+					$this->wpda_import = null;
+				}
+			}
 
             if (
                 'on' !== WPDA::get_option( WPDA::OPTION_BE_EXPORT_TABLES ) &&
@@ -211,11 +221,11 @@ namespace WPDataAccess\List_Table {
 					return stripslashes( $item[ $column_name ] );
 				} else {
 					if ( $item[ $column_name ] / (1024*1024) > 1 ) {
-						return number_format( stripslashes( $item[ $column_name ] / (1024*1024) ), 2, '.', ',') . ' MB';
+						return number_format(stripslashes( $item[ $column_name ] / (1024*1024) ), 2, '.', ',') . ' MB';
 					} elseif ( $item[ $column_name ] / 1024 > 1 ) {
-						return number_format( ( $item[ $column_name ] / 1024 ), 2, '.', ',') . ' KB';
+						return number_format(stripslashes( $item[ $column_name ] / 1024 ), 2, '.', ',') . ' KB';
 					}
-					return number_format( stripslashes( $item[ $column_name ] ), 2, '.', ',') . ' bytes';
+					return number_format(stripslashes( $item[ $column_name ] ), 2, '.', ',') . ' bytes';
 				}
 			}
 
@@ -234,11 +244,11 @@ namespace WPDataAccess\List_Table {
 						}
 
 						if ( $item[ $column_name ] / (1024*1024) > 1 ) {
-							return number_format( stripslashes( $item[ $column_name ] / (1024*1024) ), 2, '.', ',') . ' MB' . $approx;
+							return number_format(stripslashes( $item[ $column_name ] / (1024*1024) ), 2, '.', ',') . ' MB' . $approx;
 						} elseif ( $item[ $column_name ] / 1024 > 1 ) {
-							return number_format( stripslashes( $item[ $column_name ] / 1024 ), 2, '.', ',') . ' KB' . $approx;
+							return number_format(stripslashes( $item[ $column_name ] / 1024 ), 2, '.', ',') . ' KB' . $approx;
 						}
-						return number_format( stripslashes( $item[ $column_name ] ), 2, '.', ',') . ' bytes' . $approx;
+						return number_format(stripslashes( $item[ $column_name ] ), 2, '.', ',') . ' bytes' . $approx;
 					}
 				}
 			}
@@ -504,6 +514,9 @@ namespace WPDataAccess\List_Table {
                 case 'copy-table':
                     $this->process_bulk_action_copy_table();
                     break;
+                case 'drop-index':
+                    $this->process_bulk_action_drop_index();
+					break;
 				case 'optimize-table':
 					$this->process_bulk_action_optimize_table();
 					break;
@@ -1255,6 +1268,101 @@ namespace WPDataAccess\List_Table {
 
 		}
 
+        /**
+         * Perform drop index.
+         *
+         * @since   1.6.5
+         */
+        protected function drop_index( $index_name, $index_table_name ) {
+
+            global $wpdb;
+
+            if ( WPDA::is_wp_table( $index_table_name ) ) {
+                // No access to WordPress tables!
+                $msg = new WPDA_Message_Box(
+                    [
+                        'message_text'           => __( 'Not authorized', 'wp-data-access' ),
+                        'message_type'           => 'error',
+                        'message_is_dismissible' => false,
+                    ]
+                );
+                $msg->box();
+                return false;
+            }
+
+            if ( '' === $this->schema_name || $wpdb->dbname === $this->schema_name ) {
+                // Drop index in WordPress schema.
+                return $wpdb->query( "drop index `$index_name` on $index_table_name" ); // db call ok; no-cache ok.
+            } else {
+                // Drop index in other schema.
+                $db = new \wpdb( DB_USER, DB_PASSWORD, $this->schema_name, DB_HOST );
+                $result = $db->query( "drop index `$index_name` on $index_table_name" ); // db call ok; no-cache ok.
+                $db->close();
+                return $result;
+            }
+
+            return true;
+
+        }
+
+        /**
+         * Process drop index request.
+         *
+         * @since   1.6.5
+         */
+        protected function process_bulk_action_drop_index() {
+
+            // Check access rights.
+            if ( $this->process_bulk_action_check_option( WPDA::OPTION_BE_ALLOW_DROP_INDEX ) ) {
+                // Check is there is anything to drop.
+                if ( ! $this->process_bulk_action_check_action(
+                    'index_table_name',
+                    __( 'No index defined', 'wp-data-access' )
+                ) ) {
+                    return;
+                }
+                if ( $this->process_bulk_action_check_action(
+                    'index_name',
+                    __( 'No index defined', 'wp-data-access' )
+                ) ) {
+                    // Drop table is not allowed for WordPress tables (double check).
+                    $index_table_name = sanitize_text_field( wp_unslash( $_REQUEST['index_table_name'] ) ); // input var okay.
+                    $index_name       = sanitize_text_field( wp_unslash( $_REQUEST['index_name'] ) ); // input var okay.
+                    $err_txt          = sprintf( __( ' (cannot drop WordPress table `%s`)', 'wp-data-access' ), $index_table_name );
+                    if ( $this->process_bulk_action_check_is_wp_table( $index_table_name, $err_txt ) ) {
+                        // Check if table exists.
+                        if ( $this->process_bulk_action_check_table_exists( $index_table_name ) ) {
+                            // Check if drop is allowed.
+                            if ( $this->process_bulk_action_check_wpnonce( 'wpda-drop-index-' . esc_attr( $index_table_name ) . '-' . esc_attr( $index_name ), '_wpnonce' ) ) {
+                                $dbo_type = $this->get_dbo_type( $index_table_name );
+                                if ( false === $dbo_type || 'VIEW' === $dbo_type || 'SYSTEM VIEW' === $dbo_type ) {
+                                    $msg = new WPDA_Message_Box(
+                                        [
+                                            'message_text'           => sprintf( __( 'Cannot drop index `%s` from `%s`', 'wp-data-access' ), $index_name, $index_table_name ),
+                                            'message_type'           => 'error',
+                                            'message_is_dismissible' => false,
+                                        ]
+                                    );
+                                    $msg->box();
+                                } else {
+                                    // Drop index.
+                                    if ( $this->drop_index( $index_name, $index_table_name ) ) {
+                                        $msg = new WPDA_Message_Box(
+                                            [
+                                                'message_text' => sprintf( __( 'Dropped index `%s` from `%s`', 'wp-data-access' ), $index_name, $index_table_name ),
+                                            ]
+                                        );
+                                        $msg->box();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
 		/**
 		 * Processes drop table request.
 		 *
@@ -1531,24 +1639,21 @@ namespace WPDataAccess\List_Table {
 
 			<form
 					method="post"
-					action="?page=<?php echo esc_attr( \WP_Data_Access_Admin::PAGE_DESIGNER ); ?>"
+					action="?page=<?php echo esc_attr( $this->page ); ?>"
 					style="display: inline-block; vertical-align: unset;"
 			>
 				<div>
 					<input type="hidden" name="action" value="create_table">
-					<input type="hidden" name="caller" value="dataexplorer">
-					<input type="submit" value="<?php echo __( 'Design new table', 'wp-data-access' ); ?>"
+					<input type="submit" value="<?php echo esc_html__( 'Design new table', 'wp-data-access' ); ?>"
 						   class="page-title-action">
 				</div>
 			</form>
 
 			<?php
-			$this->wpda_import->add_button();
-			?>
 
-			<a href="?page=wpda_backup" class="page-title-action"><?php echo __('Scheduled Exports (Data Backup)'); ?></a>
-
-			<?php
+			if ( null !== $this->wpda_import ) {
+				$this->wpda_import->add_button();
+			}
 
 		}
 

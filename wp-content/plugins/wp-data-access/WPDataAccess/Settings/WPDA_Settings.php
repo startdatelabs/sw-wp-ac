@@ -1793,11 +1793,6 @@ namespace WPDataAccess\Settings {
 						WPDA::OPTION_BE_TEXT_WRAP,
 						isset( $_REQUEST['text_wrap'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['text_wrap'] ) ) : 400 // input var okay.
 					);
-
-					WPDA::set_option(
-						WPDA::OPTION_BE_DEBUG,
-						isset( $_REQUEST['debug'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['debug'] ) ) : 'off' // input var okay.
-					);
 				} elseif ( 'setdefaults' === $action ) {
 					// Set all back-end settings back to default.
 					WPDA::set_option( WPDA::OPTION_BE_TABLE_ACCESS );
@@ -1823,7 +1818,6 @@ namespace WPDataAccess\Settings {
 					WPDA::set_option( WPDA::OPTION_BE_DESIGN_MODE );
 					WPDA::set_option( WPDA::OPTION_BE_TEXT_WRAP_SWITCH );
 					WPDA::set_option( WPDA::OPTION_BE_TEXT_WRAP );
-					WPDA::set_option( WPDA::OPTION_BE_DEBUG );
 				}
 
 				$msg = new WPDA_Message_Box(
@@ -1878,8 +1872,6 @@ namespace WPDataAccess\Settings {
 
 			$text_wrap_switch = WPDA::get_option( WPDA::OPTION_BE_TEXT_WRAP_SWITCH );
 			$text_wrap        = WPDA::get_option( WPDA::OPTION_BE_TEXT_WRAP );
-
-			$debug = WPDA::get_option( WPDA::OPTION_BE_DEBUG );
 
 			?>
 
@@ -2026,7 +2018,7 @@ namespace WPDataAccess\Settings {
 						<td>
 							<label>
 								<input type="checkbox" name="allow_imports"
-									<?php echo 'on' === $allow_imports ? 'checked' : ''; ?> /><?php echo esc_html__( 'Allow to import scripts from Data Explorer table pages', 'wp-data-access' ); ?>
+									<?php echo 'on' === $allow_imports ? 'checked' : ''; ?> /><?php echo esc_html__( 'Allow to import scripts', 'wp-data-access' ); ?>
 							</label>
 						</td>
 					</tr>
@@ -2093,17 +2085,6 @@ namespace WPDataAccess\Settings {
 							<input
 									type="number" step="1" min="1" max="999999" name="text_wrap" maxlength="3"
 									value="<?php echo esc_attr( $text_wrap ); ?>">
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo esc_html__( 'Debug mode', 'wp-data-access' ); ?></th>
-						<td>
-							<label>
-								<input
-										type="checkbox"
-										name="debug" <?php echo 'on' === $debug ? 'checked' : ''; ?>
-								><?php echo esc_html__( 'Plugin dashboard debug mode', 'wp-data-access' ); ?>
-							</label>
 						</td>
 					</tr>
 				</table>

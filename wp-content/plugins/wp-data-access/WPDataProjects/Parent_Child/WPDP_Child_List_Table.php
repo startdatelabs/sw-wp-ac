@@ -234,7 +234,7 @@ namespace WPDataProjects\Parent_Child {
 					} else {
 						$and = ' and ';
 					}
-					if ( isset( $data_type[ $index ] ) && 'number' === strtolower( $data_type[ $index ] ) ) {
+					if ( 'number' === strtolower( $data_type[ $index ] ) ) {
 						$where .= $wpdb->prepare(
 							" `$key` = %f ",
 							$this->parent['parent_key_value'][ $this->parent['parent_key'][ $index ] ]

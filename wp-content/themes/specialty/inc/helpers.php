@@ -34,7 +34,7 @@ function specialty_admin_notice_sample_content() {
 
 	$theme = wp_get_theme();
 
-	wp_enqueue_script( 'specialty-sample-content', get_template_directory_uri() . '/inc/js/sample-content.js', array(), $theme->get( 'Version' ), true );
+	wp_enqueue_script( 'specialty-sample-content', get_template_directory_uri() . '/inc/js/sample-content.js', array(), specialty_asset_version(), true );
 
 	$settings = array(
 		'ajaxurl'       => admin_url( 'admin-ajax.php' ),
@@ -46,7 +46,7 @@ function specialty_admin_notice_sample_content() {
 function specialty_ajax_dismiss_sample_content() {
 	check_ajax_referer( 'specialty-dismiss-sample-content', 'nonce' );
 
-	if ( current_user_can( 'manage_options' ) && ! empty( $_POST['dismissed'] ) && $_POST['dismissed'] == true ) {
+	if ( current_user_can( 'manage_options' ) && ! empty( $_POST['dismissed'] ) && true === (bool) $_POST['dismissed'] ) {
 		set_theme_mod( 'dismissed_sample_content', true );
 		wp_send_json_success( 'OK' );
 	} else {
@@ -70,7 +70,7 @@ function specialty_replace_archive_widget_post_counts_in_span( $matches ) {
 }
 
 function specialty_wrap_category_widget_post_counts_in_span( $output, $args ) {
-	if ( ! isset( $args['show_count'] ) || $args['show_count'] == 0 ) {
+	if ( ! isset( $args['show_count'] ) || 0 === intval( $args['show_count'] ) ) {
 		return $output;
 	}
 	$output = preg_replace_callback( '#(<a.*?>\s*)(\(.*?\))#', 'specialty_replace_category_widget_post_counts_in_span', $output );
@@ -98,28 +98,14 @@ function specialty_get_page_var( $default_return = 0 ) {
 	$paged = get_query_var( 'paged', false );
 	$page  = get_query_var( 'page', false );
 
-	if ( $paged === false && $page === false ) {
+	if ( false === $paged && false === $page ) {
 		return $default_return;
 	}
 
 	return max( $paged, $page );
 }
 
-/**
- * Returns just the URL of an image attachment.
- *
- * @param int $image_id The Attachment ID of the desired image.
- * @param string $size The size of the image to return.
- * @return bool|string False on failure, image URL on success.
- */
-function specialty_get_image_src( $image_id, $size = 'full' ) {
-	$img_attr = wp_get_attachment_image_src( intval( $image_id ), $size );
-	if ( ! empty( $img_attr[0] ) ) {
-		return $img_attr[0];
-	}
-}
-
-if ( ! function_exists( 'specialty_mb_str_replace' ) ):
+if ( ! function_exists( 'specialty_mb_str_replace' ) ) :
 	/**
 	 * Multi-byte version of str_replace.
 	 *
@@ -158,7 +144,7 @@ function specialty_substr_right( $string, $length ) {
 	return substr( $string, - $length, $length );
 }
 
-if ( ! function_exists( 'specialty_get_related_posts' ) ):
+if ( ! function_exists( 'specialty_get_related_posts' ) ) :
 /**
  * Returns a set of related posts, or the arguments needed for such a query.
  *
@@ -190,14 +176,14 @@ function specialty_get_related_posts( $post_id, $related_count, $args = array() 
 
 	foreach ( $taxonomies as $taxonomy ) {
 		$terms = get_the_terms( $post_id, $taxonomy );
-		if ( is_array( $terms ) and count( $terms ) > 0 ) {
+		if ( is_array( $terms ) && count( $terms ) > 0 ) {
 			$term_list = wp_list_pluck( $terms, 'slug' );
 			$term_list = array_values( $term_list );
 			if ( ! empty( $term_list ) ) {
 				$tax_query['tax_query'][] = array(
 					'taxonomy' => $taxonomy,
 					'field'    => 'slug',
-					'terms'    => $term_list
+					'terms'    => $term_list,
 				);
 			}
 		}
@@ -212,10 +198,10 @@ function specialty_get_related_posts( $post_id, $related_count, $args = array() 
 		'posts_per_page' => $related_count,
 		'post_status'    => 'publish',
 		'post__not_in'   => array( $post_id ),
-		'orderby'        => $args['orderby']
+		'orderby'        => $args['orderby'],
 	);
 
-	if ( $args['return'] == 'query' ) {
+	if ( 'query' === $args['return'] ) {
 		return new WP_Query( array_merge( $query_args, $tax_query ) );
 	} else {
 		return array_merge( $query_args, $tax_query );
@@ -226,7 +212,7 @@ endif;
 
 
 $specialty_glob_inline_js = array();
-if ( ! function_exists( 'specialty_add_inline_js' ) ):
+if ( ! function_exists( 'specialty_add_inline_js' ) ) :
 /**
  * Registers an inline JS script.
  * The script will be printed on the footer of the current request's page, either on the front or the back end.
@@ -234,14 +220,14 @@ if ( ! function_exists( 'specialty_add_inline_js' ) ):
  * Passing a $handle allows to reference and/or overwrite specific inline scripts.
  *
  * @param string $script A JS script to be printed.
- * @param string $handle An optional handle by which the script is referenced.
+ * @param false|string $handle An optional handle by which the script is referenced.
  */
 function specialty_add_inline_js( $script, $handle = false ) {
 	global $specialty_glob_inline_js;
 
 	$handle = sanitize_key( $handle );
 
-	if ( ( $handle !== false ) and ( $handle != '' ) ) {
+	if ( ( false !== $handle ) && ( '' !== $handle ) ) {
 		$specialty_glob_inline_js[ $handle ] = "\n" . $script . "\n";
 	} else {
 		$specialty_glob_inline_js[] = "\n" . $script . "\n";
@@ -249,7 +235,7 @@ function specialty_add_inline_js( $script, $handle = false ) {
 }
 endif;
 
-if ( ! function_exists( 'specialty_get_inline_js' ) ):
+if ( ! function_exists( 'specialty_get_inline_js' ) ) :
 /**
  * Retrieves the inline JS scripts that are registered for printing.
  *
@@ -262,7 +248,7 @@ function specialty_get_inline_js() {
 }
 endif;
 
-if ( ! function_exists( 'specialty_print_inline_js' ) ):
+if ( ! function_exists( 'specialty_print_inline_js' ) ) :
 /**
  * Prints the inline JS scripts that are registered for printing, and removes them from the queue.
  */
@@ -294,7 +280,7 @@ function specialty_print_inline_js() {
 }
 endif;
 
-if ( ! function_exists( 'specialty_inflect' ) ):
+if ( ! function_exists( 'specialty_inflect' ) ) :
 	/**
 	 * Returns a string depending on the value of $num.
 	 *
@@ -312,9 +298,10 @@ if ( ! function_exists( 'specialty_inflect' ) ):
 	 * @return string
 	 */
 	function specialty_inflect( $num, $none, $one, $many ) {
-		if ( $num == 0 ) {
+		$num = intval( $num );
+		if ( 0 === $num ) {
 			return $none;
-		} elseif ( $num == 1 ) {
+		} elseif ( 1 === $num ) {
 			return $one;
 		} else {
 			return $many;
@@ -322,7 +309,7 @@ if ( ! function_exists( 'specialty_inflect' ) ):
 	}
 endif;
 
-if ( ! function_exists( 'specialty_e_inflect' ) ):
+if ( ! function_exists( 'specialty_e_inflect' ) ) :
 	/**
 	 * Echoes a string depending on the value of $num.
 	 *
@@ -344,7 +331,7 @@ if ( ! function_exists( 'specialty_e_inflect' ) ):
 	}
 endif;
 
-if ( ! function_exists( 'specialty_merge_wp_queries' ) ):
+if ( ! function_exists( 'specialty_merge_wp_queries' ) ) :
 /**
  * Merges multiple WP_Queries by accepting any number of valid, discreet parameter arrays.
  * It runs each query individually, merges the (unique) post IDs, and re-queries the DB for those IDs, respecting their order.
@@ -415,7 +402,7 @@ function specialty_merge_wp_queries() {
 		'post_type'       => $all_post_types,
 		'posts_per_page'  => - 1,
 		'suppress_filter' => false,
-		'orderby'         => 'post__in'
+		'orderby'         => 'post__in',
 	);
 
 	$params = apply_filters( 'specialty_merge_wp_queries', $params, $args );
@@ -426,7 +413,7 @@ function specialty_merge_wp_queries() {
 }
 endif;
 
-if ( ! function_exists( 'specialty_dropdown_posts' ) ):
+if ( ! function_exists( 'specialty_dropdown_posts' ) ) :
 /**
  * Retrieve or display list of posts as a dropdown (select list).
  *
@@ -459,16 +446,17 @@ function specialty_dropdown_posts( $args = '', $name = 'post_id' ) {
 	extract( $r, EXTR_SKIP );
 
 	$hierarchical_post_types = get_post_types( array( 'hierarchical' => true ) );
-	if ( in_array( $r['post_type'], $hierarchical_post_types ) ) {
-		$pages = get_pages($r);
+	if ( in_array( $r['post_type'], $hierarchical_post_types, true ) ) {
+		$pages = get_pages( $r );
 	} else {
-		$pages = get_posts($r);
+		$pages = get_posts( $r );
 	}
 
 	$output = '';
 	// Back-compat with old system where both id and name were based on $name argument
-	if ( empty($id) )
+	if ( empty( $id ) ) {
 		$id = $name;
+	}
 
 	if ( ! empty($pages) || $select_even_if_empty == true ) {
 		$output = "<select name='" . esc_attr( $name ) . "' id='" . esc_attr( $id ) . "' class='" . esc_attr( $class ) . "'>\n";
@@ -478,16 +466,17 @@ function specialty_dropdown_posts( $args = '', $name = 'post_id' ) {
 		if ( $show_option_none ) {
 			$output .= "\t<option value=\"" . esc_attr( $option_none_value ) . "\">$show_option_none</option>\n";
 		}
-		if ( ! empty($pages) ) {
-			$output .= walk_page_dropdown_tree($pages, $depth, $r);
+		if ( ! empty( $pages ) ) {
+			$output .= walk_page_dropdown_tree( $pages, $depth, $r );
 		}
 		$output .= "</select>\n";
 	}
 
 	$output = apply_filters( 'specialty_dropdown_posts', $output, $name, $r );
 
-	if ( $echo )
+	if ( $echo ) {
 		echo $output;
+	}
 
 	return $output;
 }
@@ -505,4 +494,71 @@ function specialty_can_use_plugin( $plugin ) {
 	}
 
 	return is_plugin_active( $plugin );
+}
+
+/**
+ * Conditionally returns a Javascript/CSS asset's version number.
+ *
+ * When the site is in debug mode, the normal asset's version is returned.
+ * When it's not in debug mode, the theme's version is returned, so that caches can be invalidated on theme updates.
+ *
+ * @param bool $version The version string of the asset.
+ *
+ * @return false|string Theme version if SCRIPT_DEBUG or WP_DEBUG are enabled. Otherwise, $version is returned.
+ */
+function specialty_asset_version( $version = false ) {
+	static $theme_version = false;
+
+	if ( ! $theme_version ) {
+		$theme         = wp_get_theme();
+		$theme_version = $theme->get( 'Version' );
+	}
+
+	if ( $version ) {
+		if ( ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ||
+			( defined( 'WP_DEBUG' ) && WP_DEBUG )
+		) {
+			return $version;
+		}
+	}
+
+	return $theme_version;
+}
+
+/**
+ * Generic fallback callback for the main menu.
+ *
+ * Displays a few useful links, in contrast to the default wp_page_menu() which may flood the menu area.
+ *
+ * @param array $args
+ *
+ * @return void|string
+ */
+function specialty_main_menu_fallback( $args ) {
+	$id    = ! empty( $args['menu_id'] ) ? $args['menu_id'] : 'menu-' . $args['theme_location'];
+	$class = $args['menu_class'];
+
+	$items = apply_filters( 'specialty_main_menu_fallback_items', array(
+		home_url( '/' )              => __( 'Home', 'specialty' ),
+		admin_url( 'nav-menus.php' ) => __( 'Set primary menu', 'specialty' ),
+	) );
+
+	$items_html = '';
+	if ( $items ) {
+		foreach ( $items as $item_url => $item_text ) {
+			$items_html .= sprintf( '<li><a href="%1$s">%2$s</a></li>', esc_url( $item_url ), esc_html( $item_text ) );
+		}
+	}
+
+	if ( empty( $items_html ) ) {
+		return false;
+	}
+
+	$menu_html = sprintf( $args['items_wrap'], esc_attr( $id ), esc_attr( $class ), $items_html );
+
+	if ( $args['echo'] ) {
+		echo wp_kses_post( $menu_html );
+	} else {
+		return $menu_html;
+	}
 }

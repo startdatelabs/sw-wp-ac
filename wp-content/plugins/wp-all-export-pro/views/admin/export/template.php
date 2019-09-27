@@ -1,6 +1,8 @@
 <?php
 $addons = new \Wpae\App\Service\Addons\AddonService();
+
 ?>
+<input type="hidden" name="wp_query" class="wpallexport-wp-query" value="<?php echo PMXE_Plugin::$session->get('wp_query'); ?>">
 <h2 class="wpallexport-wp-notices"></h2>
 <div class="wpallexport-wrapper">
     <div class="wpallexport-header">

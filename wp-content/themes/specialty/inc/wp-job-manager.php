@@ -130,7 +130,8 @@
 	add_filter( 'job_manager_get_listings_result', 'specialty_wpjb_filter_ajax_json', 10, 2 );
 	if ( ! function_exists( 'specialty_wpjb_filter_ajax_json' ) ) {
 		function specialty_wpjb_filter_ajax_json( $result, $jobs ) {
-			$result['jobs_number'] = $jobs->have_posts() ? intval( $jobs->found_posts ) : 0;
+			$result['jobs_number']       = $jobs->have_posts() ? intval( $jobs->found_posts ) : 0;
+			/* translators: %d is a number of jobs found. */
 			$result['jobs_number_found'] = sprintf( _n( '%d job found', '%d jobs found', $jobs->found_posts, 'specialty' ), $jobs->found_posts );
 
 			return $result;
@@ -143,6 +144,7 @@
 			if ( ! empty( $_REQUEST['salary_range'] ) && is_array( $_REQUEST['salary_range'] ) ) {
 				$tmp_ranges = array_map( 'specialty_wpjb_sanitize_salary_range', $_REQUEST['salary_range'] );
 				$tmp_ranges = array_filter( $tmp_ranges );
+
 				$args['salary_range'] = $tmp_ranges;
 			}
 

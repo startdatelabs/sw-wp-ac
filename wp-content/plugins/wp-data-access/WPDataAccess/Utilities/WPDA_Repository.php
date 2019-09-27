@@ -89,10 +89,11 @@ class WPDA_Repository {
 			// Check if table exists
 			$table_exists = new WPDA_Dictionary_Exist( $wpdb->dbname, $table_name );
 
+			$tables_are_same = null;
 			$bck_table_name  = null;
 			$same_cols       = null;
 
-			if ( $table_exists->table_exists( false ) ) {
+			if ( $table_exists) {
 				// Drop repository table with extention _new (in case it wasn't removed last time)
 				$this->run_script( self::DROP_TABLE[ $key ][0], '_new' );
 
@@ -134,44 +135,44 @@ class WPDA_Repository {
 						"		where  c2.table_schema = '{$wpdb->dbname}' " .
 						"		  and  c2.table_name   = '{$table_name}_new' " .
 						"	 )";
-					$same_cols       = $wpdb->get_results( $sql_check_table, 'ARRAY_A' );
-					$nocols_both     = $wpdb->num_rows;
+					$same_cols = $wpdb->get_results( $sql_check_table, 'ARRAY_A' );
+					$nocols_both = $wpdb->num_rows;
 
 					// Repository tables already available with right structure, create table not necessary
-					$create_table = $nocols_new_table !== $nocols_old_table || $nocols_new_table !== $nocols_both;
+					$create_table = $nocols_new_table !== $nocols_old_table || $nocols_new_table !== $nocols_both ;
 
 					// Drop check table
 					$this->run_script( self::DROP_TABLE[ $key ][0], '_new' );
 				}
-			}
 
-			if ( $create_table ) {
-				// Drop table
-				$this->run_script( self::DROP_TABLE[ $key ][0], '' );
+				if ( $create_table ) {
+					// Drop table
+					$this->run_script( self::DROP_TABLE[ $key ][0], '' );
 
-				// Create table
-				foreach ( $value as $sql_file ) {
-					$this->run_script( $sql_file );
-				}
-
-				// Restore data
-				if ( null !== $same_cols ) {
-					$selected_columns = '';
-					foreach ( $same_cols as $same_col ) {
-						$selected_columns .= $same_col['column_name'] . ',';
+					// Create table
+					foreach ( $value as $sql_file ) {
+						$this->run_script( $sql_file );
 					}
-					$selected_columns = substr( $selected_columns, 0, strlen( $selected_columns ) - 1 );
-					$sql_restore =
-						"insert into $table_name ($selected_columns) " .
-						"select $selected_columns from $bck_table_name";
-					$wpdb->query( $sql_restore );
 
+					// Restore data
+					if ( ! $tables_are_same ) {
+						$selected_columns = '';
+						foreach ( $same_cols as $same_col ) {
+							$selected_columns .= $same_col['column_name'] . ',';
+						}
+						$selected_columns = substr( $selected_columns, 0, strlen( $selected_columns ) - 1 );
+						$sql_restore =
+							"insert into $table_name ($selected_columns) " .
+							"select $selected_columns from $bck_table_name";
+						$wpdb->query( $sql_restore );
+
+					}
 				}
-			}
 
-			if ( 'on' !== WPDA::get_option( WPDA::OPTION_MR_KEEP_BACKUP_TABLES ) ) {
-				// Drop backup table
-				$this->run_script( self::DROP_TABLE[ $key ][0], $bck_postfix );
+				if ( 'on' !== WPDA::get_option( WPDA::OPTION_MR_KEEP_BACKUP_TABLES ) ) {
+					// Drop backup table
+					$this->run_script( self::DROP_TABLE[ $key ][0], $bck_postfix );
+				}
 			}
 		}
 		$wpdb->suppress_errors( $suppress );

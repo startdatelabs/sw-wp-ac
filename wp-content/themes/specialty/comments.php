@@ -21,6 +21,7 @@
 					esc_html__( 'Next comments', 'specialty' )
 				),
 			);
+
 			$comments_pagination = paginate_comments_links( $args ); ?>
 		<?php if ( ! empty( $comments_pagination ) ) : ?>
 			<div class="comments-pagination"><?php echo paginate_comments_links( $args ); ?></div>
@@ -57,4 +58,4 @@
 <?php if ( have_comments() || comments_open() ) : ?>
 		</div><!-- .content-wrap -->
 	</div><!-- #comments -->
-<?php endif; ?>
+<?php endif;

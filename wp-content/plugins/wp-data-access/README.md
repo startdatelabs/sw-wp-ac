@@ -4,7 +4,7 @@
 * Donate link: https://www.paypal.me/kpsch
 * Requires at least: WordPress 4.8.3
 * Tested up to: WordPress 5.2
-* Stable tag: 2.0.14
+* Stable tag: 2.0.13
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

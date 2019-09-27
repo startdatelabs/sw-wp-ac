@@ -8,6 +8,7 @@
 namespace Yoast\WP\Free\Config;
 
 use Composer\Script\Event;
+use Composer\Installer\PackageEvent;
 
 /**
  * Sets up class aliases and defines required constants.

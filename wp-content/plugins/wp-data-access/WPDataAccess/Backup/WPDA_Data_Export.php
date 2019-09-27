@@ -17,8 +17,7 @@ namespace WPDataAccess\Backup {
 
 	class WPDA_Data_Export {
 
-		const PREFIX_RUNONCE        = 'wpda-run-once-';
-		const SHOW_JOBS_OPTION_NAME = 'wpda_data_backup_show_jobs';
+		const PREFIX_RUNONCE = 'wpda-run-once-';
 
 		protected $schedules;
 
@@ -97,9 +96,9 @@ namespace WPDataAccess\Backup {
 									</select>
 								</td>
 								<td>
-									<a href="javascript:void(0)" class="button" onclick="move_all_to_export()"> >>> </a>
+									<a href="javascript:void(0);" class="button" onclick="move_all_to_export()"> >>> </a>
 									<br/>
-									<a href="javascript:void(0)" class="button" onclick="move_all_to_db()"> <<< </a>
+									<a href="javascript:void(0);" class="button" onclick="move_all_to_db()"> <<< </a>
 								</td>
 								<td>
 									<select id="wpda_table_name_export" name="wpda_table_name_export[]" multiple size="20" style="width:300px;">
@@ -313,13 +312,6 @@ namespace WPDataAccess\Backup {
 				}
 			}
 
-			if ( isset( $_REQUEST['show_jobs'] ) ) {
-				$show_jobs = sanitize_text_field( wp_unslash( $_REQUEST['show_jobs'] ) ); // input var okay.
-				update_option( self::SHOW_JOBS_OPTION_NAME, $show_jobs );
-			} else {
-				$show_jobs = get_option( self::SHOW_JOBS_OPTION_NAME, 'wpda' );
-			}
-
 			global $wpdb;
 
 			echo '<div class="wrap">';
@@ -329,7 +321,7 @@ namespace WPDataAccess\Backup {
 			echo '<input type="hidden" name="action" value="new" />';
 			echo '</form>';
 
-			if ( $data_backups_found || 'all' === $show_jobs ) {
+			if ( $data_backups_found ) {
 				echo '<table cellpadding="3" cellspacing="3" border="0" style="border-collapse:collapse;">';
 				echo '<tr>';
 				echo '<th></th>';
@@ -345,25 +337,12 @@ namespace WPDataAccess\Backup {
 				foreach ( $crons as $key => $cron ) {
 					foreach ( $cron as $key => $value ) {
 						if ( 'wpda_data_backup' === $key ) {
-							// Filter run once jobs.
-							$is_runonce = false;
-							foreach ( $value as $value_key => $value_value ) {
-								if ( isset( $value_value['args'][0] ) && substr( $value_value['args'][0], 0, 14) === 'wpda-run-once-' ) {
-									$is_runonce = true;
-									continue;
-								}
-							}
-							if ( $is_runonce ) {
-								continue;
-							}
 							$style = 'style="background-color:#ffffff;"';
 							$no_data_backup_events++;
 						} else {
 							$style = '';
-							if ( 'all' !== $show_jobs) {
-								// Hide other cron jobs
-								continue;
-							}
+							// Hide other cron jobs
+							continue;
 						}
 						echo "<tr $style>";
 						if ( 'wpda_data_backup' === $key ) {
@@ -466,24 +445,10 @@ namespace WPDataAccess\Backup {
 					}
 				}
 				echo '</table>';
-				echo '<table>';
-				echo '<tr>';
-				echo "<td><strong>$no_data_backup_events data backup job" . (1 < $no_data_backup_events ? 's' : '') . " scheduled</strong></td>";
+				echo "<p><strong>$no_data_backup_events data backup job" . (1 < $no_data_backup_events ? 's' : '') . " scheduled</strong></p>";
 			} else {
-				echo '<table>';
-				echo '<tr>';
-				echo '<td><strong>No data backup jobs found</strong></td>';
+				echo '<p><strong>No data backup jobs found</strong></p>';
 			}
-			echo '<td>';
-			echo '<form method="post" action="?page=wpda_backup" style="display: inline-block; vertical-align: unset;">';
-			echo '<select style="font-size: 90%" name="show_jobs" onclick="jQuery(this).closest(\'form\').submit()" >';
-			echo '<option value="wpda"' . ( 'all' !== $show_jobs ? 'selected' : '' ). '>Show plugin jobs only</option>';
-			echo '<option value="all"' . ( 'all' === $show_jobs ? 'selected' : '' ). '>Show all WordPress jobs</option>';
-			echo '</select>';
-			echo '</form>';
-			echo '</td>';
-			echo '</tr>';
-			echo '</table>';
 			echo '</div>';
 		}
 

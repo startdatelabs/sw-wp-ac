@@ -82,26 +82,26 @@ namespace WPDataAccess\Utilities {
 						<?php
 						if ( '' !== $this->dbo_type ) {
 							echo '<a id="' . esc_attr( $this->table_name ) . '-sel-1" class="nav-tab nav-tab-active' .
-								'" href="javascript:void(0)" onclick="settab(\'' . esc_attr( $this->table_name ) . '\', \'1\');" 
+								'" href="javascript:void(0);" onclick="settab(\'' . esc_attr( $this->table_name ) . '\', \'1\');" 
 								style="font-size:inherit;">' .
 								__( 'Actions', 'wp-data-access' ) .
 								'</a>';
 						}
 						echo '<a id="' . esc_attr( $this->table_name ) . '-sel-2" class="nav-tab' .
-							'" href="javascript:void(0)" onclick="settab(\'' . esc_attr( $this->table_name ) . '\', \'2\');" 
+							'" href="javascript:void(0);" onclick="settab(\'' . esc_attr( $this->table_name ) . '\', \'2\');" 
 							style="font-size:inherit;">' .
 							__( 'Structure', 'wp-data-access' ) .
 							'</a>';
 						if ( 'Table' === $this->dbo_type ) {
 							echo '<a id="' . esc_attr( $this->table_name ) . '-sel-3" class="nav-tab' .
-								'" href="javascript:void(0)" onclick="settab(\'' . esc_attr( $this->table_name ) . '\', \'3\');" 
+								'" href="javascript:void(0);" onclick="settab(\'' . esc_attr( $this->table_name ) . '\', \'3\');" 
 								style="font-size:inherit;">' .
 								__( 'Indexes', 'wp-data-access' ) .
 								'</a>';
 						}
 						if ( '' !== $this->dbo_type ) {
 							echo '<a id="' . esc_attr( $this->table_name ) . '-sel-4" class="nav-tab' .
-								'" href="javascript:void(0)" onclick="settab(\'' . esc_attr( $this->table_name ) . '\', \'4\');" 
+								'" href="javascript:void(0);" onclick="settab(\'' . esc_attr( $this->table_name ) . '\', \'4\');" 
 								style="font-size:inherit;">' .
 								__( 'SQL', 'wp-data-access' ) .
 								'</a>';
@@ -213,6 +213,9 @@ namespace WPDataAccess\Utilities {
             ?>
             <table class="widefat striped rows wpda-structure-table">
                 <tr>
+                    <?php if ( $this->is_wp_table === false && 'on' === WPDA::get_option( WPDA::OPTION_BE_ALLOW_DROP_INDEX ) ) { ?>
+                        <th></th>
+                    <?php } ?>
                     <th><strong><nobr>Index Name</nobr></strong></th>
                     <th><strong>Unique?</strong></th>
                     <th><strong>#</strong></th>
@@ -229,13 +232,44 @@ namespace WPDataAccess\Utilities {
                 $current_index_name = '';
                 foreach ( $this->indexes as $index ) {
                     if ( $current_index_name !== $index['Key_name'] ) {
-                        $current_index_name = esc_attr( $index['Key_name'] );
-                        $new_index          = true;
+                        $current_index_name         = esc_attr( $index['Key_name'] );
+                        $new_index                  = true;
+                        if ( 'on' === WPDA::get_option( WPDA::OPTION_BE_ALLOW_DROP_INDEX ) ) {
+                            $form_name                  = 'drop_index_form_' . esc_attr( $this->table_name ) . '_' . esc_attr( $current_index_name );
+                            $wp_nonce_action_drop_index = 'wpda-drop-index-' . esc_attr( $this->table_name ) . '-' . esc_attr( $current_index_name );
+                            $wp_nonce_drop_index        = wp_create_nonce( $wp_nonce_action_drop_index );
+                        }
                     } else {
                         $new_index = false;
                     }
                     ?>
                     <tr>
+                        <?php if ( $this->is_wp_table === false && 'on' === WPDA::get_option( WPDA::OPTION_BE_ALLOW_DROP_INDEX ) ) { ?>
+                            <td>
+                                <?php
+									if ( $new_index ) {
+										$drop_index_form =
+											"<form" .
+												" id='" . esc_attr( $form_name ) . "'" .
+												" action='?page=" . esc_attr( \WP_Data_Access_Admin::PAGE_MAIN) . "'" .
+												" method='post'>" .
+												"<input type='hidden' name='action' value='drop-index' />" .
+												"<input type='hidden' name='index_table_name' value='" . esc_attr( $this->table_name ) . "' />" .
+												"<input type='hidden' name='index_name' value='" . esc_attr( $current_index_name ) . "' />" .
+												"<input type='hidden' name='_wpnonce' value='" . esc_attr( $wp_nonce_drop_index ) . "' />" .
+											"</form>";
+										?>
+										<script language="JavaScript">
+											jQuery("#wpda_invisible_container").append("<?php echo $drop_index_form; ?>");
+										</script>
+										<a href="javascript:void(0)" onclick="if (confirm('<?php echo __( 'Drop index? This cannot be undone!', 'wp-data-access' ); ?>')) { jQuery('#<?php echo esc_attr( $form_name ); ?>').submit(); }" style="font-size:140%;" title="Drop Index <?php echo esc_attr( $index['Key_name'] ); ?>">
+											<span class="dashicons dashicons-trash drop-index"></span>
+										</a>
+									<?php
+									}
+								?>
+                            </td>
+                        <?php } ?>
                         <td>
                             <nobr><?php if ( $new_index ) { echo esc_attr( $index['Key_name'] ); } ?></nobr>
                         </td>
@@ -309,9 +343,6 @@ namespace WPDataAccess\Utilities {
 				if ( 'Table' === $this->dbo_type ) {
 					$this->tab_optimize();
 				}
-				if ( 'Table' === $this->dbo_type ) {
-					$this->tab_alter();
-				}
 				?>
 			</table>
             <?php
@@ -352,9 +383,9 @@ namespace WPDataAccess\Utilities {
 						<option value="sqlpre" <?php echo $export_variable_prefix_option ? 'selected' : ''; ?>>SQL (add variable WP prefix)</option>
 						<?php } ?>
 						<option value="xml">XML</option>
-						<option value="json">JSON</option>
+						<option value="json">json</option>
 						<option value="excel">Excel</option>
-						<option value="csv">CSV</option>
+						<option value="csv">csv</option>
 					</select>
 					<span> (file download)</span>
                 </td>
@@ -580,47 +611,6 @@ namespace WPDataAccess\Utilities {
 					<?php
 					}
 					?>
-				</td>
-			</tr>
-			<?php
-		}
-
-		protected function tab_alter() {
-			$wp_nonce_action_alter = "wpda-alter-{$this->table_name}";
-			$wp_nonce_alter        = wp_create_nonce( $wp_nonce_action_alter );
-			$alter_table_form_id   = 'alter_table_form_' . esc_attr( $this->table_name );
-			$alter_table_form      =
-				"<form" .
-				" id='$alter_table_form_id'" .
-				" action='?page=" . esc_attr( \WP_Data_Access_Admin::PAGE_DESIGNER ) . "'" .
-				" method='post'>" .
-				"<input type='hidden' name='action' value='edit' />" .
-				"<input type='hidden' name='action2' value='init' />" .
-				"<input type='hidden' name='wpda_table_name' value='" . esc_attr( $this->table_name ) . "' />" .
-				"<input type='hidden' name='wpda_table_name_re' value='" . esc_attr( $this->table_name ) . "' />" .
-				"<input type='hidden' name='_wpnonce' value='" . esc_attr( $wp_nonce_alter ) . "' />" .
-				"<input type='hidden' name='page_number' value='1' />" .
-				"<input type='hidden' name='caller' value='dataexplorer' />" .
-				"</form>";
-			?>
-			<tr>
-				<td style="box-sizing:border-box;text-align:center;white-space:nowrap;width:150px;vertical-align:middle;">
-					<script language="JavaScript">
-						jQuery("#wpda_invisible_container").append("<?php echo $alter_table_form; ?>");
-					</script>
-					<a href="javascript:void(0)"
-					   class="button button-primary"
-					   onclick="if (confirm('<?php echo __( 'Alter table?', 'wp-data-access' ); ?>')) { jQuery('#<?php echo $alter_table_form_id; ?>').submit(); }"
-					   style="display:block;"
-					>
-						ALTER
-					</a>
-				</td>
-				<td style="vertical-align:middle;">
-					Loads
-					<strong><?php echo esc_attr(strtolower($this->dbo_type)); ?>
-						`<?php echo esc_attr( $this->table_name ); ?>`</strong>
-					into the Data Designer.
 				</td>
 			</tr>
 			<?php

@@ -6,6 +6,7 @@
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 
 <div id="page">
 	<header class="header">
@@ -34,6 +35,7 @@
 						<nav class="nav">
 							<?php wp_nav_menu( array(
 								'theme_location' => 'main_menu',
+								'fallback_cb'    => 'specialty_main_menu_fallback',
 								'container'      => '',
 								'menu_id'        => '',
 								'menu_class'     => 'navigation-main',

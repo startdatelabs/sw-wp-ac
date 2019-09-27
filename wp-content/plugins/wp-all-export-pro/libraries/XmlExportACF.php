@@ -262,8 +262,8 @@ if ( ! class_exists('XmlExportACF') )
 					        $field_value = $year.$month.$day;
 
                         }
-						$format = empty($field_options['return_format']) ? 'Y-m-d' : $field_options['return_format'];
-						$field_value = date($format, (empty($field_options['return_format']))? strtotime($field_value): DateTime::createFromFormat('Ymd', $field_value)->getTimestamp());
+                        $format = apply_filters('pmxe_acf_date_picker_format', 'Ymd', $field_value);
+                        $field_value = date($format, (empty($field_options['return_format']))? strtotime($field_value): DateTime::createFromFormat($format, $field_value)->getTimestamp());
 						break;
 
 					case 'file':
@@ -559,7 +559,7 @@ if ( ! class_exists('XmlExportACF') )
 									}
 								}
 								else{
-									$v[] = $user['user_email'];
+									$v[] = $user->user_email;
 								}
 							}
 							$field_value = implode($implode_delimiter, $v);

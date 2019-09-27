@@ -18,4 +18,4 @@
 			<?php wp_reset_postdata(); ?>
 		</div>
 	</div>
-<?php endif; ?>
+<?php endif;

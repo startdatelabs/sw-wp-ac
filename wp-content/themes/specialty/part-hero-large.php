@@ -49,6 +49,5 @@
 		<?php if ( is_post_type_archive( 'job_listing' ) || is_tax( array( 'job_listing_category', 'job_listing_type' ) ) || is_page_template( array( 'template-listing-jobs.php' ) ) ) {
 			get_template_part( 'part-job-filters' );
 		} ?>
-
 	</div>
-<?php endif; ?>
+<?php endif;
